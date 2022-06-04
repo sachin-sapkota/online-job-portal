@@ -6,9 +6,9 @@ const Navbar = () => {
         <Image src={require('../images/logo.png')} width={100} height={100} />
       </div>
       <div className="flex-1 flex justify-center items-center gap-4">
-        <div className=" text-white ">home</div>
-        <div className=" text-white ">about</div>
-        <div className=" text-white ">contact</div>
+        <div className=" text-white ">Find Worker</div>
+        <div className=" text-white ">Find Work</div>
+        <div className=" text-white ">Explore</div>
       </div>
       <div className="flex gap-3">
         <div>Login</div>
