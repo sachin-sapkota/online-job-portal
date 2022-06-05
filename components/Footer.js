@@ -73,7 +73,7 @@ const Footer = () => {
           </div>
         </div>
         <div className='flex gap-2 mt-2 md:mt-0'>
-            <div mr-2>Mobile App</div>
+            <div >Mobile App</div>
             <div className="flex border-[1px] rounded-full justify-center items-center w-[30px] h-[30px] p-[1px]">
             <AiFillApple />
           </div>
