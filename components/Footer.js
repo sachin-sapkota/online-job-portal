@@ -3,9 +3,10 @@ import { CgInstagram, CgFacebook, CgTwitter, CgYoutube } from 'react-icons/cg';
 import { AiFillApple, AiFillAndroid } from 'react-icons/ai';
 const Footer = () => {
   return (
-    <div className=" p-8 h-auto  min-w-[340px] rounded-t-[0.7rem] bg-slate-800 text-white m-3  ">
+    <div className='bg-gradient-to-tr  from-color1 to-color2 p-3 '>
+    <div className=" p-8 h-auto  min-w-[340px] rounded-t-[0.7rem] shadow-xl bg-white text-black   ">
       <div className="py-5 px-2">
-        <hr className="border-dashed w-full border-white" />
+        <hr className="border-solid w-full border-white" />
       </div>
 
       <div className="grid gap-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4">
@@ -91,6 +92,7 @@ const Footer = () => {
           <div>Terms of Service</div>
           <div>Privacy Policy</div>
       </div>
+    </div>
     </div>
   );
 };
