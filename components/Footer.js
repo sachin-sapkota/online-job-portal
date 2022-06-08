@@ -3,8 +3,8 @@ import { CgInstagram, CgFacebook, CgTwitter, CgYoutube } from 'react-icons/cg';
 import { AiFillApple, AiFillAndroid } from 'react-icons/ai';
 const Footer = () => {
   return (
-    <div className='bg-gradient-to-tr  from-color1 to-color2 p-3 '>
-    <div className=" p-8 h-auto  min-w-[340px] rounded-t-[0.7rem] shadow-xl bg-white text-black   ">
+    <div className=' p-3 dark:bg-gray-900 '>
+    <div className=" p-8 h-auto  min-w-[340px] rounded-t-[0.7rem] shadow-xl bg-gray-300 text-black dark:bg-gray-700 dark:text-white   ">
       <div className="py-5 px-2">
         <hr className="border-solid w-full border-white" />
       </div>
