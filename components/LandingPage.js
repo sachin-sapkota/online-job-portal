@@ -20,7 +20,7 @@ const LandingPage = () => {
           <div className="font-serif text-red-700">
             Find Your Next Dream Job
           </div>
-          <div className="select-none font-sans text-4xl sm:text-4xl md:text-5xl font-bold">
+          <div className="select-none font-sans text-4xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">
             <div> Dream Jobs </div>
             <div> find Talent, All</div>
             <div> in One Place. </div>
@@ -31,7 +31,7 @@ const LandingPage = () => {
                 <input
                   type="text"
                   placeholder="Search Jobs"
-                  className=" dark:bg-gray-700 focus:outline-none focus:shadow-outline focus:border-blue-500"
+                  className="border-none dark:bg-gray-700 focus:outline-none focus:shadow-outline focus:border-blue-500"
                 />
                 <button className="bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 text-white font-bold py-2 px-4 rounded-3xl hover:bg-red-600">
                   Search
@@ -220,23 +220,23 @@ const LandingPage = () => {
             <Image src={require('../images/popular.svg')} />
           </div>
         </div>
-       
       </div>
       <div className="flex justify-center items-center m-3 mt-4 ">
-          <div className='w-[20rem]'>
-            <Image src={require('../images/resume.svg')}></Image>
+        <div className="w-[20rem]">
+          <Image src={require('../images/resume.svg')}></Image>
+        </div>
+        <div className="bg-gray-300 rounded-3xl p-5 flex flex-col items-center dark:bg-slate-600">
+          <div className="font-bold text-sm">
+            Upload your CV now to be headhunted by companies and apply to jobs
+            with 1-click apply.
           </div>
-          <div className='bg-gray-300 rounded-3xl p-5 flex flex-col items-center'>
-            <div className='font-bold text-sm'>
-              Upload your CV now to be headhunted by companies and apply to jobs
-              with 1-click apply.
-            </div>
-            <div className='bg-indigo-300 rounded-2xl p-2  font-bold'><Link href="/cv" className="">
+          <div className="bg-indigo-300 rounded-2xl p-2  mt-2 font-bold">
+            <Link href="/cv" className="">
               Upload CV
-            </Link></div>
-            
+            </Link>
           </div>
         </div>
+      </div>
     </div>
   );
 };
