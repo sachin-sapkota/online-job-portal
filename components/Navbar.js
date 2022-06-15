@@ -1,17 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState, useEffect , useCallback} from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import {CgCloseR} from 'react-icons/cg';
+import { CgCloseR } from 'react-icons/cg';
 import { useTheme } from 'next-themes';
-import {RiSunFill} from 'react-icons/ri';
-import {MdDarkMode} from 'react-icons/md';
-
-
+import { RiSunFill } from 'react-icons/ri';
+import { MdDarkMode } from 'react-icons/md';
 
 const Navbar = () => {
-  const[mounted,SetMounted]= useState(false);
- const{theme, setTheme} = useTheme();
+  const [mounted, SetMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
   const [Navbar, setNavbar] = useState(false);
   const [Ham, setHam] = useState(false);
   const changeBackground = () => {
@@ -21,12 +19,10 @@ const Navbar = () => {
       setNavbar(false);
     }
   };
- 
 
   useEffect(() => {
     window.addEventListener('scroll', changeBackground);
-    SetMounted(true)
-   
+    SetMounted(true);
   }, []);
   const escFunction = useCallback((event) => {
     if (event.keyCode === 27) {
@@ -35,36 +31,38 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    document.addEventListener("keydown", escFunction);
+    document.addEventListener('keydown', escFunction);
 
     return () => {
-      document.removeEventListener("keydown", escFunction);
+      document.removeEventListener('keydown', escFunction);
     };
   }, [escFunction]);
 
   const toggle = () => {
     setHam(!Ham);
   };
-  if(!mounted ){return null}
+  if (!mounted) {
+    return null;
+  }
   return (
     <div
       className={`${
         Navbar
-          ? `  justify-between sm:justify-between md:justify-center transition duration-300 bg-black bg-opacity-30 backdrop-blur-sm ease-in flex h-12  w-full shadow-lg fixed text-white `
-          : 'flex justify-between sm:justify-between md:justify-center bg-transparent absolute  h-12  w-full mt-2 pr-2 '
+          ? `  justify-between sm:justify-between md:justify-center transition duration-300 bg-black bg-opacity-30 backdrop-blur-sm ease-in flex h-12  w-full shadow-lg fixed text-white dark:bg-black/40 z-[100]`
+          : 'flex justify-between sm:justify-between md:justify-center bg-transparent absolute  h-12  w-full mt-2 pr-2  '
       } `}
     >
- 
-  
       <div className="min-w-[82px] cursor-pointer select-none flex border-transparent bg-indigo-800 text-white items-center rounded-md m-2 px-2 py-1 text-xl font-bold font-sans tracking-wide ">
-        Job Xa
+        <Link href="/"> Job Xa</Link>
         {/* <Image src={require('../images/logo.png')} width={100} height={100} alt={'logo'} /> */}
       </div>
       <div className="  mx-1 flex md:hidden sm:flex order-last justify-center items-center ">
-        <GiHamburgerMenu className="cursor-pointer " onClick={toggle}/>
+        <GiHamburgerMenu className="cursor-pointer " onClick={toggle} />
       </div>
       <div className="select-none hidden sm:hidden md:flex-1 md:flex justify-center items-center gap-4 font-sans font-semibold font-sm">
-        <div className="  ">Find Worker</div>
+        <div className="hover:translate-y-[-1px] cursor-pointer active:text-red-600   ">
+          <Link href="/findworker"> Find Worker</Link>
+        </div>
         <div className="  ">Find Work</div>
         <div className=" ">Explore</div>
         <div className=" ">Blog</div>
@@ -72,15 +70,20 @@ const Navbar = () => {
       </div>
       <div
         className={`${
-          Ham 
-            ? `fixed  bottom-0  md:hidden select-none h-[440px] sm:rounded-bl-[250px] rounded-bl-[180px]  flex flex-col sm:flex-col  order-last  sm:order-last inset-0 left-1/4 uppercase bg-black/60 backdrop-blur-sm ${!Navbar? 'backdrop-blur-sm' : 'backdrop-blur-none'} text-white  justify-center items-center gap-4 font-sans font-semibold font-sm`
+          Ham
+            ? `fixed  bottom-0  md:hidden select-none h-[440px] sm:rounded-bl-[250px] rounded-bl-[180px]  flex flex-col sm:flex-col  order-last  sm:order-last inset-0 left-1/4 uppercase bg-black/60 backdrop-blur-sm   ${
+                !Navbar ? 'backdrop-blur-sm' : 'backdrop-blur-none'
+              } text-white  justify-center items-center gap-4 font-sans font-semibold font-sm`
             : 'hidden'
         }`}
       >
-        <div className="md:hidden block sm:block cursor-cell font-light" onClick={toggle}>
-        <CgCloseR className='text-white text-3xl' />
+        <div
+          className="md:hidden block sm:block cursor-cell font-light"
+          onClick={toggle}
+        >
+          <CgCloseR className="text-white text-3xl" />
         </div>
-        
+
         <div className="  ">Find Worker</div>
         <div className="  ">Find Work</div>
         <div className=" ">Explore</div>
@@ -88,7 +91,6 @@ const Navbar = () => {
         <div className=" ">About Us</div>
         <div className="md:hidden ">Apply as Freelancer</div>
         <div className="md:hidden ">Hire Top Talent</div>
-        
       </div>
 
       <div className="select-none  flex my-[0.46rem] gap-3">
@@ -115,11 +117,15 @@ const Navbar = () => {
             Sign in
           </a>
         </div>
-        <button className='md:order-first transition ease-in-out duration-500' onClick={()=>setTheme(theme === 'light'? 'dark': 'light')}> {theme=== 'light'? <MdDarkMode/>:<RiSunFill/>}</button>
+        <button
+          className="md:order-first transition ease-in-out duration-500"
+          onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+        >
+          {' '}
+          {theme === 'light' ? <MdDarkMode /> : <RiSunFill />}
+        </button>
       </div>
-     
     </div>
- 
   );
 };
 export default Navbar;

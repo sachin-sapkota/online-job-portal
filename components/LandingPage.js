@@ -9,7 +9,6 @@ import { MdOutlineSecurity } from 'react-icons/md';
 import { CgWebsite, CgGames } from 'react-icons/cg';
 import { HiArrowNarrowRight } from 'react-icons/hi';
 import { FaSuitcase, FaRegHandshake } from 'react-icons/fa';
-import { darkMode } from '../tailwind.config';
 import { MdSupportAgent } from 'react-icons/md';
 
 const LandingPage = () => {
@@ -27,12 +26,14 @@ const LandingPage = () => {
           </div>
           <div className="mt-3 ">
             <form className=" ">
-              <div className="flex items-center border-2 border-white shadow-2xl w-full  py-2 pl-7 pr-2 rounded-[2.5rem] bg-white dark:bg-gray-700  focus:border-blue-50">
-                <input
-                  type="text"
-                  placeholder="Search Jobs"
-                  className="border-none dark:bg-gray-700 focus:outline-none focus:shadow-outline focus:border-blue-500"
-                />
+              <div className="focus:bg-indigo-600 border-transparent flex items-center border-2 focus:outline-none border-white shadow-2xl w-full  py-2 pl-7 pr-2 rounded-[2.5rem] bg-white dark:bg-gray-700  ">
+                <div className="focus:outline-none border-none">
+                  <input
+                    type="text"
+                    placeholder="Search Jobs"
+                    className="border-none dark:bg-gray-700  focus:shadow-outline "
+                  />
+                </div>
                 <button className="bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 text-white font-bold py-2 px-4 rounded-3xl hover:bg-red-600">
                   Search
                 </button>
@@ -41,11 +42,11 @@ const LandingPage = () => {
           </div>
           <div className="flex justify-center items-center mt-2 gap-2 text-sm font-mono font-bold">
             Learn more
-            <HiArrowNarrowRight className="mt-1 cursor-pointer" />{' '}
+            <HiArrowNarrowRight className="mt-1 cursor-pointer" />
           </div>
         </div>
 
-        <div className="hidden sm:hidden md:block object-contain">
+        <div className="hidden sm:hidden md:block object-contain z-[0]">
           <Image
             src={require('../images/cover.svg')}
             className="object-contain "
@@ -151,7 +152,7 @@ const LandingPage = () => {
                 <MdOutlineSecurity />
               </div>
               <div className="text-xs font-sans">Security</div>
-              <div></div>
+              <div className=""></div>
             </div>
 
             <div className="group bg-slate-200 hover:bg-indigo-400 hover:text-white flex gap-3 items-center justify-cente rounded-lg py-4 px-3 shadow-md dark:bg-gray-700">
