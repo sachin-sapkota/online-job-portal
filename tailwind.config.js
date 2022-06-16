@@ -9,18 +9,36 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        animates: 'animates 1s ease-out',
+        animate_right: 'animate_right 1s ease-in-out',
+        animate_left: 'animate_left 1s ease-in-out',
       },
+
       keyframes: {
-        animates: {
-          '0%': { transform: 'translateX(-100%)' },
-          '20%': { transform: 'translateX(-80%)' },
-          '40%': { transform: 'translateX(-60%)' },
-          '60%': { transform: 'translateX(-40%)' },
-          '80%': { transform: 'translateX(-20%)' },
+        animate_right_diagonal: {
+          '0%': { transform: 'translate(-100% )' },
+
+          '100%': { transform: 'translate(0%)' },
+        },
+
+        animate_left: {
+          '0%': { transform: 'translateX(0%)' },
+
+          '100%': { transform: 'translateX(-1%)' },
+        },
+
+        animate_down: {
+          '0%': { transform: 'translateY(-100%)' },
+
+          '100%': { transform: 'translateY(100%)' },
+        },
+
+        animate_right: {
+          '0%': { transform: 'translateX(-50%)' },
+
           '100%': { transform: 'translateX(0%)' },
         },
       },
+
       colors: {
         color1: '#96A7CF',
         color2: '#E3EFE8',

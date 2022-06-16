@@ -20,15 +20,15 @@ const Dashboard = () => {
       {
         label: 'Applied Jobs',
         data: [65, 59, 80, 81, 56, 55, 40],
-        fill: false,
-        borderColor: 'rgb(75, 192, 192)',
-        tension: 0.1,
+        fill: true,
+        borderColor: 'rgb(75, 70, 192)',
+        tension: 0.4,
       },
     ],
   };
 
   return (
-    <div className="grid grid-flow-row  ">
+    <div className="grid grid-flow-row grid-cols-1 mx-1 md:mx-10 ">
       <div className=" flex flex-col">
         <div className="text-xl md:text-3xl font-semibold mt-4">
           Hello , Sachin!
@@ -36,8 +36,8 @@ const Dashboard = () => {
         <div className="text-sm text-gray-600">Ready to jump back in?</div>
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-10 ">
-        <div className="flex justify-between items-center bg-white  px-3 py-3 rounded-md">
-          <div className=" bg-gray-200 text-indigo-500 w-10 h-10 flex items-center justify-center rounded-md">
+        <div className="flex justify-between items-center  bg-white dark:bg-gray-700  px-3 py-3 rounded-md">
+          <div className=" bg-gray-200 dark:bg-gray-600 text-indigo-500 w-10 h-10 flex items-center justify-center rounded-md">
             <RiSuitcaseLine className="w-7 h-7 " />
           </div>
           <div className="flex flex-col text-right">
@@ -45,8 +45,8 @@ const Dashboard = () => {
             <div className="text-xs font-medium">Applied Jobs</div>
           </div>
         </div>
-        <div className="flex justify-between items-center bg-white  px-3 py-3 rounded-md">
-          <div className=" bg-gray-200 text-red-500 w-10 h-10 flex items-center justify-center rounded-md">
+        <div className="flex justify-between items-center bg-white  dark:bg-gray-700  px-3 py-3 rounded-md">
+          <div className=" bg-gray-200  dark:bg-gray-600 text-red-500 w-10 h-10 flex items-center justify-center rounded-md">
             <IoMdNotificationsOutline className="w-7 h-7 " />
           </div>
           <div className="flex flex-col text-right ">
@@ -55,8 +55,8 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="flex justify-between items-center bg-white  px-3 py-3 rounded-md">
-          <div className=" bg-gray-200 text-orange-700 w-10 h-10 flex items-center justify-center rounded-md">
+        <div className="flex justify-between items-center bg-white  dark:bg-gray-700  px-3 py-3 rounded-md">
+          <div className=" bg-gray-200 text-orange-700  dark:bg-gray-600 w-10 h-10 flex items-center justify-center rounded-md">
             <TbMessageCircle className="w-7 h-7 " />
           </div>
           <div className="flex flex-col text-right">
@@ -65,8 +65,8 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="flex justify-between items-center bg-white  px-3 py-3 rounded-md">
-          <div className=" bg-gray-200 text-red-800 w-10 h-10 flex items-center justify-center rounded-md">
+        <div className="flex justify-between items-center  dark:bg-gray-700 bg-white  px-3 py-3 rounded-md">
+          <div className=" bg-gray-200 text-red-800  dark:bg-gray-600 w-10 h-10 flex items-center justify-center rounded-md">
             <AiOutlineHeart className="w-7 h-7 " />
           </div>
           <div className="flex flex-col text-right">
@@ -76,14 +76,14 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="grid  grid-cols-2  lg:grid-cols-3 mt-8 gap-4 items-center ">
-        <div className="col-span-2 bg-white  h-auto w-aut rounded-md p-2 object-contain">
+        <div className="col-span-2 bg-white dark:bg-gray-700   h-auto w-auto rounded-md p-2 object-contain">
           <div>
             <Line
               data={data}
               options={{
                 title: {
                   display: true,
-                  text: 'Average Rainfall per month',
+                  text: '',
                   fontSize: 20,
                 },
                 legend: {
@@ -94,7 +94,7 @@ const Dashboard = () => {
             />
           </div>
         </div>
-        <div className="bg-white min-w-[220px] w-auto  max-h-[30vw] rounded-md pt-4 px-5 hover:overflow-scroll overflow-hidden no-scrollbar hidden md:hidden lg:flex lg:flex-col">
+        <div className="bg-white min-w-[220px] w-auto  max-h-[30vw] rounded-md pt-4 px-5 hover:overflow-scroll overflow-hidden no-scrollbar hidden md:hidden lg:flex lg:flex-col dark:bg-gray-800">
           <div className="text-sm  font-medium font-sans ">Notifications</div>
           <div className="flex flex-col gap-4 text-xs mt-2 ">
             {message.map((message) => {
@@ -115,18 +115,18 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 bg-white   w-full  rounded-md h-auto p-3 mt-10 mb-3">
+      <div className="grid grid-cols-1 bg-white dark:bg-gray-800  w-full  rounded-md h-auto p-3 mt-10 mb-3">
         <div className="text-sm font-medium font-sans w-full pt-2 ">
           Jobs Applied Recently
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 mt-5 w gap-3  ">
+        <div className="grid grid-cols-1 lg:grid-cols-2 mt-5 md:px-6 px-2 gap-3  ">
           {appliedjobs.map((b) => {
             const a = (
-              <div className=" h-[80px] border-[1px] border-indigo-100 rounded-lg p-2 flex justify-start gap-3 items-center hover:shadow-xl hover:translate-y-[-2px] transform-gpu transition-all duration-300 ease-in-out   ">
+              <div className="md:px-8  h-[80px] border-[1px] backdrop-blur-sm dark:bg-gray-700 border-indigo-100 rounded-lg p-2 flex justify-start gap-3 items-center hover:shadow-xl hover:translate-y-[-2px] transform-gpu transition-all duration-300 ease-in-out   ">
                 <div>{b.icons}</div>
                 <div className="flex  flex-col font-sans font-medium">
                   <span className="text-sm">{b.title}</span>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 whitespace-nowrap">
+                  <div className="grid grid-cols-2  sm:grid-cols-4 gap-3 whitespace-nowrap">
                     <div className="flex gap-1 text-gray-400 text-xs font-sans cursor-pointer">
                       <MdBusinessCenter /> <div>{b.company}</div>
                     </div>
@@ -146,6 +146,9 @@ const Dashboard = () => {
             return a;
           })}
         </div>
+      </div>
+      <div className="text-center text-sm font-medium text-gray-500 py-3 ">
+        Copyright &copy; JobXa{' '}
       </div>
     </div>
   );

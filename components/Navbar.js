@@ -49,7 +49,7 @@ const Navbar = () => {
       className={`${
         Navbar
           ? `  justify-between sm:justify-between md:justify-center transition duration-300 bg-black bg-opacity-30 backdrop-blur-sm ease-in flex h-12  w-full shadow-lg fixed text-white dark:bg-black/40 z-[100]`
-          : 'flex justify-between sm:justify-between md:justify-center bg-transparent absolute  h-12  w-full mt-2 pr-2  '
+          : 'flex justify-between sm:justify-between md:justify-center bg-transparent absolute  h-12  w-full mt-2 pr-2 z-[100] '
       } `}
     >
       <div className="min-w-[82px] cursor-pointer select-none flex border-transparent bg-indigo-800 text-white items-center rounded-md m-2 px-2 py-1 text-xl font-bold font-sans tracking-wide ">
@@ -73,12 +73,12 @@ const Navbar = () => {
           Ham
             ? `fixed  bottom-0  md:hidden select-none h-[440px] sm:rounded-bl-[250px] rounded-bl-[180px]  flex flex-col sm:flex-col  order-last  sm:order-last inset-0 left-1/4 uppercase bg-black/60 backdrop-blur-sm   ${
                 !Navbar ? 'backdrop-blur-sm' : 'backdrop-blur-none'
-              } text-white  justify-center items-center gap-4 font-sans font-semibold font-sm`
+              } text-white  justify-center items-center gap-4 font-sans font-semibold font-sm animate-animate_left  `
             : 'hidden'
         }`}
       >
         <div
-          className="md:hidden block sm:block cursor-cell font-light"
+          className="md:hidden  block sm:block cursor-cell font-light"
           onClick={toggle}
         >
           <CgCloseR className="text-white text-3xl" />
