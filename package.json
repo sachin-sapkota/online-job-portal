@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "nodemon server/index.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -14,8 +14,14 @@
     "@lottiefiles/lottie-interactivity": "^1.6.0",
     "@lottiefiles/react-lottie-player": "^3.4.7",
     "@mui/material": "^5.8.3",
+    "axios": "^0.27.2",
+    "body-parser": "^1.20.0",
     "chart.js": "^3.8.0",
     "express": "^4.18.1",
+    "express-graphql": "^0.12.0",
+    "graphql": "^15.8.0",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
     "next": "12.1.6",
     "next-themes": "^0.2.0",
     "react": "18.1.0",
@@ -30,6 +36,6 @@
     "eslint-config-next": "12.1.6",
     "nodemon": "^2.0.16",
     "postcss": "^8.4.14",
-    "tailwindcss": "^3.0.24"
+    "tailwindcss": "^3.1.3"
   }
 }

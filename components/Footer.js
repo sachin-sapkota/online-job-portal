@@ -4,8 +4,8 @@ import { AiFillApple, AiFillAndroid } from 'react-icons/ai';
 const Footer = () => {
   return (
     <div className=" p-3 dark:bg-gray-900 ">
-      <div className=" p-8 h-auto  min-w-[340px] rounded-t-[0.7rem] shadow-xl bg-gray-200 text-black dark:bg-gray-700 dark:text-white   ">
-        <div className="py-5 px-2">
+      <div className=" p-8 h-auto  min-w-[340px] rounded-t-xl shadow-xl bg-gray-200 text-black dark:bg-gray-700 dark:text-white    ">
+        <div className="py-5 px-4">
           <hr className="border-solid w-full border-white" />
         </div>
 
@@ -16,9 +16,8 @@ const Footer = () => {
               <Link href="/faqs">How to Hire</Link>
               <Link href="/faqs">Marketplace</Link>
               <Link href="/faqs">Hire an Agency</Link>
-              <Link href="/faqs">Enterprise</Link>
+
               <Link href="/faqs">Direct Contracts</Link>
-              <Link href="/faqs">Hire Worldwide</Link>
               <Link href="/faqs">Project Catatlog</Link>
             </div>
           </div>

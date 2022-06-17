@@ -34,11 +34,6 @@ const Employer = () => {
 
   return (
     <div>
-      <div className="bg-white">
-        {' '}
-        <Navbar />
-      </div>
-
       <div className="">
         <div
           className={` ${dash ? 'flex justify-start' : 'grid grid-cols-5'}   `}

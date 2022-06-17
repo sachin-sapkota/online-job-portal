@@ -9,7 +9,7 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        animate_right: 'animate_right 1s ease-in-out',
+        animate_right: 'animate_right .5s ease-in-out',
         animate_left: 'animate_left 1s ease-in-out',
       },
 
