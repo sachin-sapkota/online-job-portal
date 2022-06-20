@@ -5,11 +5,25 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Navbar from '../components/Navbar';
 import { CgGoogle, CgFacebook, CgTwitter } from 'react-icons/cg';
+import axios from 'axios';
 const signup = () => {
   const [user, Setuser] = useState({
+    name: '',
+    username: '',
     email: '',
+    date: '',
+    number: '',
     password: '',
+    acctype: '',
   });
+  console.log(user);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    axios
+      .post('/sign-up', user)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="">
@@ -24,7 +38,7 @@ const signup = () => {
             />
           </div>
           <div className="min-w-[300px] max-w-[300px] flex items-center justify-center">
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <input
                   type="text"
@@ -32,7 +46,20 @@ const signup = () => {
                   placeholder="Name"
                   onChange={(e) =>
                     Setuser((prev) => {
-                      return { ...prev, email: e.target.value };
+                      return { ...prev, name: e.target.value };
+                    })
+                  }
+                  required
+                />
+              </div>
+              <div className="mb-3">
+                <input
+                  type="text"
+                  className=" block w-full px-4 py-1 text-base  bg-gray-300 font-semibold text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                  placeholder="username"
+                  onChange={(e) =>
+                    Setuser((prev) => {
+                      return { ...prev, username: e.target.value };
                     })
                   }
                   required
@@ -60,7 +87,7 @@ const signup = () => {
                   placeholder="Date of Birth"
                   onChange={(e) =>
                     Setuser((prev) => {
-                      return { ...prev, email: e.target.value };
+                      return { ...prev, date: e.target.value };
                     })
                   }
                   required
@@ -74,7 +101,7 @@ const signup = () => {
                   placeholder="Mobile Number"
                   onChange={(e) =>
                     Setuser((prev) => {
-                      return { ...prev, email: e.target.value };
+                      return { ...prev, number: e.target.value };
                     })
                   }
                   required
@@ -93,6 +120,44 @@ const signup = () => {
                   }
                   required
                 />
+              </div>
+              <div className="flex gap-4 items-center mb-3">
+                <div className="bg-indigo-200 p-2 rounded-lg ">
+                  <label
+                    htmlfor="employer"
+                    className="text-sm font-semibold font-sans "
+                  >
+                    <input
+                      type="radio"
+                      name="type"
+                      value="employer"
+                      onChange={(e) =>
+                        Setuser((prev) => {
+                          return { ...prev, acctype: e.target.value };
+                        })
+                      }
+                    />
+                    <span className="pl-2">Employer</span>
+                  </label>
+                </div>
+                <div className="bg-indigo-200 p-2 rounded-lg ">
+                  <label
+                    htmlfor="employee"
+                    className="text-sm font-semibold font-sans "
+                  >
+                    <input
+                      type="radio"
+                      name="type"
+                      value="employee"
+                      onChange={(e) =>
+                        Setuser((prev) => {
+                          return { ...prev, acctype: e.target.value };
+                        })
+                      }
+                    />
+                    <span className="pl-2">Employee</span>
+                  </label>
+                </div>
               </div>
 
               <div className="flex justify-between items-center mb-5">

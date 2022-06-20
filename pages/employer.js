@@ -9,11 +9,13 @@ import { TbMessageCircle } from 'react-icons/tb';
 import { IoMdNotificationsOutline } from 'react-icons/io';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { useState, useEffect, useCallback } from 'react';
-import { GiRaiseZombie, GiShamblingZombie } from 'react-icons/gi';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import Dashboard from '../components/employer/Dashboard';
 import Profile from '../components/employer/Profile';
 import Jobs from '../components/employer/Jobs';
+import Manage from '../components/employer/Manage';
+import Applicants from '../components/employer/Applicants';
+
 const Employer = () => {
   const [active, setActive] = useState('Dashboard');
   const [dash, SetDash] = useState(true);
@@ -233,17 +235,17 @@ const Employer = () => {
               <div className={`${dash ? 'hidden' : ''}`}>Delete Profile</div>
             </div>
           </div>
-          <div className="col-span-4 bg-gray-200 dark:bg-gray-900 w-[100vw] h-auto mt-[60px] pt-10 pl-[4rem] md:pl-[3rem]   ">
+          <div className="col-span-4 bg-gray-200 dark:bg-gray-900 w-[100vw] h-auto mt-[60px] pt-10 pl-[3.5rem] sm:pl-[3.8rem] md:pl-[3rem] pr-2   ">
             {active === 'Dashboard' ? <Dashboard /> : null}
             {active === 'Profile' ? <Profile /> : null}
             {active === 'Jobs' ? <Jobs /> : null}
-            {/* {active === 'Manage' ? <Manage /> : null}
+            {active === 'Manage' ? <Manage /> : null}
             {active === 'Applicants' ? <Applicants /> : null}
             {active === 'Favourites' ? <Favourites /> : null}
             {active === 'Messages' ? <Messages /> : null}
             {active === 'Notifications' ? <Notifications /> : null}
             {active === 'Logout' ? <Logout /> : null}
-            {active === 'Delete' ? <Delete /> : null} */}
+            {active === 'Delete' ? <Delete /> : null}
           </div>
         </div>
       </div>

@@ -8,6 +8,11 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      fontFamily: {
+        poppins: ['Poppins'],
+        roboto: ['Roboto'],
+      },
+
       animation: {
         animate_right: 'animate_right .5s ease-in-out',
         animate_left: 'animate_left 1s ease-in-out',
