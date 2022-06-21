@@ -2,7 +2,7 @@
   "name": "job-app",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
+  
   "scripts": {
     "dev": "nodemon server/index.js",
     "build": "next build",
@@ -12,12 +12,10 @@
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
-    "@headlessui/react": "^1.6.4",
-    "@heroicons/react": "^1.0.6",
     "@lottiefiles/lottie-interactivity": "^1.6.0",
     "@lottiefiles/react-lottie-player": "^3.4.7",
+    "@mui/material": "^5.8.3",
     "axios": "^0.27.2",
-    "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
     "chart.js": "^3.8.0",
     "cookie-parser": "^1.4.6",
@@ -27,17 +25,14 @@
     "express-graphql": "^0.12.0",
     "express-session": "^1.17.3",
     "graphql": "^15.8.0",
-    "jsonwebtoken": "^8.5.1",
-    "jwt-decode": "^3.1.2",
     "morgan": "^1.10.0",
-    "mysql2": "^2.3.3",
+    "mysql": "^2.18.1",
     "next": "12.1.6",
     "next-themes": "^0.2.0",
     "react": "18.1.0",
     "react-chartjs-2": "^4.2.0",
     "react-dom": "18.1.0",
-    "react-icons": "^4.4.0",
-    "sequelize": "^6.21.0"
+    "react-icons": "^4.4.0"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.2",
