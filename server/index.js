@@ -6,19 +6,17 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 const bodyParser = require('body-parser');
-const session = require('express-session');
+require('dotenv').config();
+const cookieParser = require('cookie-parser');
+const router = require('./routes/index.js');
 
 app.prepare().then(() => {
-  const userrouter = require('./routes/user');
-  const signuproute = require('./routes/signup');
   const server = express();
   server.use(bodyParser.json());
-
-  server.use('/user', userrouter);
-  server.post('/sign-up', signuproute);
-  server.post('/api', (req, res) => {
-    return app.render(req, res, '/api', req.query);
-  });
+  server.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
+  server.use(cookieParser());
+  server.use(express.json());
+  server.use('/api', router);
 
   server.all('*', (req, res) => {
     return handle(req, res);

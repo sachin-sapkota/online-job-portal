@@ -1,8 +1,8 @@
-import Users from '../Models/UserModel.js';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+const Users = require('../Models/UserModel.js');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
-export const getUsers = async (req, res) => {
+const getUsers = async (req, res) => {
   try {
     const users = await Users.findAll({
       attributes: ['id', 'name', 'email'],
@@ -13,7 +13,7 @@ export const getUsers = async (req, res) => {
   }
 };
 
-export const Register = async (req, res) => {
+const Register = async (req, res) => {
   const { name, email, password, confPassword } = req.body;
   if (password !== confPassword)
     return res
@@ -33,7 +33,7 @@ export const Register = async (req, res) => {
   }
 };
 
-export const Login = async (req, res) => {
+const Login = async (req, res) => {
   try {
     const user = await Users.findAll({
       where: {
@@ -77,7 +77,7 @@ export const Login = async (req, res) => {
   }
 };
 
-export const Logout = async (req, res) => {
+const Logout = async (req, res) => {
   const refreshToken = req.cookies.refreshToken;
   if (!refreshToken) return res.sendStatus(204);
   const user = await Users.findAll({
@@ -98,3 +98,7 @@ export const Logout = async (req, res) => {
   res.clearCookie('refreshToken');
   return res.sendStatus(200);
 };
+module.exports = getUsers;
+module.exports = Register;
+module.exports = Login;
+module.exports = Logout;

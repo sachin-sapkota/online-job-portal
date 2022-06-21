@@ -54,13 +54,10 @@ const Applicants = () => {
                       {appliedjobs.map((b) => {
                         const a = (
                           <div className="md:px-8  h-[80px] border-[1px] backdrop-blur-sm dark:bg-gray-700 border-indigo-100 rounded-lg p-2 flex justify-start gap-3 items-center hover:shadow-xl hover:translate-y-[-2px] transform-gpu transition-all duration-300 ease-in-out   ">
-                            <div>{b.icons}</div>
+                            <div>{b.profilelink}</div>
                             <div className="flex  flex-col font-sans font-medium">
                               <span className="text-sm">{b.title}</span>
                               <div className="grid grid-cols-2  sm:grid-cols-4 gap-3 whitespace-nowrap">
-                                <div className="flex gap-1 text-gray-400 text-xs font-sans cursor-pointer">
-                                  <MdBusinessCenter /> <div>{b.company}</div>
-                                </div>
                                 <div className="flex gap-1 text-gray-400 text-xs font-sans cursor-pointer">
                                   <MdBusinessCenter /> <div>{b.location}</div>
                                 </div>
@@ -68,7 +65,7 @@ const Applicants = () => {
                                   <MdBusinessCenter /> <div>{b.date}</div>
                                 </div>
                                 <div className="flex gap-1 text-gray-400 text-xs font-sans cursor-pointer ">
-                                  <MdBusinessCenter />{' '}
+                                  <MdBusinessCenter />
                                   <div>{b.salary_range}</div>
                                 </div>
                               </div>
@@ -91,4 +88,4 @@ const Applicants = () => {
 
 export default Applicants;
 
-export const contacts = [{}];
+export const contacts = [];

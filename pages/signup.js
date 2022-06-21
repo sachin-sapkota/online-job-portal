@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-
+import { BiShow, BiHide } from 'react-icons/bi';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -7,16 +7,39 @@ import Navbar from '../components/Navbar';
 import { CgGoogle, CgFacebook, CgTwitter } from 'react-icons/cg';
 import axios from 'axios';
 const signup = () => {
+  const [usertype, setusertype] = useState('employee');
+  const [showpass, setshowpass] = useState(false);
+  const [errormess, seterrmess] = useState({
+    error1: '',
+    error2: '',
+  });
   const [user, Setuser] = useState({
     name: '',
     username: '',
     email: '',
-    date: '',
     number: '',
     password: '',
-    acctype: '',
+    usertype: '',
   });
-  console.log(user);
+  const checkpass = () => {
+    const a =
+      user.password.length >= 8
+        ? true
+        : seterrmess((prev) => {
+            return {
+              ...prev,
+              error1: 'Password size must be greater than equal to 8',
+            };
+          });
+    const b =
+      user.password == user.confpassword
+        ? 'true'
+        : seterrmess((prev) => {
+            return { ...prev, error2: 'Password doesnot match!' };
+          });
+    console.log(a && b);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     axios
@@ -39,6 +62,32 @@ const signup = () => {
           </div>
           <div className="min-w-[300px] max-w-[300px] flex items-center justify-center">
             <form onSubmit={handleSubmit}>
+              <div className="flex justify-between items-center mb-4">
+                <div
+                  onClick={() => {
+                    setusertype('employee');
+                  }}
+                  className={`bg-gray-200 p-3 rounded-xl font-bold font-sans text-xl text-gray-700  transition-all duration-400 cursor-pointer ${
+                    usertype == 'employee'
+                      ? 'bg-indigo-700 text-white'
+                      : 'hover:bg-indigo-200 hover:text-black'
+                  }`}
+                >
+                  Freelancer
+                </div>
+                <div
+                  onClick={() => {
+                    setusertype('employer');
+                  }}
+                  className={`bg-gray-200 p-3 rounded-xl font-bold font-sans text-xl text-gray-700  transition-all duration-400 cursor-pointer ${
+                    usertype == 'employer'
+                      ? 'bg-indigo-700 text-white'
+                      : 'hover:bg-indigo-200 hover:text-black'
+                  }`}
+                >
+                  Post a Job
+                </div>
+              </div>
               <div className="mb-3">
                 <input
                   type="text"
@@ -65,7 +114,6 @@ const signup = () => {
                   required
                 />
               </div>
-
               <div className="mb-3">
                 <input
                   type="email"
@@ -79,21 +127,6 @@ const signup = () => {
                   required
                 />
               </div>
-
-              <div className="mb-3 ">
-                <input
-                  type="date"
-                  className=" block w-full px-4 py-1 text-base  bg-gray-300 font-semibold text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  placeholder="Date of Birth"
-                  onChange={(e) =>
-                    Setuser((prev) => {
-                      return { ...prev, date: e.target.value };
-                    })
-                  }
-                  required
-                />
-              </div>
-
               <div className="mb-3">
                 <input
                   type="tel"
@@ -107,58 +140,55 @@ const signup = () => {
                   required
                 />
               </div>
-
-              <div className="mb-5 ">
-                <input
-                  type="password"
-                  className="form-control block w-full px-4 py-2 text-base  bg-gray-300 font-semibold text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  placeholder="Password"
-                  onChange={(e) =>
-                    Setuser((prev) => {
-                      return { ...prev, password: e.target.value };
-                    })
-                  }
-                  required
-                />
-              </div>
-              <div className="flex gap-4 items-center mb-3">
-                <div className="bg-indigo-200 p-2 rounded-lg ">
-                  <label
-                    htmlfor="employer"
-                    className="text-sm font-semibold font-sans "
+              <div onFocus={console.log('changed')}>
+                <div className="mb-3 relative  ">
+                  <div
+                    onClick={() => setshowpass(!showpass)}
+                    className=" flex   absolute right-0 inset-y-0 items-center cursor-pointer pr-3 text-gray-600 transition-all duration-200 "
                   >
-                    <input
-                      type="radio"
-                      name="type"
-                      value="employer"
-                      onChange={(e) =>
-                        Setuser((prev) => {
-                          return { ...prev, acctype: e.target.value };
-                        })
-                      }
-                    />
-                    <span className="pl-2">Employer</span>
-                  </label>
+                    {showpass ? (
+                      <BiHide className="w-6 h-6 antialiased" />
+                    ) : (
+                      <BiShow className="w-6 h-6 antialiased" />
+                    )}
+                  </div>
+                  <input
+                    type={showpass ? 'text' : 'password'}
+                    className="form-control block w-full px-4 py-2 text-base  bg-gray-300 font-semibold text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    placeholder="Password"
+                    onChange={(e) =>
+                      Setuser((prev) => {
+                        return { ...prev, password: e.target.value };
+                      })
+                    }
+                    required
+                  />
                 </div>
-                <div className="bg-indigo-200 p-2 rounded-lg ">
-                  <label
-                    htmlfor="employee"
-                    className="text-sm font-semibold font-sans "
+                <div className="mb-2 relative ">
+                  <div
+                    onClick={() => setshowpass(!showpass)}
+                    className=" flex   absolute right-0 inset-y-0 items-center cursor-pointer pr-3 text-gray-600 transition-all duration-200 "
                   >
-                    <input
-                      type="radio"
-                      name="type"
-                      value="employee"
-                      onChange={(e) =>
-                        Setuser((prev) => {
-                          return { ...prev, acctype: e.target.value };
-                        })
-                      }
-                    />
-                    <span className="pl-2">Employee</span>
-                  </label>
+                    {showpass ? (
+                      <BiHide className="w-6 h-6 antialiased" />
+                    ) : (
+                      <BiShow className="w-6 h-6 antialiased" />
+                    )}
+                  </div>
+                  <input
+                    type={showpass ? 'text' : 'password'}
+                    className="form-control block w-full px-4 py-2 text-base  bg-gray-300 font-semibold text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    placeholder="Confirm Password"
+                    onChange={(e) =>
+                      Setuser((prev) => {
+                        return { ...prev, confpassword: e.target.value };
+                      })
+                    }
+                    required
+                  />
                 </div>
               </div>
+              <div className="mb-4"></div>
 
               <div className="flex justify-between items-center mb-5">
                 <div className="form-group form-check">
@@ -181,7 +211,6 @@ const signup = () => {
                   Forgot password?
                 </a>
               </div>
-
               <button
                 type="submit"
                 className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"

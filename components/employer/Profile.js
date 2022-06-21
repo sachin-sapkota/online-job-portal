@@ -9,8 +9,7 @@ const Profile = () => {
       <div className="flex flex-col gap-5">
         <div className="flex flex-col  gap-6 mt-10 h-auto rounded-md p-5 pt-8 bg-white ">
           <div className="flex justify-start items-center gap-5">
-            {/*             
-            logo here */}
+            {/* logo here */}
             <div className="w-[100px] h-[100px] rounded-md object-contain overflow-hidden bg-orange-500"></div>
             <div className="flex flex-col gap-3 justify-center ">
               <div className=" text-indigo-500">
