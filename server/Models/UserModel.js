@@ -8,6 +8,12 @@ const Users = db.define(
     name: {
       type: DataTypes.STRING,
     },
+    username: {
+      type: DataTypes.TEXT,
+    },
+    number: {
+      type: DataTypes.INTEGER,
+    },
     email: {
       type: DataTypes.STRING,
     },

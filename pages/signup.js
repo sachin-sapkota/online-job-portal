@@ -9,10 +9,7 @@ import axios from 'axios';
 const signup = () => {
   const [usertype, setusertype] = useState('employee');
   const [showpass, setshowpass] = useState(false);
-  const [errormess, seterrmess] = useState({
-    error1: '',
-    error2: '',
-  });
+  const [valid, setvalid] = useState(false);
   const [user, Setuser] = useState({
     name: '',
     username: '',
@@ -22,22 +19,13 @@ const signup = () => {
     usertype: '',
   });
   const checkpass = () => {
-    const a =
-      user.password.length >= 8
-        ? true
-        : seterrmess((prev) => {
-            return {
-              ...prev,
-              error1: 'Password size must be greater than equal to 8',
-            };
-          });
-    const b =
-      user.password == user.confpassword
-        ? 'true'
-        : seterrmess((prev) => {
-            return { ...prev, error2: 'Password doesnot match!' };
-          });
-    console.log(a && b);
+    if (user.password.length >= 8) {
+      setvalid(true);
+    }
+
+    if (user.password == user.confpassword) {
+      setvalid(true);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -212,8 +200,22 @@ const signup = () => {
                 </a>
               </div>
               <button
+                onMouseEnter={() => checkpass()}
+                disabled={
+                  user.password !== user.confpassword ||
+                  user.name == null ||
+                  user.number == null ||
+                  user.password == null ||
+                  user.email == null ||
+                  user.confpassword == null ||
+                  user.username == null
+                    ? true
+                    : false
+                }
                 type="submit"
-                className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
+                className={`inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full ${
+                  valid ? 'cursor-pointer' : 'cursor-not-allowed'
+                } `}
                 data-mdb-ripple="true"
                 data-mdb-ripple-color="light"
               >
