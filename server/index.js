@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 const cookieParser = require('cookie-parser');
 const router = require('./routes/index.js');
+const db1 = require('./config/auth_db');
 
 app.prepare().then(() => {
   const server = express();

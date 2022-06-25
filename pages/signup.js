@@ -16,7 +16,7 @@ const signup = () => {
     email: '',
     number: '',
     password: '',
-    usertype: '',
+    confpassword: '',
   });
   const checkpass = () => {
     if (user.password.length >= 8) {
@@ -31,7 +31,16 @@ const signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     axios
-      .post('/sign-up', user)
+      .post('http://localhost:3000/api/users', {
+        name: user.name,
+        email: user.email,
+        password: user.password,
+        confPassword: user.confpassword,
+        usertype: usertype,
+        number: user.number,
+        username: user.username,
+      
+      })
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
