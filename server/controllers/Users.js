@@ -68,13 +68,20 @@ exports.Login = async (req, res) => {
       if (err) {
         res.throw(err);
       }
-
+      console.log(result[0]);
+      const data = {
+        id: result[0].id,
+        name: result[0].name,
+        username: result[0].username,
+        email: result[0].email,
+        verified: result[0].verified,
+        Last_login: result[0].Last_login,
+        number: result[0].number,
+      };
       if (results) {
-        const accessToken = jwt.sign(
-          result[0],
-          process.env.ACCESS_TOKEN_SECRET,
-          { expiresIn: '10h' }
-        );
+        const accessToken = jwt.sign(data, process.env.ACCESS_TOKEN_SECRET, {
+          expiresIn: '10h',
+        });
 
         db1.execute(`UPDATE users SET Last_login = now() WHERE id= ?`, [
           result[0]['id'],
