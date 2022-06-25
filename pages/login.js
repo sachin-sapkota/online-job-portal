@@ -1,18 +1,34 @@
 import { useState } from 'react';
-
+import axios from 'axios';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import Navbar from '../components/Navbar';
 import { CgGoogle, CgFacebook, CgTwitter } from 'react-icons/cg';
 const login = () => {
+  const router = useRouter();
   const [user, Setuser] = useState({
     email: '',
     password: '',
   });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    axios.post('http://localhost:3000/api/login', {
+      email: user.email,
+      password: user.password,
+    });
+    router
+      .push('/employee')
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="">
+      <Head>
+        <title>Login</title>
+      </Head>
       <Navbar />
       <div className=" py-8 h-screen w-screen flex justify-center items-center">
         <div className="grid items-center md:grid-cols-2 sm:grid-cols-1 grid-cols-1 grid-rows-2 md:grid-rows-1 justify-center    gap-3 md:gap-8 lg:gap-[5rem] text-gray-800">
@@ -24,7 +40,7 @@ const login = () => {
             />
           </div>
           <div className="min-w-[300px] max-w-[300px] flex items-center justify-center">
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <input
                   type="text"

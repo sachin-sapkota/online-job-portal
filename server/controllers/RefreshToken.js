@@ -1,35 +1,34 @@
 const jwt = require('jsonwebtoken');
+const db1 = require('../config/auth_db');
 
 const refreshToken = async (req, res) => {
-  try {
-    const refreshToken = req.cookies.refreshToken;
-    if (!refreshToken) return res.sendStatus(401);
-    const user = await Users.findAll({
-      where: {
-        refresh_token: refreshToken,
-      },
-    });
-    if (!user[0]) return res.sendStatus(403);
-    jwt.verify(
-      refreshToken,
-      process.env.REFRESH_TOKEN_SECRET,
-      (err, decoded) => {
-        if (err) return res.sendStatus(403);
-        const userId = user[0].id;
-        const name = user[0].name;
-        const email = user[0].email;
-        const accessToken = jwt.sign(
-          { userId, name, email },
-          process.env.ACCESS_TOKEN_SECRET,
-          {
-            expiresIn: '15s',
-          }
-        );
-        res.json({ accessToken });
-      }
-    );
-  } catch (error) {
-    console.log(error);
-  }
+  const refreshToken = req.cookies.refreshToken;
+  if (!refreshToken) return res.send({ msg: 'No refresh token' });
+  db1.execute(
+    `SELECT * FROM users WHERE refresh_token=?`,
+    [refreshToken],
+    (err, result) => {
+      console.log(result);
+      if (!result[0]) return res.send({ msg: 'refresh token error' });
+      jwt.verify(
+        refreshToken,
+        process.env.REFRESH_TOKEN_SECRET,
+        (err, decoded) => {
+          if (err) return res.sendStatus(403);
+
+          const results = result[0];
+          const id = results.id;
+          const name = results.name;
+          const email = result.email;
+          const accessToken = jwt.sign(
+            results,
+            process.env.ACCESS_TOKEN_SECRET,
+            { expiresIn: '15s' }
+          );
+        }
+      );
+      res.json({ accessToken });
+    }
+  );
 };
 module.exports = refreshToken;

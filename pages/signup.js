@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BiShow, BiHide } from 'react-icons/bi';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -18,18 +19,14 @@ const signup = () => {
     password: '',
     confpassword: '',
   });
+  const router = useRouter();
   const checkpass = () => {
     if (user.password.length >= 8) {
-      setvalid(true);
-    }
-
-    if (user.password == user.confpassword) {
       setvalid(true);
     }
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
     axios
       .post('http://localhost:3000/api/users', {
         name: user.name,
@@ -39,14 +36,18 @@ const signup = () => {
         usertype: usertype,
         number: user.number,
         username: user.username,
-      
       })
+
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
+    router.push('/login');
   };
 
   return (
     <div className="">
+      <Head>
+        <title>Sign up</title>
+      </Head>
       <Navbar />
       <div className=" pt-8 h-screen w-screen flex justify-center items-center">
         <div className="grid items-center md:grid-cols-2 sm:grid-cols-1 grid-cols-1 grid-rows-1 md:grid-rows-1 justify-center    gap-3 md:gap-8 lg:gap-[5rem] text-gray-800">
@@ -137,7 +138,7 @@ const signup = () => {
                   required
                 />
               </div>
-              <div onFocus={console.log('changed')}>
+              <div>
                 <div className="mb-3 relative  ">
                   <div
                     onClick={() => setshowpass(!showpass)}
@@ -208,6 +209,7 @@ const signup = () => {
                   Forgot password?
                 </a>
               </div>
+
               <button
                 onMouseEnter={() => checkpass()}
                 disabled={
@@ -228,7 +230,7 @@ const signup = () => {
                 data-mdb-ripple="true"
                 data-mdb-ripple-color="light"
               >
-                Sign in
+                Sign up
               </button>
               <div className="dark:text-white text-sm flex mt-2">
                 Don't have a account?
