@@ -3,17 +3,22 @@ import { CgInstagram, CgFacebook, CgTwitter, CgYoutube } from 'react-icons/cg';
 import { AiFillApple, AiFillAndroid } from 'react-icons/ai';
 const Footer = () => {
   return (
-    <div className=" p-3 dark:bg-gray-900 ">
-      <div className=" p-8 h-auto  min-w-[340px] rounded-t-xl shadow-xl bg-gray-200 text-black dark:bg-gray-700 dark:text-white    ">
-        <div className="py-5 px-4">
-          <hr className="border-solid w-full border-white" />
+    <div className="  ">
+      <div className="pl-5  h-auto  min-w-[340px]  shadow-xl bg-gray-200 text-black dark:bg-gray-700 dark:text-white    ">
+        <div className="flex items-center justify-center py-5 ">
+          <div className="min-w-[82px] cursor-pointer select-none flex border-transparent bg-indigo-800 text-white items-center rounded-md m-2 px-2 py-1 text-xl font-bold font-sans tracking-wide ">
+            Job Xa
+            {/* <Image src={require('../images/logo.png')} width={100} height={100} alt={'logo'} /> */}
+          </div>
         </div>
 
-        <div className="grid gap-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4">
+        <div className="grid  gap-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4">
           <div className="flex flex-col">
             <div className="font-bold mb-1 ">For Client</div>
             <div className="flex flex-col text-xs font-sans">
-              <Link href="/faqs">How to Hire</Link>
+              <div>
+                <Link href="/faqs">How to Hire</Link>
+              </div>
               <Link href="/faqs">Marketplace</Link>
               <Link href="/faqs">Hire an Agency</Link>
 

@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { data } from 'autoprefixer';
 
 // export async function getServerSideProps() {
 //   const res = await fetch(`http://localhost:3000/api/users`);
@@ -14,28 +15,27 @@ import axios from 'axios';
 const employee = () => {
   const [token, settoken] = useState('');
   const [user, setuser] = useState([]);
-  const [name, setName] = useState('');
-  const [expire, setExpire] = useState('');
-  useEffect(() => {
-    getUsers();
-  }, []);
-  const router = useRouter();
 
-  const getUsers = async () => {
-    axios
-      .get('http://localhost:3000/api/users')
+  //   useEffect(() => {
+  //     getUsers();
+  //   }, []);
+  //   const router = useRouter();
 
-      .then((res) => {
-        setuser(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => console.log(err));
-  };
+  //   const getUsers = async () => {
+  //     axios
+  //       .get('http://localhost:3000/api/users')
+
+  //       .then((res) => {
+  //         setuser(res.data);
+  //       })
+  //       .catch((err) => console.log(err));
+  //   };
+  //   console.log(user);
 
   return (
     <div>
-      <div className="container mt-5">
-        <h1>Welcome Back: {name}</h1>
+      <div className="">
+        <h1>Welcome Back: {user.name}</h1>
         <table>
           <thead>
             <tr>
@@ -43,17 +43,7 @@ const employee = () => {
               <th>Email</th>
             </tr>
           </thead>
-          <tbody>
-            {/* {user.map((data) => {
-              const a = (
-                <tr key={data.id}>
-                  <td>{data.name}</td>
-                  <td>{data.email}</td>
-                </tr>
-              );
-              return a;
-            })} */}
-          </tbody>
+          <tbody></tbody>
         </table>
       </div>
     </div>
