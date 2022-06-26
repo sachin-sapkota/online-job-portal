@@ -13,7 +13,7 @@ import axios from 'axios';
 
 const employee = () => {
   const [token, settoken] = useState('');
-  const [user, setuser] = useState('');
+  const [user, setuser] = useState([]);
   const [name, setName] = useState('');
   const [expire, setExpire] = useState('');
   useEffect(() => {
@@ -24,13 +24,13 @@ const employee = () => {
   const getUsers = async () => {
     axios
       .get('http://localhost:3000/api/users')
-      .then((res) => res.json())
-      .then((data) => {
-        setuser(data);
+
+      .then((res) => {
+        setuser(res.data);
+        console.log(res.data);
       })
       .catch((err) => console.log(err));
   };
-  console.log(user);
 
   return (
     <div>
@@ -44,12 +44,15 @@ const employee = () => {
             </tr>
           </thead>
           <tbody>
-            {/* {user.map((a, index) => (
-             return( <tr key={a.id}>
-                <td>{a.name}</td>
-                <td>{a.email}</td>
-              </tr>)
-            ))} */}
+            {/* {user.map((data) => {
+              const a = (
+                <tr key={data.id}>
+                  <td>{data.name}</td>
+                  <td>{data.email}</td>
+                </tr>
+              );
+              return a;
+            })} */}
           </tbody>
         </table>
       </div>
