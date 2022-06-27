@@ -59,8 +59,8 @@ const LandingPage = () => {
 
       <section className="mt-10 text-gray-800 dark:text-gray-200 ">
         <div className="container  px-4 py-12 flex justify-center">
-          <div className="grid gap-20 mx-4 sm:grid-cols-12 ">
-            <div className=" col-span-12  sm:col-span-5 ">
+          <div className="flex flex-col md:flex-row mx-4  ">
+            <div className="  ">
               <div className="text-center sm:text-left mb-14 before:block before:w-24 before:h-3 before:mb-5 before:rounded-md before:mx-auto sm:before:mx-0 before:bg-emerald-600">
                 <h3 className="text-3xl font-semibold">Job Xa</h3>
                 <span className="text-[15px] font-bold tracking-wider uppercase text-gray-600">
@@ -100,19 +100,21 @@ const LandingPage = () => {
         </div>
       </section>
 
-      <div className="flex flex-col mx-2 mt-[3rem]">
-        <div className="text-center font-bold text-2xl">
+      <div className="flex flex-col mx-2 mt-[3rem] select-none">
+        <div className="text-center font-bold  text-primary tracking-widest text-3xl">
           More easier to find a job
         </div>
-        <div className="text-center font-bold text-2xl">with our platform </div>
-        <div className="text-center px-7 text-sm font-semibold">
+        <div className="text-center font-bold text-3xl tracking-widest text-primary ">
+          with our platform
+        </div>
+        <div className="mt-2 tracking-wide  text-center px-7 text-sm font-semibold">
           The following features make our service easier to help you find
           suitable job from various companies.
         </div>
         <div className="flex sm:flex-row flex-col justify-center text-center items-center mt-2 gap-5 px-3">
           <div className="flex flex-col items-center justify-center ">
             <div>
-              <FaRegHandshake className="text-indigo-600 text-[5.5rem] dark:text-indigo-400 " />
+              <FaRegHandshake className="text-primary text-[5.5rem] dark:text-indigo-400 " />
             </div>
             <span className="font-semibold">Easy Applying</span>
             <span className="text-xs tracking-wide ">
@@ -122,7 +124,7 @@ const LandingPage = () => {
 
           <div className="flex flex-col items-center justify-center px-4">
             <div>
-              <FaSuitcase className="text-indigo-600 text-[5rem] dark:text-indigo-400  " />
+              <FaSuitcase className=" text-[5rem] text-primary dark:text-indigo-400  " />
             </div>
             <span className="font-semibold">Many vacancies</span>
             <span className="text-xs tracking-wide ">
@@ -132,7 +134,7 @@ const LandingPage = () => {
 
           <div className="flex flex-col items-center justify-center ">
             <div>
-              <MdSupportAgent className="text-indigo-600 text-[5rem] dark:text-indigo-400  " />
+              <MdSupportAgent className="text-primary text-[5rem] dark:text-indigo-400  " />
             </div>
             <span className="font-semibold">Best Support</span>
             <span className="text-xs tracking-wide ">

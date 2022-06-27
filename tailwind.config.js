@@ -49,6 +49,7 @@ module.exports = {
         color2: '#E3EFE8',
         color4: '#243b55',
         color3: '#141e30',
+        primary: '#00308b',
       },
     },
   },
