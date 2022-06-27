@@ -100,44 +100,47 @@ const LandingPage = () => {
         </div>
       </section>
 
-      <div className="flex flex-col mx-2 mt-[3rem] select-none">
-        <div className="text-center font-bold  text-primary tracking-widest text-3xl">
+      <div className=" px-2 flex flex-col mx-2 mt-[3rem] select-none mb-[3rem]">
+        <div className="text-center font-bold  text-primary tracking-widest text-4xl">
           More easier to find a job
         </div>
-        <div className="text-center font-bold text-3xl tracking-widest text-primary ">
+        <div className="text-center font-bold text-4xl tracking-widest text-primary ">
           with our platform
         </div>
-        <div className="mt-2 tracking-wide  text-center px-7 text-sm font-semibold">
+        <div className="mt-2 tracking-wide  text-center px-7 text-md font-semibold mb-4">
           The following features make our service easier to help you find
           suitable job from various companies.
         </div>
-        <div className="flex sm:flex-row flex-col justify-center text-center items-center mt-2 gap-5 px-3">
-          <div className="flex flex-col items-center justify-center ">
+        <div className="flex gap-16 md:gap-10 lg:gap-16 md:flex-row flex-col justify-center text-center items-center md:items-start mt-2  px-3">
+          <div className="mt-0 md:mt-[100px] min-w-[230px] min-h-[180px] w-[350px] h-[200px] bg-black/20 shadow-primary/60  drop-shadow-md shadow-2xl   p-4 rounded-xl flex flex-col items-center justify-center ">
             <div>
-              <FaRegHandshake className="text-primary text-[5.5rem] dark:text-indigo-400 " />
+              <FaRegHandshake className="rounded-full overflow-hidden text-primary text-[5.5rem] dark:text-indigo-400 " />
             </div>
-            <span className="font-semibold">Easy Applying</span>
-            <span className="text-xs tracking-wide ">
+            <span className="font-bold font-sans tracking-wide ">
+              Easy Applying
+            </span>
+            <span className=" text-sm tracking-wide font-semibold ">
               The process of applying for job is easier and faster.
             </span>
           </div>
 
-          <div className="flex flex-col items-center justify-center px-4">
-            <div>
-              <FaSuitcase className=" text-[5rem] text-primary dark:text-indigo-400  " />
+          <div className="min-w-[230px] min-h-[180px] w-[350px] h-[200px] scale-100 md:scale-110 bg-black/20 shadow-primary/60  drop-shadow-md shadow-2xl   p-4 rounded-xl flex flex-col items-center justify-center ">
+            <div className="">
+              <FaSuitcase className=" rounded-full overflow-hidden  text-[5rem] text-primary dark:text-indigo-400  " />
             </div>
             <span className="font-semibold">Many vacancies</span>
-            <span className="text-xs tracking-wide ">
+            <span className=" text-sm tracking-wide font-semibold ">
               There are many job vacancies from various companies.
             </span>
           </div>
 
-          <div className="flex flex-col items-center justify-center ">
+          <div className="mt-0 md:mt-[100px] min-w-[230px] min-h-[180px] w-[350px] h-[200px] bg-black/20 shadow-primary/60  drop-shadow-md shadow-2xl   p-4 rounded-xl flex flex-col items-center justify-center ">
+            {' '}
             <div>
-              <MdSupportAgent className="text-primary text-[5rem] dark:text-indigo-400  " />
+              <MdSupportAgent className="rounded-full overflow-hidden text-primary text-[5rem] dark:text-indigo-400  " />
             </div>
             <span className="font-semibold">Best Support</span>
-            <span className="text-xs tracking-wide ">
+            <span className=" text-sm tracking-wide font-semibold ">
               We provide the full support for job seekers for better results.
             </span>
           </div>
@@ -153,65 +156,65 @@ const LandingPage = () => {
             We provide many categories, choose a category according to your
             expertise to make it easier to find a job.
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 mt-3 gap-3">
-            <div className=" dark:bg-gray-700 group bg-slate-200 hover:scale-[10px] hover:bg-indigo-400 hover:text-white flex gap-3 items-center justify-cente rounded-lg py-4 px-3 shadow-md">
-              <div className="text-color1 bg-white rounded-[0.7rem] p- 2 dark:bg-gray-700">
+          <div className="[&>*]:bg-footer/90 [&>*]:text-white [&>*]:shadow-lg [&>*]:dark:shadow-md [&>*]:dark:shadow-white/40  grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 mt-3 gap-4">
+            <div className="group hover:bg-footer/80 transition-all duration-300 hover:text-white flex gap-3 items-center  rounded-lg py-4 px-3 shadow-md dark:bg-footer">
+              <div className="text-footer dark:text-white bg-white rounded-[0.7rem] p-2 dark:bg-gray-700">
                 <SiAppstore />
               </div>
               <div className="text-xs font-sans">App Development</div>
               <div></div>
             </div>
 
-            <div className="group bg-slate-200 hover:bg-indigo-400 hover:text-white flex gap-3 items-center justify-cente rounded-lg py-4 px-3 shadow-md dark:bg-gray-700">
-              <div className="text-color1 bg-white rounded-[0.7rem] p-2 dark:bg-gray-700">
+            <div className="group hover:bg-footer/80 transition-all duration-300 hover:text-white flex gap-3 items-center  rounded-lg py-4 px-3 shadow-md dark:bg-footer">
+              <div className="text-footer dark:text-white bg-white rounded-[0.7rem] p-2 dark:bg-gray-700">
                 <RiMoneyDollarCircleFill />
               </div>
               <div className="text-xs font-sans">Finance</div>
               <div></div>
             </div>
 
-            <div className="group bg-slate-200 hover:bg-indigo-400 hover:text-white flex gap-3 items-center justify-cente rounded-lg py-4 px-3 shadow-md dark:bg-gray-700">
-              <div className="text-color1 bg-white rounded-[0.7rem] p-2 dark:bg-gray-700">
+            <div className="group hover:bg-footer/80 transition-all duration-300 hover:text-white flex gap-3 items-center  rounded-lg py-4 px-3 shadow-md dark:bg-footer">
+              <div className="text-footer dark:text-white bg-white rounded-[0.7rem] p-2 dark:bg-gray-700">
                 <SiAltiumdesigner />
               </div>
               <div className="text-xs font-sans">Graphics Design</div>
               <div></div>
             </div>
 
-            <div className="group bg-slate-200 hover:bg-indigo-400 hover:text-white flex gap-3 items-center justify-cente rounded-lg py-4 px-3 shadow-md dark:bg-gray-700">
-              <div className="text-color1 bg-white rounded-[0.7rem] p-2 dark:bg-gray-700">
+            <div className="group hover:bg-footer/80 transition-all duration-300 hover:text-white flex gap-3 items-center  rounded-lg py-4 px-3 shadow-md dark:bg-footer">
+              <div className="text-footer dark:text-white bg-white rounded-[0.7rem] p-2 dark:bg-gray-700">
                 <RiServiceFill />
               </div>
               <div className="text-xs font-sans">Services</div>
               <div></div>
             </div>
 
-            <div className="group bg-slate-200 hover:bg-indigo-400 hover:text-white flex gap-3 items-center justify-cente rounded-lg py-4 px-3 shadow-md dark:bg-gray-700">
-              <div className="text-color1 bg-white rounded-[0.7rem] p-2 dark:bg-gray-700">
+            <div className="group hover:bg-footer/80 transition-all duration-300 hover:text-white flex gap-3 items-center  rounded-lg py-4 px-3 shadow-md dark:bg-footer">
+              <div className="text-footer dark:text-white bg-white rounded-[0.7rem] p-2 dark:bg-gray-700">
                 <GiTeacher />
               </div>
               <div className="text-xs font-sans">Teacher</div>
               <div></div>
             </div>
 
-            <div className="group bg-slate-200 hover:bg-indigo-400 hover:text-white flex gap-3 items-center justify-cente rounded-lg py-4 px-3 shadow-md dark:bg-gray-700">
-              <div className="text-color1 bg-white rounded-[0.7rem] p-2 dark:bg-gray-700">
+            <div className="group hover:bg-footer/80 transition-all duration-300 hover:text-white flex gap-3 items-center  rounded-lg py-4 px-3 shadow-md dark:bg-footer">
+              <div className="text-footer dark:text-white bg-white rounded-[0.7rem] p-2 dark:bg-gray-700">
                 <MdOutlineSecurity />
               </div>
               <div className="text-xs font-sans">Security</div>
               <div className=""></div>
             </div>
 
-            <div className="group bg-slate-200 hover:bg-indigo-400 hover:text-white flex gap-3 items-center justify-cente rounded-lg py-4 px-3 shadow-md dark:bg-gray-700">
-              <div className="text-color1 bg-white rounded-[0.7rem] p-2 dark:bg-gray-700">
+            <div className="group hover:bg-footer/80 transition-all duration-300 hover:text-white flex gap-3 items-center  rounded-lg py-4 px-3 shadow-md dark:bg-footer">
+              <div className="text-footer dark:text-white bg-white rounded-[0.7rem] p-2 dark:bg-gray-700">
                 <CgWebsite />
               </div>
               <div className="text-xs font-sans">Web Development</div>
               <div></div>
             </div>
 
-            <div className="group bg-slate-200 hover:bg-indigo-400 hover:text-white flex gap-3 items-center justify-cente rounded-lg py-4 px-3 shadow-md dark:bg-gray-700">
-              <div className="text-color1 bg-white rounded-[0.7rem] p-2 dark:bg-gray-700">
+            <div className="group hover:bg-footer/80 transition-all duration-300 hover:text-white flex gap-3 items-center  rounded-lg py-4 px-3 shadow-md dark:bg-footer">
+              <div className="text-footer dark:text-white bg-white rounded-[0.7rem] p-2 dark:bg-gray-700">
                 <CgGames />
               </div>
               <div className="text-xs font-sans">Game Developers</div>
@@ -220,8 +223,8 @@ const LandingPage = () => {
           </div>
         </div>
         <div className="flex justify-center items-center ">
-          <div className="flex flex-col items-center justify-center">
-            <div className="bg-gray-200 rounded-3xl md:p-6 sm:p-5 p-5 mx-5 sm:mx-5  mt-9 flex flex-col divide-y gap-4 min-h-[280px] min-w-[280px] max-w-[410px] dark:bg-gray-700">
+          <div className="flex flex-col items-center justify-center ">
+            <div className="shadow-lg bg-footer/90 text-white rounded-3xl md:p-6 sm:p-5 p-5 mx-5 sm:mx-5  mt-9 flex flex-col divide-y divide-gray-600 gap-4 min-h-[280px] min-w-[280px] max-w-[410px] dark:bg-gray-700">
               <div className="font-bold font-sans text-lg text-center">
                 Popular Categories
               </div>
@@ -229,7 +232,7 @@ const LandingPage = () => {
                 <span className="flex-1 flex items-center  font-sans font-medium">
                   System analyst
                 </span>
-                <div className="bg-color1 bg-opacity-60 text-indigo-600 px-3 py-1 mt-1 rounded-xl flex items-center justify-center">
+                <div className="bg-footer bg-opacity-60 text-indigo-600 px-3 py-1 mt-1 rounded-xl flex items-center justify-center">
                   2
                 </div>
               </div>
@@ -237,7 +240,7 @@ const LandingPage = () => {
                 <span className="flex-1 flex items-center   font-sans font-medium">
                   Frontend Developer
                 </span>
-                <div className="bg-color1 bg-opacity-60 text-indigo-600 px-3 py-1 rounded-xl mt-1  flex items-center justify-center">
+                <div className="bg-footer bg-opacity-60 text-indigo-600 px-3 py-1 rounded-xl mt-1  flex items-center justify-center">
                   10
                 </div>
               </div>
@@ -245,7 +248,7 @@ const LandingPage = () => {
                 <span className="flex-1 flex items-center  font-sans font-medium">
                   Backend Developer
                 </span>
-                <div className="bg-color1 bg-opacity-60 text-indigo-600 px-3 py-1 mt-1  rounded-xl flex items-center justify-center">
+                <div className="bg-footer bg-opacity-60 text-indigo-600 px-3 py-1 mt-1  rounded-xl flex items-center justify-center">
                   8
                 </div>
               </div>
@@ -253,19 +256,19 @@ const LandingPage = () => {
                 <span className="flex-1 flex items-center   font-sans font-medium">
                   Full stack Developer
                 </span>
-                <div className="bg-color1 bg-opacity-60 text-indigo-600 px-3 py-1 mt-1  rounded-xl flex items-center justify-center">
+                <div className="bg-footer bg-opacity-60 text-indigo-600 px-3 py-1 mt-1  rounded-xl flex items-center justify-center">
                   7
                 </div>
               </div>
             </div>
 
-            <div className="min-w-[200px] max-w-[410px] select-none cursor-pointer  bg-gray-200 dark:bg-slate-600 rounded-3xl  flex items-center justify-between mx-5 sm:mx-5 md:mx-[100px] my-3 px-5 py-3">
+            <div className="shadow-md   min-w-[200px] max-w-[410px] select-none cursor-pointer  bg-footer/95 text-white hover:bg-footer/80 transition-all duration-300 dark:bg-slate-600 rounded-3xl  flex items-center justify-between mx-5 sm:mx-5 md:mx-[100px] my-3 px-5 py-3">
               <div>See All Categories</div>
               <HiArrowNarrowRight />
             </div>
           </div>
-          <div className="hidden sm:block  md:block p-3 lg:hidden">
-            <Image src={require('../images/popular.svg')} />
+          <div className="hidden sm:block  md:block p-3 lg:hidden object-contain w-[400px] h-[400px] mt-9 pt-10">
+            <Image src={require('../images/popular2.svg')} />
           </div>
         </div>
       </div>

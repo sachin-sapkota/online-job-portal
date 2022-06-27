@@ -50,6 +50,7 @@ module.exports = {
         color4: '#243b55',
         color3: '#141e30',
         primary: '#00308b',
+        footer: '#301934',
       },
     },
   },

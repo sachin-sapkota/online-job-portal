@@ -4,7 +4,7 @@ import { AiFillApple, AiFillAndroid } from 'react-icons/ai';
 const Footer = () => {
   return (
     <div className="  ">
-      <div className="pl-5  h-auto  min-w-[340px]  shadow-xl bg-gray-200 text-black dark:bg-gray-700 dark:text-white    ">
+      <div className="pl-5  h-auto  min-w-[340px]  shadow-xl bg-footer text-gray-200 dark:bg-gray-700 dark:text-white    ">
         <div className="flex items-center justify-center py-5 ">
           <div className="min-w-[82px] cursor-pointer select-none flex border-transparent bg-indigo-800 text-white items-center rounded-md m-2 px-2 py-1 text-xl font-bold font-sans tracking-wide ">
             Job Xa
@@ -22,7 +22,6 @@ const Footer = () => {
               <Link href="/faqs">Marketplace</Link>
               <Link href="/faqs">Hire an Agency</Link>
 
-              <Link href="/faqs">Direct Contracts</Link>
               <Link href="/faqs">Project Catatlog</Link>
             </div>
           </div>
@@ -31,7 +30,7 @@ const Footer = () => {
             <div className="font-bold mb-1">For Skilled</div>
             <div className="flex flex-col text-xs font-sans">
               <Link href="/faqs">How to Find Work</Link>
-              <Link href="/faqs">Direct Contracts</Link>
+
               <Link href="/faqs">Find Freelance Jobs</Link>
             </div>
           </div>
@@ -42,9 +41,7 @@ const Footer = () => {
               <Link href="/faqs">Help & Support</Link>
               <Link href="/faqs">Sucess Stories</Link>
               <Link href="/faqs">Reviews</Link>
-              <Link href="/faqs">Resources</Link>
               <Link href="/faqs">Blog</Link>
-              <Link href="/faqs">Communities</Link>
             </div>
           </div>
 
@@ -52,9 +49,7 @@ const Footer = () => {
             <div className="font-bold mb-1">Company</div>
             <div className="text-xs flex flex-col font-sans">
               <Link href="/faqs">About Us</Link>
-              <Link href="/faqs">Leadership</Link>
-              <Link href="/faqs">Investors Relations</Link>
-              <Link href="/faqs">Careers</Link>
+
               <Link href="/faqs">Trust, Safety and Security</Link>
               <Link href="/faqs">Contact Us</Link>
             </div>
