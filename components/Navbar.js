@@ -73,12 +73,12 @@ const Navbar = () => {
           Ham
             ? `fixed  bottom-0  md:hidden select-none h-[440px] sm:rounded-bl-[250px] rounded-bl-[180px]  flex flex-col sm:flex-col  order-last  sm:order-last inset-0 left-1/4 uppercase bg-black/60 backdrop-blur-sm   ${
                 !Navbar ? 'backdrop-blur-sm' : 'backdrop-blur-none'
-              } text-white  justify-center items-center gap-4 font-sans font-semibold font-sm animate-animate_left  `
-            : 'hidden'
+              } text-white  justify-center items-center gap-4 font-sans font-semibold font-sm animate-animate_diagonal_on  `
+            : 'hidden '
         }`}
       >
         <div
-          className="md:hidden  block sm:block cursor-cell font-light"
+          className="md:hidden  block sm:block cursor-cell font-light "
           onClick={toggle}
         >
           <CgCloseR className="text-white text-3xl" />
@@ -89,20 +89,22 @@ const Navbar = () => {
         <div className=" ">Explore</div>
         <div className=" ">Blog</div>
         <div className=" ">About Us</div>
-        <div className="md:hidden ">Apply as Freelancer</div>
-        <div className="md:hidden ">Hire Top Talent</div>
+        <Link href="/login">
+          <div>Apply as Freelancer</div>
+        </Link>
+        <div className="hidden md:hidden ">Hire Top Talent</div>
       </div>
 
       <div className="select-none  flex my-[0.46rem] gap-3">
         <div className="hidden sm:hidden md:hidden lg-block whitespace-nowrap font-semibold">
-          <Link className="" href="/login">
-            Apply as Freelancer
+          <Link href="/login">
+            <div>Apply as Freelancer</div>
           </Link>
         </div>
 
         <a
           href="#"
-          className="min-w-[127px] flex items-center justify-center px-2 py-1 border border-transparent rounded-md shadow-sm  font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+          className="hidden min-w-[127px] md:flex items-center justify-center px-2 py-1 border border-transparent rounded-md shadow-sm  font-medium text-white bg-indigo-600 hover:bg-indigo-700"
         >
           Hire Top Talent
         </a>

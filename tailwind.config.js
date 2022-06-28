@@ -16,13 +16,27 @@ module.exports = {
       animation: {
         animate_right: 'animate_right .5s ease-in-out',
         animate_left: 'animate_left 1s ease-in-out',
+        blurry: 'blurry 7s infinite ease-in-out',
+        animate_diagonal_on: 'animate_diagonal_on .7s ease-in-out',
+        animate_diagonal_off: 'animate_diagonal_off .7s ease-in-out',
       },
 
       keyframes: {
-        animate_right_diagonal: {
-          '0%': { transform: 'translate(-100% )' },
+        blurry: {
+          '0%': { transform: ' translate(0px, 0px) scale(1)' },
+          '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+          '66%': { transform: 'translate(-20px, -20px) scale(0.9)' },
+          '100%': { transform: 'translate(0px, 0px) scale(1)' },
+        },
+        animate_diagonal_on: {
+          '0%': { transform: 'translate(100%, -100% )' },
 
-          '100%': { transform: 'translate(0%)' },
+          '100%': { transform: 'translate(0%,0%)' },
+        },
+        animate_diagonal_off: {
+          '0%': { transform: 'translate(0%,0%)' },
+
+          '100%': { transform: 'translate(100%, -100% )' },
         },
 
         animate_left: {
