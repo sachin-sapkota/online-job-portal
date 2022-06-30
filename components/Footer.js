@@ -3,17 +3,27 @@ import { CgInstagram, CgFacebook, CgTwitter, CgYoutube } from 'react-icons/cg';
 import { AiFillApple, AiFillAndroid } from 'react-icons/ai';
 const Footer = () => {
   return (
-    <div className=" pl-5  h-auto  min-w-[200px]  shadow-xl bg-footer text-gray-200 dark:bg-gray-800 dark:text-white    ">
-      <div className=" h-20  dark:bg-white"></div>
+    <div className="relative  pt-9 px-8  h-auto  min-w-[200px]   shadow-xl bg-footer text-gray-200 dark:bg-gray-800 dark:text-white    ">
+      <div className="gap-3 items-center justify-center p-5 flex-col  flex -top-16 md:-top-20 absolute h-[150px] md:h-[200px] w-[80vw] inset-x-0   rounded-3xl max-w-2xl mx-auto bg-gradient-to-br from-primary to-color1/95 backdrop-blur-sm ">
+        <div className="font-bold font-sans text-2xl  ">
+          Trust Us! We will build your success.
+        </div>
+        <div className="text-2xl text-center font-sans font-medium ">
+          <div className="inline-block pr-1">Know your capability</div>
+          <div className="inline-block bg-primary px-3 py-1 rounded-xl transition-all duration-150 hover:bg-primary/80 ">
+            <Link href="/signup">Now</Link>
+          </div>
+        </div>
+      </div>
 
-      <div className="flex items-center justify-center py-5 ">
+      <div className="flex items-center justify-center py-5 mt-9 ">
         <div className="min-w-[82px] cursor-pointer select-none flex border-transparent bg-indigo-800 text-white items-center rounded-md m-2 px-2 py-1 text-xl font-bold font-sans tracking-wide ">
           Job Xa
           {/* <Image src={require('../images/logo.png')} width={100} height={100} alt={'logo'} /> */}
         </div>
       </div>
 
-      <div className="grid  gap-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4">
+      <div className="grid   gap-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4">
         <div className="flex flex-col">
           <div className="font-bold mb-1 ">For Client</div>
           <div className="flex flex-col text-xs font-sans">

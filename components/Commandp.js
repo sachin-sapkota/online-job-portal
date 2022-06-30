@@ -9,7 +9,7 @@ const Commandp = () => {
   //  (event.metaKey || event.ctrlKey)
   useEffect(() => {
     const onkeydown = (event) => {
-      if (event.shiftKey) {
+      if (event.key == 'Escape') {
         setIsOpen(!isOpen);
       }
     };
@@ -37,21 +37,21 @@ const Commandp = () => {
         onClose={setIsOpen}
       >
         <Transition.Child
-          enter="duration-300 ease-out"
+          enter="duration- 200 ease-out"
           enterFrom="opacity-0"
           enterTo="opacity-100"
-          leave="duration-300 ease-in"
+          leave="duration- 200 ease-in"
           leaveFrom=" opacity-100"
           leaveTo=" opacity-0"
         >
-          <Dialog.Overlay className="fixed inset-0 bg-white/60 backdrop-blur-sm   " />
+          <Dialog.Overlay className="fixed inset-0 bg-black/60 dark:bg-white/30 opacity-90 backdrop-blur-xl   " />
         </Transition.Child>
 
         <Transition.Child
-          enter="duration-300 ease-out"
+          enter="duration- 200 ease-out"
           enterFrom="opacity-0 scale-95"
           enterTo="opacity-100 scale-100"
-          leave="duration-300 ease-in  "
+          leave="duration- 200 ease-in  "
           leaveFrom=" opacity-100 scale-100"
           leaveTo=" opacity-0 scale-95"
         >
@@ -61,7 +61,7 @@ const Commandp = () => {
               setIsOpen(false);
               router.push(`${data.links}`);
             }}
-            className="relative divide-y divide-gray-700 overflow-hidden max-w-md dark:bg-footer bg-white  rounded-xl mx-auto shadow-2xl ring-1 ring-black/5"
+            className="relative divide-y dark:divide-gray-700 divide-gray-300  overflow-hidden max-w-md dark:bg-footer bg-gray-200  rounded-xl mx-auto shadow-2xl ring-1 ring-black/10"
           >
             <div className="flex items-center px-3">
               <SearchIcon className="dark:text-gray-300 w-6 h-6 text-gray-500" />

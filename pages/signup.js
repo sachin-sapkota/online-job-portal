@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { BiShow, BiHide } from 'react-icons/bi';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
@@ -7,6 +7,14 @@ import Image from 'next/image';
 import Navbar from '../components/Navbar';
 import { CgGoogle, CgFacebook, CgTwitter } from 'react-icons/cg';
 import axios from 'axios';
+import { GiCheckMark } from 'react-icons/gi';
+
+const email_regex = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
+const password_regex = /^(?=.*?[a-z])(?=.*?[0-9]).{8,}$/;
+const username_regex = /^(?=.*?[a-z])(?=.*?[0-9]).{4,}$/;
+const name_regex = /^[a-zA-Z]+ [a-zA-Z]+$/;
+const number_regex = /(98|97)\d{8}/g;
+
 const signup = () => {
   const [usertype, setusertype] = useState('employee');
   const [showpass, setshowpass] = useState(false);
@@ -19,6 +27,63 @@ const signup = () => {
     password: '',
     confpassword: '',
   });
+  const [error, seterror] = useState('');
+  const [sucess, setsucess] = useState('');
+
+  const userRef = useRef();
+  const errRef = useRef();
+  const [validusername, setvalidusername] = useState(false);
+  const [usernamefocus, setusernamefocus] = useState(false);
+
+  const [validnumber, setvalidnumber] = useState(false);
+  const [numberfocus, setnumberfocus] = useState(false);
+
+  const [validname, setvalidname] = useState(false);
+  const [namefocus, setnamefocus] = useState(false);
+
+  const [validpwd, setvalidpwd] = useState(false);
+  const [pwdfocus, setpwdfocus] = useState(false);
+
+  const [validmatch, setvalidmatch] = useState(false);
+  const [matchfocus, setmatchfocus] = useState(false);
+
+  const [validemail, setvalidemail] = useState(false);
+  const [emailfocus, setemailfocus] = useState(false);
+
+  const [loggeduser, setloggeduser] = useState({
+    username: '',
+  });
+
+  useEffect(() => {
+    userRef.current.focus();
+  }, []);
+  useEffect(() => {
+    const result = name_regex.test(user.name);
+
+    setvalidname(result);
+  }, [user.name]);
+  useEffect(() => {
+    const result = number_regex.test(user.number);
+    setvalidnumber(result);
+  }, [user.number]);
+
+  useEffect(() => {
+    const result = email_regex.test(user.email);
+    setvalidemail(result);
+  }, [user.email]);
+  useEffect(() => {
+    const result = username_regex.test(user.username);
+    setvalidusername(result);
+  }, [user.username]);
+
+  useEffect(() => {
+    const result = password_regex.test(user.password);
+
+    setvalidpwd(result);
+    const match = user.password === user.confpassword;
+    setvalidmatch(match);
+  }, [user.password, user.confpassword]);
+
   const router = useRouter();
   const checkpass = () => {
     if (user.password.length >= 8) {
@@ -27,6 +92,8 @@ const signup = () => {
   };
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
+
     axios
       .post('http://localhost:3000/api/users', {
         name: user.name,
@@ -38,9 +105,15 @@ const signup = () => {
         username: user.username,
       })
 
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-    router.push('/login');
+      .then((res) => {
+        setsucess(res.data.msg);
+        seterror('');
+      })
+      .catch((err) => console.log(err.response.data.msg));
+    if (error) {
+      console.log(error);
+    }
+    // router.push('/login');
   };
 
   return (
@@ -86,104 +159,218 @@ const signup = () => {
                   Post a Job
                 </div>
               </div>
-              <div className="mb-3">
-                <input
-                  type="text"
-                  className=" block w-full px-4 py-1 text-base  bg-gray-300 font-semibold text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  placeholder="Name"
-                  onChange={(e) =>
-                    Setuser((prev) => {
-                      return { ...prev, name: e.target.value };
-                    })
+              <div className="mb-2 flex flex-col">
+                <div className="flex gap-1 relative">
+                  <input
+                    type="text"
+                    ref={userRef}
+                    autcomplete="off"
+                    className=" block w-full px-4 py-1 text-base  bg-gray-300 font-semibold text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    placeholder="Name"
+                    onChange={(e) =>
+                      Setuser((prev) => {
+                        return { ...prev, name: e.target.value };
+                      })
+                    }
+                    required
+                    onFocus={() => setnamefocus(true)}
+                    onBlur={() => setnamefocus(false)}
+                  />
+                  <GiCheckMark
+                    className={
+                      validname
+                        ? ' absolute right-2  inset-y-0 my-auto  w-5 h-5 '
+                        : 'hidden'
+                    }
+                  />
+                </div>
+
+                <div
+                  className={
+                    namefocus && user.name && !validname
+                      ? 'text-left text-[10px]  text-red-500'
+                      : 'hidden'
                   }
-                  required
-                />
+                >
+                  Name should be alphabets and should include Full Name!
+                </div>
+              </div>
+              <div className="mb-3 flex flex-col">
+                <div className="flex relative">
+                  <input
+                    type="text"
+                    className=" block w-full px-4 py-1 text-base  bg-gray-300 font-semibold text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    placeholder="username"
+                    onChange={(e) =>
+                      Setuser((prev) => {
+                        return { ...prev, username: e.target.value };
+                      })
+                    }
+                    required
+                    onFocus={() => setusernamefocus(true)}
+                    onBlur={() => setusernamefocus(false)}
+                  />
+                  <GiCheckMark
+                    className={
+                      validusername
+                        ? ' absolute right-2  inset-y-0 my-auto  w-5 h-5 '
+                        : 'hidden'
+                    }
+                  />
+                </div>
+
+                <div
+                  className={
+                    usernamefocus && user.username && !validusername
+                      ? 'text-left text-[10px]  text-red-500 '
+                      : 'hidden'
+                  }
+                >
+                  <ul>
+                    <li>Username should be alphanumeric.</li>
+                    <li>Username should have atleast four characters.</li>
+                  </ul>
+                </div>
               </div>
               <div className="mb-3">
-                <input
-                  type="text"
-                  className=" block w-full px-4 py-1 text-base  bg-gray-300 font-semibold text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  placeholder="username"
-                  onChange={(e) =>
-                    Setuser((prev) => {
-                      return { ...prev, username: e.target.value };
-                    })
+                <div>
+                  <input
+                    type="email"
+                    className=" block w-full px-4 py-1 text-base  bg-gray-300 font-semibold text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    placeholder="Email address"
+                    onChange={(e) =>
+                      Setuser((prev) => {
+                        return { ...prev, email: e.target.value };
+                      })
+                    }
+                    required
+                    onFocus={() => setemailfocus(true)}
+                    onBlur={() => setemailfocus(false)}
+                  />
+                </div>
+                <div
+                  className={
+                    emailfocus && user.email && !validemail
+                      ? 'text-left text-[10px]  text-red-500 '
+                      : 'hidden'
                   }
-                  required
-                />
+                >
+                  Email format incorrect!
+                </div>
               </div>
-              <div className="mb-3">
-                <input
-                  type="email"
-                  className=" block w-full px-4 py-1 text-base  bg-gray-300 font-semibold text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  placeholder="Email address"
-                  onChange={(e) =>
-                    Setuser((prev) => {
-                      return { ...prev, email: e.target.value };
-                    })
+              <div className="mb-3 flex flex-col">
+                <div className="relative flex">
+                  <input
+                    type="tel"
+                    className="block w-full px-4 py-1text-base  bg-gray-300 font-semibold text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    placeholder="Mobile Number"
+                    onChange={(e) =>
+                      Setuser((prev) => {
+                        return { ...prev, number: e.target.value };
+                      })
+                    }
+                    required
+                    onFocus={() => setnumberfocus(true)}
+                    onBlur={() => setnumberfocus(false)}
+                  />
+                  <GiCheckMark
+                    className={
+                      validnumber
+                        ? ' absolute right-2  inset-y-0 my-auto  w-5 h-5 '
+                        : 'hidden'
+                    }
+                  />
+                </div>
+
+                <div
+                  className={
+                    numberfocus && user.number && !validnumber
+                      ? 'text-left text-[10px]  text-red-500 '
+                      : 'hidden'
                   }
-                  required
-                />
-              </div>
-              <div className="mb-3">
-                <input
-                  type="tel"
-                  className="block w-full px-4 py-1text-base  bg-gray-300 font-semibold text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  placeholder="Mobile Number"
-                  onChange={(e) =>
-                    Setuser((prev) => {
-                      return { ...prev, number: e.target.value };
-                    })
-                  }
-                  required
-                />
+                >
+                  Number format incorrect!
+                </div>
               </div>
               <div>
                 <div className="mb-3 relative  ">
-                  <div
-                    onClick={() => setshowpass(!showpass)}
-                    className=" flex   absolute right-0 inset-y-0 items-center cursor-pointer pr-3 text-gray-600 transition-all duration-200 "
-                  >
-                    {showpass ? (
-                      <BiHide className="w-6 h-6 antialiased" />
-                    ) : (
-                      <BiShow className="w-6 h-6 antialiased" />
-                    )}
+                  <div>
+                    <div
+                      onClick={() => setshowpass(!showpass)}
+                      className=" flex absolute right-0 inset-y-0 items-center cursor-pointer pr-3 text-gray-600 transition-all duration-200 "
+                    >
+                      {showpass ? (
+                        <BiHide className="w-6 h-6 antialiased" />
+                      ) : (
+                        <BiShow className="w-6 h-6 antialiased" />
+                      )}
+                    </div>
+                    <input
+                      type={showpass ? 'text' : 'password'}
+                      className="form-control block w-full px-4 py-2 text-base  bg-gray-300 font-semibold text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                      placeholder="Password"
+                      onChange={(e) =>
+                        Setuser((prev) => {
+                          return { ...prev, password: e.target.value };
+                        })
+                      }
+                      required
+                      onFocus={() => setpwdfocus(true)}
+                      onBlur={() => setpwdfocus(false)}
+                    />
                   </div>
-                  <input
-                    type={showpass ? 'text' : 'password'}
-                    className="form-control block w-full px-4 py-2 text-base  bg-gray-300 font-semibold text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    placeholder="Password"
-                    onChange={(e) =>
-                      Setuser((prev) => {
-                        return { ...prev, password: e.target.value };
-                      })
+
+                  <div
+                    className={
+                      pwdfocus && user.password && !validpwd
+                        ? 'text-left text-[10px]  text-red-500 '
+                        : 'hidden'
                     }
-                    required
-                  />
+                  >
+                    <ul>
+                      <li> Enter the valid password!</li>
+                      <li>Password should contain letter and number!</li>
+                    </ul>
+                  </div>
                 </div>
-                <div className="mb-2 relative ">
-                  <div
-                    onClick={() => setshowpass(!showpass)}
-                    className=" flex   absolute right-0 inset-y-0 items-center cursor-pointer pr-3 text-gray-600 transition-all duration-200 "
-                  >
-                    {showpass ? (
-                      <BiHide className="w-6 h-6 antialiased" />
-                    ) : (
-                      <BiShow className="w-6 h-6 antialiased" />
-                    )}
+                <div className="mb-2  ">
+                  <div className="relative">
+                    <div
+                      onClick={() => setshowpass(!showpass)}
+                      className=" flex   absolute right-0 inset-y-0 items-center cursor-pointer pr-3 text-gray-600 transition-all duration-200 "
+                    >
+                      {showpass ? (
+                        <BiHide className="w-6 h-6 antialiased" />
+                      ) : (
+                        <BiShow className="w-6 h-6 antialiased" />
+                      )}
+                    </div>
+                    <input
+                      type={showpass ? 'text' : 'password'}
+                      className="form-control block w-full px-4 py-2 text-base  bg-gray-300 font-semibold text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                      placeholder="Confirm Password"
+                      onChange={(e) =>
+                        Setuser((prev) => {
+                          return { ...prev, confpassword: e.target.value };
+                        })
+                      }
+                      required
+                      onFocus={() => setmatchfocus(true)}
+                      onBlur={() => setmatchfocus(false)}
+                    />
                   </div>
-                  <input
-                    type={showpass ? 'text' : 'password'}
-                    className="form-control block w-full px-4 py-2 text-base  bg-gray-300 font-semibold text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    placeholder="Confirm Password"
-                    onChange={(e) =>
-                      Setuser((prev) => {
-                        return { ...prev, confpassword: e.target.value };
-                      })
+
+                  <div
+                    className={
+                      matchfocus && user.confpassword && !validmatch
+                        ? 'text-left text-[10px]  text-red-500 '
+                        : 'hidden'
                     }
-                    required
-                  />
+                  >
+                    <ul>
+                      <li>Enter the same password as above!</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
               <div className="mb-4"></div>
@@ -194,20 +381,15 @@ const signup = () => {
                     type="checkbox"
                     className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                     id="exampleCheck3"
+                    required
                   />
                   <label
                     className=" inline-block text-gray-800    dark:text-white"
                     htmlFor=""
                   >
-                    Remember me
+                    I agree to privacy terms
                   </label>
                 </div>
-                <a
-                  href="#!"
-                  className="text-blue-600 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out"
-                >
-                  Forgot password?
-                </a>
               </div>
 
               <button
@@ -233,13 +415,13 @@ const signup = () => {
                 Sign up
               </button>
               <div className="dark:text-white text-sm flex mt-2">
-                Don't have a account?
+                Already have a account?
                 <div className="pl-1 text-indigo-600">
-                  <Link href="/signup">Register </Link>
+                  <Link href="/login">Login </Link>
                 </div>
               </div>
               <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5 dark:text-white">
-                <p className="text-center font-semibold mx-4 mb-0">OR</p>
+                <div className="text-center font-semibold mx-4 mb-0">OR</div>
               </div>
               <div className="flex gap-4 items-center justify-start">
                 <div className="pr-4 font-semibold dark:text-white">

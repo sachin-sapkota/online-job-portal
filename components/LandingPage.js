@@ -18,9 +18,9 @@ const LandingPage = () => {
     <div className="dark:bg-gray-900 pt-10">
       <div className=" grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2  pt-20 w-full ">
         <div className="relative flex flex-col   mt-6">
-          <div className=" absolute mix-blend-multiply dark:mix-blend-soft-light    filter blur-xl  opacity-60 animate-blurry top-0 left-[25%] md:-left-4   w-40   md:w-72   h-40   md:h-72 bg-purple-300 rounded-full "></div>
-          <div className="absolute mix-blend-multiply dark:mix-blend-soft-light  filter blur-xl opacity-60 animate-blurry top-0 left-[15%]  md:left-[180px]   w-40   md:w-72   h-40   md:h-72 bg-yellow-300 rounded-full"></div>
-          <div className="absolute mix-blend-multiply dark:mix-blend-soft-light filter blur-xl  opacity-60 animate-blurry top-0 mt-9 left-[28%] md:left-20    w-40   md:w-72   h-40   md:h-72 bg-pink-300 rounded-full"></div>
+          <div className=" absolute inset-x-0 mx-auto mix-blend-multiply dark:mix-blend-soft-light    filter blur-xl  opacity-60 animate-blurry top-0  -left-[100px]   w-40   md:w-72   h-40   md:h-72 bg-purple-300 rounded-full "></div>
+          <div className="absolute inset-x-0 mx-auto mix-blend-multiply dark:mix-blend-soft-light  filter blur-xl opacity-60 animate-blurry top-0    left-[100px] w-40   md:w-72   h-40   md:h-72 bg-yellow-300 rounded-full"></div>
+          <div className="absolute inset-x-0 mx-auto mix-blend-multiply dark:mix-blend-soft-light filter  opacity-60 blur-xl animate-blurry top-0 mt-9     w-40   md:w-72   h-40   md:h-72 bg-pink-300 rounded-full"></div>
 
           <div className="flex flex-col relative items-center justify-center">
             <div className="font-serif text-red-700">
@@ -73,7 +73,7 @@ const LandingPage = () => {
           The following features make our service easier to help you find
           suitable job from various companies.
         </div>
-        <div className="flex  gap-16 md:gap-10 lg:gap-16 md:flex-row flex-col justify-center text-center  md:items-start mt-2  ">
+        <div className="flex gap-16  md:gap-10 lg:gap-16 md:flex-row flex-col justify-center text-center  md:items-start mt-2  ">
           <div className="mt-0 mx-auto md:mt-[100px] min-w-[200px] min-h-[180px] w-[280px] h-[190px]  md:w-[350px] md:h-[200px] bg-black/20 shadow-primary/60  drop-shadow-md shadow-2xl   p-4 rounded-xl flex flex-col items-center justify-center ">
             <div>
               <FaRegHandshake className="rounded-full overflow-hidden text-primary text-[5.5rem] dark:text-indigo-400 " />
@@ -86,7 +86,7 @@ const LandingPage = () => {
             </span>
           </div>
 
-          <div className="mt-0 mx-auto md:mt-[100px] min-w-[200px] min-h-[180px] w-[280px] h-[190px]  md:w-[350px] md:h-[200px] bg-black/20 shadow-primary/60  drop-shadow-md shadow-2xl   p-4 rounded-xl flex flex-col items-center justify-center ">
+          <div className="mt-0 mx-auto md:mt-[10px] min-w-[200px] min-h-[180px] w-[280px] h-[190px]  md:w-[350px] md:h-[200px] bg-black/20 shadow-primary/60  drop-shadow-md shadow-2xl   p-4 rounded-xl flex flex-col items-center justify-center ">
             <div className="">
               <FaSuitcase className=" rounded-full overflow-hidden  text-[5rem] text-primary dark:text-indigo-400  " />
             </div>
@@ -112,7 +112,7 @@ const LandingPage = () => {
         <div className="container  px-4 py-12 flex justify-center">
           <div className="flex flex-col md:flex-row mx-4  ">
             <div className="  ">
-              <div className="text-center sm:text-left mb-14 before:block before:w-24 before:h-3 before:mb-5 before:rounded-md before:mx-auto sm:before:mx-0 before:bg-emerald-600">
+              <div className=" text-center sm:text-left mb-14 before:block before:w-24 before:h-3 before:mb-5 before:rounded-md before:mx-auto sm:before:mx-0 before:bg-emerald-600">
                 <h3 className="text-3xl font-semibold">Job Xa</h3>
                 <span className="text-[15px] font-bold tracking-wider uppercase text-gray-600">
                   How to get your dream job?
@@ -121,27 +121,30 @@ const LandingPage = () => {
             </div>
             <div className="relative col-span-12 md:px-10 px-4 sm:px-6 space-y-6 sm:col-span-7">
               <div className="[&>*]:pl-5 col-span-12  space-y-12 relative px-4 sm:col-span-8 sm:space-y-8 sm:before:absolute sm:before:top-2 sm:before:bottom-0 sm:before:w-0.5 sm:before:-left-3 before:bg-gray-300">
-                <div className="flex flex-col items-center sm:items-start  sm:relative sm:before:absolute sm:before:top-2 sm:before:w-4 sm:before:h-4 sm:before:rounded-full sm:before:left-[-35px] sm:before:z-[1] before:bg-emerald-600">
+                <div className="relative flex flex-col items-center sm:items-start  sm:relative sm:before:absolute sm:before:top-2 sm:before:w-4 sm:before:h-4 sm:before:rounded-full sm:before:left-[-35px] sm:before:z-[1] before:bg-emerald-600">
+                  <div className="absolute animate-scaler w-[150px] md:w-[200px] h-[150px] md:h-[200px] rounded-full blur-xl inset-0 m-auto bg-primary/50"></div>
                   <h3 className="text-lg md:text-xl font-semibold tracking-wide">
                     Register your Account
                   </h3>
-                  <div className="mt-3 object-contain w-[200px] h-[200px] sm:w-[250px] sm:h-[250px] md:w-[320px] md:h-[320px] ">
+                  <div className="mt-3  opacity-95 dark:opacity-60  object-contain w-[200px] h-[200px] sm:w-[250px] sm:h-[250px] md:w-[300px] md:h-[300px] ">
                     <Image src={require('../images/time1.svg')} alt={''} />
                   </div>
                 </div>
-                <div className="flex items-center sm:items-start flex-col sm:relative sm:before:absolute sm:before:top-2 sm:before:w-4 sm:before:h-4 sm:before:rounded-full sm:before:left-[-35px] sm:before:z-[1] before:bg-emerald-600">
+                <div className="relative flex flex-col items-center sm:items-start  sm:relative sm:before:absolute sm:before:top-2 sm:before:w-4 sm:before:h-4 sm:before:rounded-full sm:before:left-[-35px] sm:before:z-[1] before:bg-emerald-600">
+                  <div className="absolute animate-scaler w-[150px] md:w-[200px] h-[150px] md:h-[200px] rounded-full blur-xl inset-0 m-auto bg-primary/50"></div>
                   <h3 className="text-lg md:text-xl font-semibold tracking-wide">
                     Upload your Resume
                   </h3>
-                  <div className="mt-3 object-contain w-[200px] h-[200px] sm:w-[250px] sm:h-[250px] md:w-[320px] md:h-[320px] ">
+                  <div className="mt-3 dark:opacity-60 object-contain w-[200px] h-[200px] sm:w-[250px] sm:h-[250px] md:w-[320px] md:h-[320px] ">
                     <Image src={require('../images/time2.svg')} alt={''} />
                   </div>
                 </div>
-                <div className="flex  items-center sm:items-start flex-col sm:relative sm:before:absolute sm:before:top-2 sm:before:w-4 sm:before:h-4 sm:before:rounded-full sm:before:left-[-35px] sm:before:z-[1] before:bg-emerald-600">
+                <div className="relative flex flex-col items-center sm:items-start  sm:relative sm:before:absolute sm:before:top-2 sm:before:w-4 sm:before:h-4 sm:before:rounded-full sm:before:left-[-35px] sm:before:z-[1] before:bg-emerald-600">
+                  <div className="absolute animate-scaler w-[150px] md:w-[200px] h-[150px] md:h-[200px] rounded-full blur-xl inset-0 m-auto bg-primary/50"></div>
                   <h3 className="text-lg md:text-xl font-semibold tracking-wide">
                     Choose the best job
                   </h3>
-                  <div className="mt-3 object-contain w-[200px] h-[200px] sm:w-[250px] sm:h-[250px] md:w-[320px] md:h-[320px] ">
+                  <div className="mt-3  dark:opacity-60 object-contain w-[200px] h-[200px] sm:w-[250px] sm:h-[250px] md:w-[320px] md:h-[320px] ">
                     <Image src={require('../images/time3.svg')} alt={''} />
                   </div>
                 </div>

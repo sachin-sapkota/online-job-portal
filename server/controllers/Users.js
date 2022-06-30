@@ -14,7 +14,44 @@ const { strict } = require('assert');
 exports.getUsers = async (req, res) => {
   return res.send(req.body);
 };
-
+exports.getuserprofile = async (req, res) => {
+  db1.execute(`SELECT * FROM users WHERE id=? `, [id], (err, result) => {
+    if (result.length) {
+      return res.send(result);
+    } else {
+      return res.send({ msg: 'id not found' });
+    }
+  });
+};
+exports.getuserprofilebyid = async (req, res) => {
+  db1.execute(
+    `SELECT * FROM users WHERE id=? `,
+    [req.params],
+    (err, result) => {
+      if (result.length) {
+        return res.send(result);
+      } else {
+        return res.send({ msg: 'id not found' });
+      }
+    }
+  );
+};
+exports.getuserbyusername = async (req, res) => {
+  const username = req.body.username;
+  db1.execute(
+    `SELECT * FROM users WHERE username=? `,
+    [username],
+    (err, result) => {
+      if (result.length) {
+        return res.status(409).send({
+          msg: 'This username is already taken!',
+        });
+      } else {
+        return res.send({ msg: 'sucess' });
+      }
+    }
+  );
+};
 exports.Register = async (req, res) => {
   const username = req.body.username;
   const email = req.body.email;

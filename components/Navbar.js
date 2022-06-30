@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState, useEffect, useCallback } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { CgCloseR } from 'react-icons/cg';
@@ -12,6 +13,8 @@ const Navbar = () => {
   const { theme, setTheme } = useTheme();
   const [Navbar, setNavbar] = useState(false);
   const [Ham, setHam] = useState(false);
+  const router = useRouter();
+
   const changeBackground = () => {
     if (window.scrollY > 300) {
       setNavbar(true);
@@ -48,9 +51,9 @@ const Navbar = () => {
     <div
       className={`${
         Navbar
-          ? `  justify-between sm:justify-between md:justify-center transition duration-300 bg-black bg-opacity-30 backdrop-blur-sm ease-in flex h-12  w-full shadow-lg fixed text-white dark:bg-black/40 z-[100]`
+          ? `  justify-between sm:justify-between md:justify-center transition duration-300 bg-black bg-opacity-80 backdrop-blur-sm ease-in flex h-12  w-full shadow-lg fixed text-white dark:bg-black/40 z-[100]`
           : 'flex justify-between sm:justify-between md:justify-center bg-transparent absolute  h-12  w-full mt-2 pr-2 z-[100] '
-      } `}
+      } select-none  `}
     >
       <div className="min-w-[82px] cursor-pointer select-none flex border-transparent bg-indigo-800 text-white items-center rounded-md m-2 px-2 py-1 text-xl font-bold font-sans tracking-wide ">
         <Link href="/"> Job Xa</Link>
@@ -60,13 +63,21 @@ const Navbar = () => {
         <GiHamburgerMenu className="cursor-pointer " onClick={toggle} />
       </div>
       <div className="select-none hidden sm:hidden md:flex-1 md:flex justify-center items-center gap-4 font-sans font-semibold font-sm">
-        <div className="hover:translate-y-[-1px] cursor-pointer active:text-red-600   ">
+        <div className="hover:bg-black/30 hover:rounded-[100px]    hover:p-1 hover:translate-y-[-1px] cursor-pointer active:text-red-600   ">
           <Link href="/findworker"> Find Worker</Link>
         </div>
-        <div className="  ">Find Work</div>
-        <div className=" ">Explore</div>
-        <div className=" ">Blog</div>
-        <div className=" ">About Us</div>
+        <div className="hover:translate-y-[-1px] cursor-pointer active:text-red-600   ">
+          <Link href="/find work">Find Work</Link>
+        </div>
+        <div className="hover:translate-y-[-1px] cursor-pointer active:text-red-600   ">
+          <Link href="/explore">Explore</Link>
+        </div>
+        <div className="hover:translate-y-[-1px] cursor-pointer active:text-red-600   ">
+          <Link href="/blog">Blog</Link>
+        </div>
+        <div className="hover:translate-y-[-1px] cursor-pointer active:text-red-600   ">
+          <Link href="/aboutus">About Us</Link>
+        </div>
       </div>
       <div
         className={`${
@@ -84,11 +95,21 @@ const Navbar = () => {
           <CgCloseR className="text-white text-3xl" />
         </div>
 
-        <div className="  ">Find Worker</div>
-        <div className="  ">Find Work</div>
-        <div className=" ">Explore</div>
-        <div className=" ">Blog</div>
-        <div className=" ">About Us</div>
+        <div className="hover:translate-y-[-1px]  cursor-pointer active:text-red-600   ">
+          <Link href="/findworker"> Find Worker</Link>
+        </div>
+        <div className="hover:translate-y-[-1px] cursor-pointer active:text-red-600   ">
+          <Link href="/">Find Work</Link>
+        </div>
+        <div className="hover:translate-y-[-1px] cursor-pointer active:text-red-600   ">
+          <Link href="/">Explore</Link>
+        </div>
+        <div className="hover:translate-y-[-1px] cursor-pointer active:text-red-600   ">
+          <Link href="/">Blog</Link>
+        </div>
+        <div className="hover:translate-y-[-1px] cursor-pointer active:text-red-600   ">
+          <Link href="/">About Us</Link>
+        </div>
         <Link href="/login">
           <div>Apply as Freelancer</div>
         </Link>
@@ -113,9 +134,13 @@ const Navbar = () => {
             Navbar
               ? 'text-white flex justify-center items-center border-2 font-medium shadow-sm border-indigo-600 rounded-md px-2 hover:bg-indigo-700 hover:text-white  '
               : 'flex justify-center items-center border-2 font-medium shadow-sm border-indigo-600 rounded-md px-2 hover:bg-indigo-700 hover:text-white text-black dark:text-white'
-          }`}
+          }  dark:bg-black/50  `}
         >
-          <a href="#" className="  whitespace-nowrap  ">
+          <a
+            href="#"
+            className=" font-bold font-sans whitespace-nowrap 
+             "
+          >
             Sign in
           </a>
         </div>

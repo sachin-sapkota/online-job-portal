@@ -17,11 +17,18 @@ module.exports = {
         animate_right: 'animate_right .5s ease-in-out',
         animate_left: 'animate_left 1s ease-in-out',
         blurry: 'blurry 7s infinite ease-in-out',
+        scaler: 'scaler 9s infinite  ',
         animate_diagonal_on: 'animate_diagonal_on .7s ease-in-out',
         animate_diagonal_off: 'animate_diagonal_off .7s ease-in-out',
       },
 
       keyframes: {
+        scaler: {
+          '0%': { transform: 'scale(1) rotate(0deg)' },
+          '33%': { transform: 'scale(1.1) rotate(90deg)' },
+          '66%': { transform: 'scale(0.9) rotate(90deg) ' },
+          '100%': { transform: 'scale(1) rotate(90deg) ' },
+        },
         blurry: {
           '0%': { transform: ' translate(0px, 0px) scale(1)' },
           '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
