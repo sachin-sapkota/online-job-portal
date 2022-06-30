@@ -17,6 +17,6 @@ router.post('/users', Register);
 router.post('/login', Login);
 router.get('/username', getuserbyusername);
 router.delete('/logout', Logout);
-router.get('/profile/:id', verifyToken, getuserprofilebyid);
+router.get('/profiles/:id', verifyToken, getuserprofilebyid);
 router.get('/profile', verifyToken, getuserprofile);
 module.exports = router;

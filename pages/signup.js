@@ -8,7 +8,7 @@ import Navbar from '../components/Navbar';
 import { CgGoogle, CgFacebook, CgTwitter } from 'react-icons/cg';
 import axios from 'axios';
 import { GiCheckMark } from 'react-icons/gi';
-
+import useSWR from 'swr';
 const email_regex = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
 const password_regex = /^(?=.*?[a-z])(?=.*?[0-9]).{8,}$/;
 const username_regex = /^(?=.*?[a-z])(?=.*?[0-9]).{4,}$/;
@@ -52,9 +52,39 @@ const signup = () => {
 
   const [loggeduser, setloggeduser] = useState({
     username: '',
+    acctype: '',
   });
 
+  const getprofiles = (url) => {
+    axios
+      .get('http://localhost:3000/api/profile', { withCredentials: true })
+
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err.response.data.msg));
+  };
+
+  const getprofile = (url) => {
+    axios.get(url, { withCredentials: true }).then((res) => res.data);
+  };
+
+  const { data } = useSWR('/api/profile', async (url) => getprofile(url));
   useEffect(() => {
+    async function getData() {
+      if (typeof data !== typeof undefined) {
+        if (data.success) {
+          setLogged(true);
+        } else {
+          setLogged(false);
+        }
+      }
+    }
+    getData();
+  }, [data]);
+
+  useEffect(() => {
+    getprofiles();
     userRef.current.focus();
   }, []);
   useEffect(() => {
@@ -425,7 +455,7 @@ const signup = () => {
               </div>
               <div className="flex gap-4 items-center justify-start">
                 <div className="pr-4 font-semibold dark:text-white">
-                  Sign in with
+                  Sign up with
                 </div>
                 <div className="shadow-md flex border-[1px] rounded-full justify-center items-center w-[40px] h-[40px] p-[1px] bg-indigo-700 border-none  text-white">
                   <CgGoogle />

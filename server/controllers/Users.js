@@ -14,15 +14,23 @@ const { strict } = require('assert');
 exports.getUsers = async (req, res) => {
   return res.send(req.body);
 };
+
 exports.getuserprofile = async (req, res) => {
-  db1.execute(`SELECT * FROM users WHERE id=? `, [id], (err, result) => {
-    if (result.length) {
-      return res.send(result);
-    } else {
-      return res.send({ msg: 'id not found' });
-    }
-  });
+  if (!req.body) return res.send({ msg: 'Not logged in.' });
+
+  return res.send({ success: true, user: req.body });
 };
+
+// exports.getuserprofile = async (req, res) => {
+//   db1.execute(`SELECT * FROM users WHERE id=? `, [id], (err, result) => {
+//     if (result.length) {
+//       return res.send(result);
+//     } else {
+//       return res.send({ msg: 'id not found' });
+//     }
+//   });
+// };
+
 exports.getuserprofilebyid = async (req, res) => {
   db1.execute(
     `SELECT * FROM users WHERE id=? `,
@@ -79,7 +87,6 @@ exports.Register = async (req, res) => {
                 if (error) return res.send({ msg: 'error while registering' });
                 else {
                   res.send({ msg: 'registration sucessfull' });
-                  console.log(result.affectedRows);
                 }
               }
             );
@@ -105,7 +112,7 @@ exports.Login = async (req, res) => {
       if (err) {
         res.throw(err);
       }
-      console.log(result[0]);
+
       const data = {
         id: result[0].id,
         name: result[0].name,
@@ -114,6 +121,7 @@ exports.Login = async (req, res) => {
         verified: result[0].verified,
         Last_login: result[0].Last_login,
         number: result[0].number,
+        acctype: result[0].acctype,
       };
       if (results) {
         const accessToken = jwt.sign(data, process.env.ACCESS_TOKEN_SECRET, {

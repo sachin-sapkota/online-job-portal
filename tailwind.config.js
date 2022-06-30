@@ -16,10 +16,10 @@ module.exports = {
       animation: {
         animate_right: 'animate_right .5s ease-in-out',
         animate_left: 'animate_left 1s ease-in-out',
-        blurry: 'blurry 7s infinite ease-in-out',
+        blurry: 'blurry 8s infinite ease-in-out',
         scaler: 'scaler 9s infinite  ',
-        animate_diagonal_on: 'animate_diagonal_on .7s ease-in-out',
-        animate_diagonal_off: 'animate_diagonal_off .7s ease-in-out',
+        animate_diagonal_on: 'animate_diagonal_on .3s ease-in-out',
+        animate_diagonal_off: 'animate_diagonal_off .3s ease-in-out',
       },
 
       keyframes: {
