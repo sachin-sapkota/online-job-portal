@@ -16,7 +16,7 @@ exports.getUsers = async (req, res) => {
 };
 
 exports.getuserprofile = async (req, res) => {
-  if (!req.body) return res.send({ msg: 'Not logged in.' });
+  if (!req.body) return res.send({ success: false });
 
   return res.send({ success: true, user: req.body });
 };
@@ -39,7 +39,7 @@ exports.getuserprofilebyid = async (req, res) => {
       if (result.length) {
         return res.send(result);
       } else {
-        return res.send({ msg: 'id not found' });
+        return res.send({ msg: 'id not found', success: false });
       }
     }
   );
@@ -53,9 +53,10 @@ exports.getuserbyusername = async (req, res) => {
       if (result.length) {
         return res.status(409).send({
           msg: 'This username is already taken!',
+          success: false,
         });
       } else {
-        return res.send({ msg: 'sucess' });
+        return res.send({ msg: 'username found', success: true });
       }
     }
   );
@@ -77,7 +78,9 @@ exports.Register = async (req, res) => {
       } else {
         bcrypt.hash(password, 10, (err, hash) => {
           if (err) {
-            return res.status(500).send({ msg: err });
+            return res
+              .status(500)
+              .send({ msg: 'password is incorrect', success: false });
           } else {
             const randomid = randomUUID();
             db1.execute(
@@ -86,7 +89,7 @@ exports.Register = async (req, res) => {
               (error, result) => {
                 if (error) return res.send({ msg: 'error while registering' });
                 else {
-                  res.send({ msg: 'registration sucessfull' });
+                  res.send({ msg: 'registration sucessfull', success: true });
                 }
               }
             );
@@ -102,10 +105,13 @@ exports.Login = async (req, res) => {
 
   db1.execute(`SELECT * FROM users WHERE email= ?`, [email], (err, result) => {
     if (err) {
-      return res.sendStatus(400).send({ msg: error });
+      return res.sendStatus(400).send({ msg: error, success: false });
     }
     if (!result.length) {
-      return res.send({ msg: 'Email or password is incorrect' });
+      return res.send({
+        msg: 'Email or password is incorrect',
+        success: false,
+      });
     }
 
     bcrypt.compare(req.body.password, result[0]['password'], (err, results) => {
@@ -137,9 +143,9 @@ exports.Login = async (req, res) => {
           expires: new Date(Date.now() + 30 * 60 * 1000),
         });
 
-        res.json({ accessToken });
+        res.json({ success: true });
       } else {
-        res.send({ msg: 'password incorrect' });
+        res.send({ msg: 'password incorrect', success: false });
       }
     });
   });

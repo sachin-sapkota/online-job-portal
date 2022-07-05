@@ -7,7 +7,7 @@ const verifyToken = (req, res, next) => {
 
   if (token === undefined) {
     return res.json({
-      message: 'Access Denied! Unauthorized User',
+      success: false,
     });
   } else {
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, authData) => {
@@ -17,6 +17,7 @@ const verifyToken = (req, res, next) => {
         });
       } else {
         req.body = authData;
+        res.json({ success: true });
       }
     });
   }

@@ -63,7 +63,7 @@ const LandingPage = () => {
       </div>
 
       <div className=" px-2 flex flex-col  mt-[3rem] select-none mb-[3rem]">
-        <div className="text-center font-bold  text-primary tracking-widest text-4xl">
+        <div className="text-center font-bold  text-primary tracking-widest text-4xl dark:text-primary">
           More easier to find a job
         </div>
         <div className="text-center font-bold text-4xl tracking-widest text-primary ">
@@ -119,8 +119,8 @@ const LandingPage = () => {
                 </span>
               </div>
             </div>
-            <div className="relative col-span-12 md:px-10 px-4 sm:px-6 space-y-6 sm:col-span-7">
-              <div className="[&>*]:pl-5 col-span-12  space-y-12 relative px-4 sm:col-span-8 sm:space-y-8 sm:before:absolute sm:before:top-2 sm:before:bottom-0 sm:before:w-0.5 sm:before:-left-3 before:bg-gray-300">
+            <div className="relative  md:px-10 px-4 sm:px-6 space-y-6 ">
+              <div className="[&>*]:pl-5 col-span-12  space-y-12 relative px-4  sm:space-y-8 sm:before:absolute sm:before:top-2 sm:before:bottom-0 sm:before:w-0.5 sm:before:-left-3 before:bg-gray-300">
                 <div className="relative flex flex-col items-center sm:items-start  sm:relative sm:before:absolute sm:before:top-2 sm:before:w-4 sm:before:h-4 sm:before:rounded-full sm:before:left-[-35px] sm:before:z-[1] before:bg-emerald-600">
                   <div className="absolute animate-scaler w-[150px] md:w-[200px] h-[150px] md:h-[200px] rounded-full blur-xl inset-0 m-auto bg-primary/50"></div>
                   <h3 className="text-lg md:text-xl font-semibold tracking-wide">

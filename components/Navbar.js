@@ -55,15 +55,20 @@ const Navbar = () => {
           : 'flex justify-between sm:justify-between md:justify-center bg-transparent absolute  h-12  w-full mt-2 pr-2 z-[100] '
       } select-none  `}
     >
-      <div className="min-w-[82px] cursor-pointer select-none flex border-transparent bg-indigo-800 text-white items-center rounded-md m-2 px-2 py-1 text-xl font-bold font-sans tracking-wide ">
-        <Link href="/"> Job Xa</Link>
-        {/* <Image src={require('../images/logo.png')} width={100} height={100} alt={'logo'} /> */}
+      <div className="min-w-[89px] pl-2 cursor-pointer object-contain flex items-center ">
+        <Image
+          className="object-contain"
+          src={require('../images/logo3.png')}
+          width={120}
+          height={33}
+          alt={'logo'}
+        />
       </div>
       <div className="  mx-1 flex md:hidden sm:flex order-last justify-center items-center ">
         <GiHamburgerMenu className="cursor-pointer " onClick={toggle} />
       </div>
-      <div className="select-none hidden sm:hidden md:flex-1 md:flex justify-center items-center gap-4 font-sans font-semibold font-sm">
-        <div className="hover:bg-black/30 hover:rounded-[100px]    hover:p-1 hover:translate-y-[-1px] cursor-pointer active:text-red-600   ">
+      <div className="select-none hidden sm:hidden md:flex-1 md:flex justify-center items-center gap-4 font-sans font-semibold text-sm">
+        <div className=" hover:translate-y-[-1px] cursor-pointer active:text-red-600   ">
           <Link href="/findworker"> Find Worker</Link>
         </div>
         <div className="hover:translate-y-[-1px] cursor-pointer active:text-red-600   ">
@@ -84,7 +89,7 @@ const Navbar = () => {
           Ham
             ? `fixed  bottom-0  md:hidden select-none h-[440px] sm:rounded-bl-[250px] rounded-bl-[180px]  flex flex-col sm:flex-col  order-last  sm:order-last inset-0 left-1/4 uppercase bg-black/60 backdrop-blur-sm   ${
                 !Navbar ? 'backdrop-blur-sm' : 'backdrop-blur-none'
-              } text-white  justify-center items-center gap-4 font-sans font-semibold font-sm animate-animate_diagonal_on  `
+              } text-white  justify-center items-center gap-4 font-sans font-semibold text-sm animate-animate_diagonal_on  `
             : 'hidden '
         }`}
       >
