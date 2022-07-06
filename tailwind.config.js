@@ -72,6 +72,7 @@ module.exports = {
         color3: '#141e30',
         primary: '#00308b',
         footer: '#301934',
+        background: '#F4F5FA',
       },
     },
   },

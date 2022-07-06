@@ -15,12 +15,12 @@ import { ChevronUpIcon } from '@heroicons/react/solid';
 
 const LandingPage = () => {
   return (
-    <div className="dark:bg-gray-900 pt-10">
+    <div className="dark:bg-gray-900 bg-background pt-10">
       <div className=" grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2  pt-20 w-full ">
         <div className="relative flex flex-col   mt-6">
-          <div className=" absolute inset-x-0 mx-auto mix-blend-multiply dark:mix-blend-soft-light    filter blur-xl  opacity-60 animate-blurry top-0  -left-[100px]   w-40   md:w-72   h-40   md:h-72 bg-purple-300 rounded-full "></div>
-          <div className="absolute inset-x-0 mx-auto mix-blend-multiply dark:mix-blend-soft-light  filter blur-xl opacity-60 animate-blurry top-0    left-[100px] w-40   md:w-72   h-40   md:h-72 bg-yellow-300 rounded-full"></div>
-          <div className="absolute inset-x-0 mx-auto mix-blend-multiply dark:mix-blend-soft-light filter  opacity-60 blur-xl animate-blurry top-0 mt-9     w-40   md:w-72   h-40   md:h-72 bg-pink-300 rounded-full"></div>
+          <div className=" absolute inset-x-0 mx-auto mix-blend-multiply dark:mix-blend-soft-light    filter blur-xl  opacity-50 animate-blurry top-0  -left-[100px]   w-40   md:w-72   h-40   md:h-72 bg-purple-300 rounded-full "></div>
+          <div className="absolute inset-x-0 mx-auto mix-blend-multiply dark:mix-blend-soft-light  filter blur-xl opacity-50 animate-blurry top-0    left-[100px] w-40   md:w-72   h-40   md:h-72 bg-yellow-300 rounded-full"></div>
+          <div className="absolute inset-x-0 mx-auto mix-blend-multiply dark:mix-blend-soft-light filter  opacity-50 blur-xl animate-blurry top-0 mt-9     w-40   md:w-72   h-40   md:h-72 bg-pink-300 rounded-full"></div>
 
           <div className="flex flex-col relative items-center justify-center">
             <div className="font-serif text-red-700">
@@ -74,7 +74,7 @@ const LandingPage = () => {
           suitable job from various companies.
         </div>
         <div className="flex gap-16  md:gap-10 lg:gap-16 md:flex-row flex-col justify-center text-center  md:items-start mt-2  ">
-          <div className="mt-0 mx-auto md:mt-[100px] min-w-[200px] min-h-[180px] w-[280px] h-[190px]  md:w-[350px] md:h-[200px] bg-black/20 shadow-primary/60  drop-shadow-md shadow-2xl   p-4 rounded-xl flex flex-col items-center justify-center ">
+          <div className="mt-0 mx-auto md:mt-[100px] min-w-[200px] min-h-[180px] w-[280px] h-[190px]  md:w-[350px] md:h-[200px] bg-white dark:bg-white/10 shadow-primary/20  drop-shadow-md shadow-xl   p-4 rounded-xl flex flex-col items-center justify-center ">
             <div>
               <FaRegHandshake className="rounded-full overflow-hidden text-primary text-[5.5rem] dark:text-indigo-400 " />
             </div>
@@ -86,7 +86,7 @@ const LandingPage = () => {
             </span>
           </div>
 
-          <div className="mt-0 mx-auto md:mt-[10px] min-w-[200px] min-h-[180px] w-[280px] h-[190px]  md:w-[350px] md:h-[200px] bg-black/20 shadow-primary/60  drop-shadow-md shadow-2xl   p-4 rounded-xl flex flex-col items-center justify-center ">
+          <div className="mt-0 mx-auto md:mt-[10px] min-w-[200px] min-h-[180px] w-[280px] h-[190px]  md:w-[350px] md:h-[200px] bg-white dark:bg-white/10 shadow-primary/20  drop-shadow-md shadow-xl   p-4 rounded-xl flex flex-col items-center justify-center ">
             <div className="">
               <FaSuitcase className=" rounded-full overflow-hidden  text-[5rem] text-primary dark:text-indigo-400  " />
             </div>
@@ -96,7 +96,7 @@ const LandingPage = () => {
             </span>
           </div>
 
-          <div className="mt-0 mx-auto md:mt-[100px] min-w-[200px] min-h-[180px] w-[280px] h-[190px]  md:w-[350px] md:h-[200px] bg-black/20 shadow-primary/60  drop-shadow-md shadow-2xl   p-4 rounded-xl flex flex-col items-center justify-center ">
+          <div className="mt-0 mx-auto md:mt-[100px] min-w-[200px] min-h-[180px] w-[280px] h-[190px]  md:w-[350px] md:h-[200px] bg-white dark:bg-white/10 shadow-primary/20  drop-shadow-md shadow-xl   p-4 rounded-xl flex flex-col items-center justify-center ">
             <div>
               <MdSupportAgent className="rounded-full overflow-hidden text-primary text-[5rem] dark:text-indigo-400  " />
             </div>

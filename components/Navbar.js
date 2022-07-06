@@ -52,15 +52,15 @@ const Navbar = () => {
       className={`${
         Navbar
           ? `  justify-between sm:justify-between md:justify-center transition duration-300 bg-black bg-opacity-80 backdrop-blur-sm ease-in flex h-12  w-full shadow-lg fixed text-white dark:bg-black/40 z-[100]`
-          : 'flex justify-between sm:justify-between md:justify-center bg-transparent absolute  h-12  w-full mt-2 pr-2 z-[100] '
+          : 'flex justify-between sm:justify-between md:justify-center bg-transparent absolute  h-12  w-full mt-1 pr-2  '
       } select-none  `}
     >
       <div className="min-w-[89px] pl-2 cursor-pointer object-contain flex items-center ">
         <Image
           className="object-contain"
           src={require('../images/logo3.png')}
-          width={120}
-          height={33}
+          width={125}
+          height={40}
           alt={'logo'}
         />
       </div>
@@ -150,10 +150,9 @@ const Navbar = () => {
           </a>
         </div>
         <button
-          className="md:order-first transition ease-in-out duration-500"
+          className=" rounded-full  p-1 md:order-first transition ease-in-out duration-500"
           onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
         >
-          {' '}
           {theme === 'light' ? <MdDarkMode /> : <RiSunFill />}
         </button>
       </div>
