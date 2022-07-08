@@ -14,7 +14,7 @@ const Navbar = () => {
   const [Navbar, setNavbar] = useState(false);
   const [Ham, setHam] = useState(false);
   const router = useRouter();
-
+  console.log(router.pathname);
   const changeBackground = () => {
     if (window.scrollY > 300) {
       setNavbar(true);
@@ -55,7 +55,13 @@ const Navbar = () => {
           : 'flex justify-between sm:justify-between md:justify-center bg-transparent absolute  h-12  w-full mt-1 pr-2  '
       } select-none  `}
     >
-      <div className="min-w-[89px] pl-2 cursor-pointer object-contain flex items-center ">
+      <div
+        className={` ${
+          !router.pathname === '/employee/dashboard'
+            ? 'min-w-[89px] pl-2 cursor-pointer object-contain flex items-center'
+            : 'invisible'
+        }`}
+      >
         <Image
           className="object-contain"
           src={require('../images/logo3.png')}

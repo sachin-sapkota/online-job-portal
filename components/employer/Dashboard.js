@@ -121,7 +121,7 @@ const Dashboard = () => {
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 mt-5 md:px-6 px-2 gap-3  ">
           {appliedjobs.map((b) => {
-            const a = (
+            return (
               <div className="md:px-8  h-[80px] border-[1px] backdrop-blur-sm dark:bg-gray-700 border-indigo-100 rounded-lg p-2 flex justify-start gap-3 items-center hover:shadow-xl hover:translate-y-[-2px] transform-gpu transition-all duration-300 ease-in-out   ">
                 <div>{b.icons}</div>
                 <div className="flex  flex-col font-sans font-medium">
@@ -143,7 +143,6 @@ const Dashboard = () => {
                 </div>
               </div>
             );
-            return a;
           })}
         </div>
       </div>

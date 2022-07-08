@@ -3,7 +3,7 @@ import DashLayout from '../../components/employee/DashLayout';
 const Dashboard = () => {
   return (
     <div>
-      <DashLayout></DashLayout>
+      <DashLayout active={'dashboard'}>this is dashboard </DashLayout>
     </div>
   );
 };
