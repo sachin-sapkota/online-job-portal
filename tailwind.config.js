@@ -74,7 +74,7 @@ module.exports = {
         footer: '#301934',
         background: '#F4F5FA',
         darkback: '#28243D',
-        darkcard: '#312D71',
+        darkcard: '#312D4B',
         whiteback: '#F4F5FA',
         active: '#9155FD',
       },

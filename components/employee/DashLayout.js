@@ -10,6 +10,7 @@ import { FaRegBell } from 'react-icons/fa';
 import { dashboard } from '../../variables/variables';
 
 const DashLayout = ({ children, active }) => {
+  const [Navbar, setNavbar] = useState(false);
   const [lock, setlock] = useState(false);
   const [isshow, setisshow] = useState(false);
   const { theme, setTheme } = useTheme();
@@ -17,6 +18,18 @@ const DashLayout = ({ children, active }) => {
     if (event.keyCode === 27) {
       setisshow(false);
     }
+  }, []);
+
+  const changeBackground = () => {
+    if (window.scrollY > 15) {
+      setNavbar(true);
+    } else {
+      setNavbar(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', changeBackground);
   }, []);
 
   useEffect(() => {
@@ -27,7 +40,7 @@ const DashLayout = ({ children, active }) => {
     };
   }, [escFunction]);
   return (
-    <div className="flex flex-row  relative  h-[100vh] w-full bg-whiteback dark:bg-darkback  ">
+    <div className="flex flex-row  relative  h-[160vh] w-full bg-whiteback dark:bg-darkback  ">
       <div
         onMouseEnter={() => {
           !lock && !isshow ? setisshow(true) : '';
@@ -38,8 +51,12 @@ const DashLayout = ({ children, active }) => {
         className={`
       
          ${isshow ? 'w-[235px]  ' : 'w-0 lg:w-[70px]'} 
-         ${lock && isshow ? 'shadow-none' : 'shadow-lg dark:shadow-white/30  '}
-         ${lock ? '' : 'absolute'}
+         ${
+           lock && isshow
+             ? 'shadow-none sticky top-0 left-0'
+             : ' shadow-lg dark:shadow-white/30 sticky top-0 left-0'
+         }
+         ${lock ? '' : 'fixed left-0 top-0'}
         bg-whiteback dark:bg-darkback flex-none flex flex-col   h-[100vh]  overflow-hidden  transition-all duration-300 ease-in-out backdrop-blur-sm z-[100] `}
       >
         <div className="min-w-[89px] px-2  object-contain flex items-center py-2 justify-between transition-all duration-300 delay-400 ease-linear ">
@@ -76,11 +93,11 @@ const DashLayout = ({ children, active }) => {
           </div>
         </div>
         <div className="pr-5 xl:pr-4 flex flex-col gap-2 mt-7 ">
-          {dashboard.map((item, i) => {
+          {dashboard.map((item) => {
             return (
-              <Link href={item.links}>
+              <Link key={item.id} href={item.links}>
                 <div
-                  key={i}
+                  key={item.id}
                   className={`py-2 px-3 flex gap-4 items-center cursor-pointer overflow-hidden  ${
                     active === item.id
                       ? 'bg-gradient-to-r from-color1 to-active  '
@@ -98,17 +115,17 @@ const DashLayout = ({ children, active }) => {
           <div className=""></div>
         </div>
       </div>
-      <div
-        className={`  ${
-          !isshow ? 'p-0 lg:ml-[100px]' : ' '
-        } flex flex-col w-full `}
-      >
+      <div className={`  ${!isshow ? 'p-0 ' : ' '} flex flex-col w-full `}>
         {/*  
     navbar conatiner
     */}
 
         <div
-          className={`gap-2 flex w-full justify-between transition-all duration-300 items-center h-[60px]  `}
+          className={`${
+            Navbar
+              ? ' rounded-b-xl   backdrop-blur-sm dark:bg-darkcard/80 bg-white/80 shadow-md'
+              : ''
+          } gap-2 z-10 sticky top-0 flex w-full justify-between transition-all duration-300 items-center h-[67px]  `}
         >
           <div
             onClick={() => setisshow(!isshow)}
@@ -143,12 +160,12 @@ const DashLayout = ({ children, active }) => {
             <div className="rounded-full p-2 bg-gray-300 w-9 h-9"></div>
           </div>
         </div>
+
         {/* 
 child container */}
 
-        <div className={`  pt-[40px] `}>
+        <div className={`   `}>
           <div className="relative">
-            hello
             {children}
             <div
               onClick={() => setisshow(!isshow)}
