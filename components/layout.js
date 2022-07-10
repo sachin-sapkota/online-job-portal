@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
   return (
     <div>
       <Commandp />
-      {path === '/employee/dashboard' ? null : <Navbar />}
+      {path === '/' ? <Navbar /> : ''}
 
       {children}
       {path === '/' ? <Footer /> : null}

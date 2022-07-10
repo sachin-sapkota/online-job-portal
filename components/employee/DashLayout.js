@@ -10,6 +10,7 @@ import { FaRegBell } from 'react-icons/fa';
 import { dashboard } from '../../variables/variables';
 
 const DashLayout = ({ children, active }) => {
+  const [mounted, SetMounted] = useState(false);
   const [Navbar, setNavbar] = useState(false);
   const [lock, setlock] = useState(false);
   const [isshow, setisshow] = useState(false);
@@ -27,6 +28,10 @@ const DashLayout = ({ children, active }) => {
       setNavbar(false);
     }
   };
+  useEffect(() => {
+    SetMounted(true);
+    return () => SetMounted(false);
+  }, []);
 
   useEffect(() => {
     window.addEventListener('scroll', changeBackground);
@@ -39,8 +44,11 @@ const DashLayout = ({ children, active }) => {
       document.removeEventListener('keydown', escFunction);
     };
   }, [escFunction]);
+  if (!mounted) {
+    return null;
+  }
   return (
-    <div className="flex flex-row  relative  h-[160vh] w-full bg-whiteback dark:bg-darkback  ">
+    <div className="flex relative  h-auto w-full bg-whiteback dark:bg-darkback  ">
       <div
         onMouseEnter={() => {
           !lock && !isshow ? setisshow(true) : '';
@@ -54,7 +62,7 @@ const DashLayout = ({ children, active }) => {
          ${
            lock && isshow
              ? 'shadow-none sticky top-0 left-0'
-             : ' shadow-lg dark:shadow-white/30 sticky top-0 left-0'
+             : ' shadow-lg dark:shadow-white/30 '
          }
          ${lock ? '' : 'fixed left-0 top-0'}
         bg-whiteback dark:bg-darkback flex-none flex flex-col   h-[100vh]  overflow-hidden  transition-all duration-300 ease-in-out backdrop-blur-sm z-[100] `}
@@ -115,7 +123,11 @@ const DashLayout = ({ children, active }) => {
           <div className=""></div>
         </div>
       </div>
-      <div className={`  ${!isshow ? 'p-0 ' : ' '} flex flex-col w-full `}>
+      <div
+        className={`  ${
+          isshow && lock ? 'p-0 ' : 'pl-0 lg:pl-[80px]'
+        } flex flex-col w-full `}
+      >
         {/*  
     navbar conatiner
     */}
@@ -125,7 +137,7 @@ const DashLayout = ({ children, active }) => {
             Navbar
               ? ' rounded-b-xl   backdrop-blur-sm dark:bg-darkcard/80 bg-white/80 shadow-md'
               : ''
-          } gap-2 z-10 sticky top-0 flex w-full justify-between transition-all duration-300 items-center h-[67px]  `}
+          } gap-2 z-10 sticky  top-0 flex w-full justify-between transition-all duration-100 ease-in-out delay-100 items-center h-[67px]  `}
         >
           <div
             onClick={() => setisshow(!isshow)}
@@ -164,7 +176,7 @@ const DashLayout = ({ children, active }) => {
         {/* 
 child container */}
 
-        <div className={`   `}>
+        <div className={``}>
           <div className="relative">
             {children}
             <div

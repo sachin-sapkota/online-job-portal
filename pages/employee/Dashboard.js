@@ -85,10 +85,17 @@ const Dashboard = () => {
           </div>
         </div>
         {/* Bar chart */}
-        <div className="w-full h-auto mt-6 p-7 text-gray-800 dark:text-gray-400 bg-white dark:bg-darkcard rounded-md shadow-md">
+        <div className="flex  w-full lg:w-3/4 h-auto mt-6 p-7 text-gray-800 dark:text-gray-400 bg-white dark:bg-darkcard rounded-md shadow-md">
           <BarChart chartData={userData} />
         </div>
-        <div className=""></div>
+        <div className="flex flex-col mt-6 bg-white dark:bg-darkcard rounded-md p-2 ">
+          <span className="text-xl font-sans  dark:text-gray-400 text-gray-800 ">
+            Jobs Applied Recently
+          </span>
+          <div className="flex bg-whiteback  rounded-md p-5">
+            <div className="w-9 h-9 rounded-full bg-indigo-500"></div>
+          </div>
+        </div>
       </div>
     </DashLayout>
   );
