@@ -3,22 +3,36 @@ import { CgInstagram, CgFacebook, CgTwitter, CgYoutube } from 'react-icons/cg';
 import { AiFillApple, AiFillAndroid } from 'react-icons/ai';
 const Footer = () => {
   return (
-    <div className=' p-3 dark:bg-gray-900 '>
-    <div className=" p-8 h-auto  min-w-[340px] rounded-t-[0.7rem] shadow-xl bg-gray-300 text-black dark:bg-gray-700 dark:text-white   ">
-      <div className="py-5 px-2">
-        <hr className="border-solid w-full border-white" />
+    <div className="relative  pt-9 px-8  h-auto  min-w-[200px]   shadow-xl bg-footer text-gray-200 dark:bg-gray-800 dark:text-white    ">
+      <div className="gap-3 items-center justify-center p-5 flex-col  flex -top-16 md:-top-20 absolute h-[150px] md:h-[200px] w-[80vw] inset-x-0   rounded-3xl max-w-2xl mx-auto bg-gradient-to-br from-primary to-color1/95 backdrop-blur-sm ">
+        <div className="font-bold font-sans text-2xl  ">
+          Trust Us! We will build your success.
+        </div>
+        <div className="text-2xl text-center font-sans font-medium ">
+          <div className="inline-block pr-1">Know your capability</div>
+          <div className="inline-block bg-primary px-3 py-1 rounded-xl transition-all duration-150 hover:bg-primary/80 ">
+            <Link href="/signup">Now</Link>
+          </div>
+        </div>
       </div>
 
-      <div className="grid gap-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4">
+      <div className="flex items-center justify-center py-5 mt-9 ">
+        <div className="min-w-[82px] cursor-pointer select-none flex border-transparent bg-indigo-800 text-white items-center rounded-md m-2 px-2 py-1 text-xl font-bold font-sans tracking-wide ">
+          Job Xa
+          {/* <Image src={require('../images/logo.png')} width={100} height={100} alt={'logo'} /> */}
+        </div>
+      </div>
+
+      <div className="grid   gap-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4">
         <div className="flex flex-col">
           <div className="font-bold mb-1 ">For Client</div>
           <div className="flex flex-col text-xs font-sans">
-            <Link href="/faqs">How to Hire</Link>
+            <div>
+              <Link href="/faqs">How to Hire</Link>
+            </div>
             <Link href="/faqs">Marketplace</Link>
             <Link href="/faqs">Hire an Agency</Link>
-            <Link href="/faqs">Enterprise</Link>
-            <Link href="/faqs">Direct Contracts</Link>
-            <Link href="/faqs">Hire Worldwide</Link>
+
             <Link href="/faqs">Project Catatlog</Link>
           </div>
         </div>
@@ -27,7 +41,7 @@ const Footer = () => {
           <div className="font-bold mb-1">For Skilled</div>
           <div className="flex flex-col text-xs font-sans">
             <Link href="/faqs">How to Find Work</Link>
-            <Link href="/faqs">Direct Contracts</Link>
+
             <Link href="/faqs">Find Freelance Jobs</Link>
           </div>
         </div>
@@ -38,9 +52,7 @@ const Footer = () => {
             <Link href="/faqs">Help & Support</Link>
             <Link href="/faqs">Sucess Stories</Link>
             <Link href="/faqs">Reviews</Link>
-            <Link href="/faqs">Resources</Link>
             <Link href="/faqs">Blog</Link>
-            <Link href="/faqs">Communities</Link>
           </div>
         </div>
 
@@ -48,9 +60,7 @@ const Footer = () => {
           <div className="font-bold mb-1">Company</div>
           <div className="text-xs flex flex-col font-sans">
             <Link href="/faqs">About Us</Link>
-            <Link href="/faqs">Leadership</Link>
-            <Link href="/faqs">Investors Relations</Link>
-            <Link href="/faqs">Careers</Link>
+
             <Link href="/faqs">Trust, Safety and Security</Link>
             <Link href="/faqs">Contact Us</Link>
           </div>
@@ -73,26 +83,24 @@ const Footer = () => {
             <CgTwitter />
           </div>
         </div>
-        <div className='flex gap-2 mt-2 md:mt-0'>
-            <div >Mobile App</div>
-            <div className="flex border-[1px] rounded-full justify-center items-center w-[30px] h-[30px] p-[1px]">
+        <div className="flex gap-2 mt-2 md:mt-0">
+          <div>Mobile App</div>
+          <div className="flex border-[1px] rounded-full justify-center items-center w-[30px] h-[30px] p-[1px]">
             <AiFillApple />
           </div>
           <div className="flex border-[1px] rounded-full justify-center items-center w-[30px] h-[30px] p-[1px]">
             <AiFillAndroid />
           </div>
         </div>
-      
       </div>
       <div className="pt-5 px-2">
         <hr className="border-1 w-full border-white" />
       </div>
-      <div className='flex text-sm gap-3 items-center justify-center mt-3'>
-          <div>&copy;2022</div>
-          <div>Terms of Service</div>
-          <div>Privacy Policy</div>
+      <div className="flex text-sm gap-3 items-center justify-center mt-3">
+        <div>&copy;2022</div>
+        <div>Terms of Service</div>
+        <div>Privacy Policy</div>
       </div>
-    </div>
     </div>
   );
 };
