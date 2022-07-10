@@ -4,17 +4,6 @@
 
 
 
-/* @font-face {
-  font-family: "Poppins";
-  src: url("../public/fonts/poppins.ttf");
-}
-@font-face {
-  font-family: "Roboto";
-  src: url("../public/fonts/roboto.ttf");
-} */
-
-
-
 @layer utilities {
   /* Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {

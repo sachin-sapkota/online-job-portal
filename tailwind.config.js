@@ -9,8 +9,12 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        poppins: ['Poppins'],
-        roboto: ['Roboto'],
+        // poppins: ['Poppins', 'sans-serif'],
+        // roboto: ['Roboto', 'sans-serif'],
+        // opensans: ['Open Sans', 'sans-serif'],
+        // ubuntu: ['Ubuntu', 'sans-serif'],
+        nunito: ['Nunito', 'sans-serif'],
+        ubuntu: ['Ubuntu', 'sans-serif'],
       },
 
       animation: {
