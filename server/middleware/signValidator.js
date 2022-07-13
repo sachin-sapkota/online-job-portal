@@ -1,4 +1,3 @@
-const jwt = require('jsonwebtoken');
 module.exports = {
   validateRegister: (req, res, next) => {
     if (!req.body.username || req.body.username.length < 3) {

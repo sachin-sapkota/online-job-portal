@@ -55,36 +55,41 @@ const signup = () => {
 
   const [loggeduser, setloggeduser] = useState(false);
 
-  const getprofiles = (url) => {
+  const getprofiles = () => {
     axios
       .get('http://localhost:3000/api/profile', { withCredentials: true })
 
       .then((res) => {
-        setloggeduser(res.data.success);
-      })
-      .catch((err) => console.log(err));
-  };
-  console.log(loggeduser);
-  // const getprofile = (url) => {
-  //   axios.get(url, { withCredentials: true }).then((res) => res.data);
-  // };
-
-  // const { data } = useSWR('/api/profile', async (url) => getprofile(url));
-  useEffect(() => {
-    async function getData() {
-      if (typeof data !== typeof undefined) {
-        if (data.success) {
-          setLogged(true);
+        console.log(res.data);
+        if (res.data.success) {
+          setloggeduser(true);
         } else {
-          setLogged(false);
+          setloggeduser(false);
         }
-      }
-    }
-    getData();
+      })
+      .catch((err) => {
+        console.log(err);
+        setloggeduser(false);
+        alert(err.response.data.message);
+      });
+  };
+  console.log(loggeduser, 'outside');
+  useEffect(() => {
+    getprofiles();
+    console.log('logggedddd', loggeduser);
   }, []);
+  useEffect(() => {
+    console.log(loggeduser, ' inside use effect');
+    if (loggeduser) {
+      router.push('/');
+    }
+    if (!loggeduser) {
+      router.push('/signup');
+    }
+  }, [loggeduser]);
 
   useEffect(() => {
-    loggeduser ? userRef.current.focus() : null;
+    loggeduser != typeof undefined ? userRef.current.focus() : null;
   }, []);
   useEffect(() => {
     const result = name_regex.test(user.name);
@@ -141,20 +146,11 @@ const signup = () => {
     if (error) {
       console.log(error);
     }
-    // router.push('/login');
   };
-  useEffect(() => {
-    getprofiles();
-
-    if (loggeduser) {
-      router.push('/');
-    }
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <>
-      {loggeduser ? (
+      {true ? (
         <div className="">
           <Head>
             <title>Sign up</title>

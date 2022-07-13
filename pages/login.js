@@ -18,10 +18,10 @@ const login = () => {
       email: user.email,
       password: user.password,
     });
-    router
-      .push('/employee')
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+    // router
+
+    //   .then((res) => console.log(res))
+    //   .catch((err) => console.log(err));
   };
 
   return (

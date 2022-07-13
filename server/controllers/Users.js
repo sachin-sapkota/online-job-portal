@@ -2,23 +2,49 @@ const db = require('../config/sign_authdb');
 const db1 = require('../config/auth_db');
 const { randomUUID } = require('crypto');
 require('dotenv').config();
-const {
-  signupValidation,
-  loginValidation,
-} = require('../middleware/signValidator');
+// const {
+//   signupValidation,
+//   loginValidation,
+// } = require('../middleware/signValidator');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { getuserbyemail } = require('../config/sign_authdb');
 const { strict } = require('assert');
 
 exports.getUsers = async (req, res) => {
+  const { user } = req;
+  if (!user)
+    return res.status(401).json({ msg: 'not logged in', success: false });
+  return res.send(req.body);
+};
+
+exports.userprofile = async (req, res) => {
+  const user = req.body;
+  if (!user)
+    return res.status(401).json({ msg: 'not logged in', success: false });
+
+  // db1.execute(
+  //   `SELECT * FROM users WHERE username=? `,
+  //   [username],
+  //   (err, result) => {
+  //     if (result.length) {
+  //       return res.status(409).send({
+  //         msg: 'This username is already taken!',
+  //         success: false,
+  //       });
+  //     } else {
+  //       return res.send({ msg: 'username found', success: true });
+  //     }
+  //   }
+  // );
+
   return res.send(req.body);
 };
 
 exports.getuserprofile = async (req, res) => {
-  if (!req.body) return res.send({ success: false });
+  if (!req.body) return res.status(400).send({ success: false });
 
-  return res.send({ success: true, user: req.body });
+  return res.status(200);
 };
 
 // exports.getuserprofile = async (req, res) => {
@@ -105,7 +131,9 @@ exports.Login = async (req, res) => {
 
   db1.execute(`SELECT * FROM users WHERE email= ?`, [email], (err, result) => {
     if (err) {
-      return res.sendStatus(400).send({ msg: error, success: false });
+      return res
+        .sendStatus(400)
+        .send({ msg: 'user not found', success: false });
     }
     if (!result.length) {
       return res.send({
@@ -131,7 +159,7 @@ exports.Login = async (req, res) => {
       };
       if (results) {
         const accessToken = jwt.sign(data, process.env.ACCESS_TOKEN_SECRET, {
-          expiresIn: '10h',
+          expiresIn: '10d',
         });
 
         db1.execute(`UPDATE users SET Last_login = now() WHERE id= ?`, [
@@ -140,35 +168,22 @@ exports.Login = async (req, res) => {
         res.cookie('accessToken', accessToken, {
           httpOnly: true,
           secure: false,
-          expires: new Date(Date.now() + 30 * 60 * 1000),
         });
 
-        res.json({ success: true });
+        res.status(200).json({ success: true });
       } else {
-        res.send({ msg: 'password incorrect', success: false });
+        res.status(401).json({ msg: 'password incorrect', success: false });
       }
     });
   });
 };
 
 exports.Logout = async (req, res) => {
-  // const refreshToken = req.cookies.refreshToken;
-  // if (!refreshToken) return res.sendStatus(204);
-  // const user = await Users.findAll({
-  //   where: {
-  //     refresh_token: refreshToken,
-  //   },
-  // });
-  // if (!user[0]) return res.sendStatus(204);
-  // const userId = user[0].id;
-  // await Users.update(
-  //   { refresh_token: null },
-  //   {
-  //     where: {
-  //       id: userId,
-  //     },
-  //   }
-  // );
-  // res.clearCookie('refreshToken');
-  // return res.sendStatus(200);
+  if (req.cookies['accessToken']) {
+    res
+      .clearCookie('accessToken')
+      .json({ msg: 'logout successfull', success: true });
+  } else {
+    res.send({ msg: 'no token found', success: false });
+  }
 };

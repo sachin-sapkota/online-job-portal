@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { SiAppstore } from 'react-icons/si';
 import { RiMoneyDollarCircleFill } from 'react-icons/ri';
 import { SiAltiumdesigner } from 'react-icons/si';
@@ -15,18 +16,18 @@ import { ChevronUpIcon } from '@heroicons/react/solid';
 
 const LandingPage = () => {
   return (
-    <div className="dark:bg-gray-900 bg-background pt-10">
+    <div className="dark:bg-gray-900 bg-whiteback pt-20 font-ubuntu">
       <div className=" grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2  pt-20 w-full ">
         <div className="relative flex flex-col   mt-6">
-          <div className=" absolute inset-x-0 mx-auto mix-blend-multiply dark:mix-blend-soft-light    filter blur-xl  opacity-50 animate-blurry top-0  -left-[100px]   w-40   md:w-72   h-40   md:h-72 bg-purple-300 rounded-full "></div>
-          <div className="absolute inset-x-0 mx-auto mix-blend-multiply dark:mix-blend-soft-light  filter blur-xl opacity-50 animate-blurry top-0    left-[100px] w-40   md:w-72   h-40   md:h-72 bg-yellow-300 rounded-full"></div>
-          <div className="absolute inset-x-0 mx-auto mix-blend-multiply dark:mix-blend-soft-light filter  opacity-50 blur-xl animate-blurry top-0 mt-9     w-40   md:w-72   h-40   md:h-72 bg-pink-300 rounded-full"></div>
+          <div className=" absolute inset-x-0 mx-auto mix-blend-multiply dark:mix-blend-soft-light    filter blur-xl  opacity-40 animate-blurry top-0  -left-[100px] md:-left-[120px] xl:-left-[160px]   w-40   md:w-72   h-40   md:h-72 bg-purple-300 rounded-full "></div>
+          <div className="absolute inset-x-0 mx-auto mix-blend-multiply dark:mix-blend-soft-light  filter blur-xl opacity-40 animate-blurry top-0    left-[100px] md:left-[120px] xl:left-[160px]  w-40   md:w-72   h-40   md:h-72 bg-yellow-300 rounded-full"></div>
+          <div className="absolute inset-x-0 mx-auto mix-blend-multiply dark:mix-blend-soft-light filter  opacity-40 blur-xl animate-blurry top-0 mt-9 md:mt-[70px] xl:mt-[95]    w-40   md:w-72   h-40   md:h-72 bg-pink-300 rounded-full"></div>
 
           <div className="flex flex-col relative items-center justify-center">
-            <div className="font-serif text-red-700">
+            <div className="font-nunito text-red-700 dark:text-red-400">
               Find Your Next Dream Job
             </div>
-            <div className="select-none font-sans text-4xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">
+            <div className="select-none font-nunito font-extrabold text-4xl sm:text-4xl md:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">
               <div> Dream Jobs </div>
               <div> find Talent, All</div>
               <div> in One Place. </div>
@@ -62,11 +63,11 @@ const LandingPage = () => {
         </div>
       </div>
 
-      <div className=" px-2 flex flex-col  mt-[3rem] select-none mb-[3rem]">
-        <div className="text-center font-bold  text-primary tracking-widest text-4xl dark:text-primary">
+      <div className=" px-2 flex flex-col  mt-[6.3rem] select-none mb-[3rem]">
+        <div className="text-center font-bold font-ubuntu text-primary tracking-widest text-4xl dark:text-indigo-500">
           More easier to find a job
         </div>
-        <div className="text-center font-bold text-4xl tracking-widest text-primary ">
+        <div className="text-center font-ubuntu font-bold text-4xl tracking-widest text-primary dark:text-indigo-500">
           with our platform
         </div>
         <div className="mt-2 tracking-wide  text-center px-7 text-md font-semibold mb-4">
@@ -156,7 +157,7 @@ const LandingPage = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2  mt-8">
         <div className="sm:pl-5 px-5 md:pl-9">
-          <div className="text-3xl font-sans tracking-wider text-footer font-bold  text-center sm:text-left te">
+          <div className="text-3xl font-sans tracking-wider text-gray-700 dark:text-gray-300 font-bold  text-center sm:text-left te">
             Explore by Categories
           </div>
           <div className="text-sm text-slate-600 text-left mt-4 dark:text-gray-300 hidden sm:text-left">

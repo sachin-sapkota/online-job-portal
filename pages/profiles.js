@@ -417,12 +417,12 @@ contact us */}
                   placeholder="Email"
                   className="w-full placeholder:font-nunito placeholder:text-[13px] placeholder:font-semibold placeholder:text-gray-400 px-2 py-1 rounded-md text-gray-700 border border-gray-300 focus:outline-none focus:border-gray-500"
                 />
-                <input
-                  typte="text-area"
+                <textarea
+                  rows="6"
                   placeholder="Message"
-                  className="w-full placeholder:font-nunito placeholder:text-[13px] placeholder:font-semibold placeholder:text-gray-400 px-2 py-1 rounded-md text-gray-700 border border-gray-300 focus:outline-none focus:border-gray-500"
-                />
-                <button className="font-nunito text-[13px] font-semibold  w-full px-2 py-2 rounded-md text-white bg-blue-700 hover:bg-blue-500 focus:outline-none focus:border-indigo-500">
+                  className="w-full resize-none   placeholder:font-nunito placeholder:text-[13px] placeholder:font-semibold placeholder:text-gray-400 px-2 py-1 rounded-md text-gray-700 border border-gray-300 focus:outline-none focus:border-gray-500"
+                ></textarea>
+                <button className="resize-none font-nunito text-[13px] font-semibold  w-full px-2 py-2 rounded-md text-white bg-blue-700 hover:bg-blue-500 focus:outline-none focus:border-indigo-500">
                   Send Message
                 </button>
               </div>

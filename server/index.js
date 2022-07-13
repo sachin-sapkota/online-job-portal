@@ -18,7 +18,7 @@ app.prepare().then(() => {
   server.use(cookieParser());
   server.use(express.json());
   server.use('/api', router);
-
+  // server.use('/user',user);
   server.all('*', (req, res) => {
     return handle(req, res);
   });
