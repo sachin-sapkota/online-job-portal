@@ -36,7 +36,7 @@ const profiles = () => {
             </div>
             <div className="flex flex-col gap-1">
               <div className="font-bold text-xl font-nunito capitalize">
-                Sachin Sapkota
+                Sachin Sapkotaa
               </div>
               <div className="text-[13px] font-nunito font-bold dark:text-indigo-400 text-indigo-600  ">
                 Web Development
@@ -285,7 +285,7 @@ work and experience */}
         <div className="flex flex-col">
           <div className="flex gap-3">
             <span className="flex-1 bg-blue-700 text-white rounded-md text-center font-nunito text-[13px] py-1 ">
-              Download CV
+              DownloadCV
             </span>
             <div className="bg-gray-200 py-1 px-2  rounded-md flex items-center justify-center">
               <BsFillBookmarkHeartFill className="text-indigo-700 w-3 h-3" />{' '}

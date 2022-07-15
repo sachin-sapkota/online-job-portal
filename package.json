@@ -30,7 +30,7 @@
     "jsonwebtoken": "^8.5.1",
     "mapbox-gl": "^2.9.1",
     "mysql2": "^2.3.3",
-    "next": "12.1.6",
+    "next": "^12.2.2",
     "next-themes": "^0.2.0",
     "prop-types": "^15.8.1",
     "react": "18.2.0",
