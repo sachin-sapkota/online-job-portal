@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-
+import { useState } from 'react';
 import { SiAppstore } from 'react-icons/si';
 import { RiMoneyDollarCircleFill } from 'react-icons/ri';
 import { SiAltiumdesigner } from 'react-icons/si';
@@ -12,9 +12,20 @@ import { HiArrowNarrowRight } from 'react-icons/hi';
 import { FaSuitcase, FaRegHandshake } from 'react-icons/fa';
 import { MdSupportAgent } from 'react-icons/md';
 import { Disclosure } from '@headlessui/react';
-import { ChevronUpIcon } from '@heroicons/react/solid';
+import { ChevronUpIcon, SearchCircleIcon } from '@heroicons/react/solid';
+import { useRouter } from 'next/router';
 
 const LandingPage = () => {
+  const route = useRouter();
+  const [search, setsearch] = useState('');
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    route.push({
+      pathname: '/findjob',
+
+      query: { search },
+    });
+  };
   return (
     <div className="dark:bg-gray-900 bg-whiteback pt-20 font-ubuntu">
       <div className=" grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2  pt-20 w-full ">
@@ -33,13 +44,14 @@ const LandingPage = () => {
               <div> in One Place. </div>
             </div>
             <div className="mt-5 ">
-              <form className=" ">
+              <form onSubmit={handleSubmit}>
                 <div className="focus:bg-indigo-600 border-transparent flex items-center border-2 focus:outline-none border-white shadow-2xl w-full  py-2 pl-7 pr-2 rounded-[2.5rem] bg-white dark:bg-gray-800  ">
                   <div className="focus:outline-none border-none ">
                     <input
                       type="text"
                       className="border-transparent placeholder:font-bold placeholder-indigo-500 placeholder:text-xl focus:border-transparent border-4 appearance-none focus:ring-transparent dark:bg-gray-800 font-medium  "
                       placeholder="Search for any job"
+                      onChange={(e) => setsearch(e.target.value)}
                     />
                   </div>
                   <button className="bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 text-white font-bold py-2 px-4 rounded-3xl hover:bg-red-600">

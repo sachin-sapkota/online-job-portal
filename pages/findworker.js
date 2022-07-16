@@ -1,10 +1,5 @@
-import Navbar from '../components/Navbar';
 const findworker = () => {
-  return (
-    <div>
-      <Navbar />
-    </div>
-  );
+  return <div>ehllo</div>;
 };
 
 export default findworker;

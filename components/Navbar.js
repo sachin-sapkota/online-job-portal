@@ -70,9 +70,6 @@ const Navbar = () => {
   if (!mounted) {
     return null;
   }
-  const logoutUser = (url, data) =>
-    axios.post(url, { withCredentials: true }).then((res) => res.data);
-
   const handleLogout = async (e) => {
     e.preventDefault();
     await axios.post('http://localhost:3000/api/logout', {
@@ -82,18 +79,18 @@ const Navbar = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative ">
       <div
         className={`${
           Navbar
-            ? `  justify-between sm:justify-between md:justify-center transition duration-300 bg-black bg-opacity-80 backdrop-blur-sm ease-in flex h-12  w-full shadow-lg fixed text-white dark:bg-black/40 z-[100]`
-            : 'flex justify-between sm:justify-between md:justify-center bg-transparent absolute  h-12  w-full mt-1 pr-2  '
+            ? ` w-full  px-3 rounded-b-md justify-between sm:justify-between md:justify-center transition duration-300 bg-deep-purple-900 shadow-purple-900/60 bg-opacity-80 backdrop-blur-sm ease-in flex h-[60px]  fixed text-white dark:bg-black/40 shadow-2xl z-[100]`
+            : 'flex justify-between sm:justify-between md:justify-center bg-transparent absolute  h-[60px]  w-full mt-1 pr-2  '
         } select-none  `}
       >
-        <div>
+        <div className="inset-y-0 my-auto ">
           <Image
             className="object-contain"
-            src={require('../images/logo3.png')}
+            src={require('../images/footerimg.png')}
             width={125}
             height={40}
             alt={'logo'}
@@ -170,7 +167,7 @@ const Navbar = () => {
           </div>
 
           <button
-            className=" rounded-full  p-1 md:order-first transition ease-in-out duration-500"
+            className=" rounded-full  p-1 md:order-first transition ease-in-out duration-200"
             onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
           >
             {theme === 'light' ? <MdDarkMode /> : <RiSunFill />}
