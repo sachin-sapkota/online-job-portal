@@ -4,7 +4,33 @@ import { MdWorkOutline } from 'react-icons/md';
 import Maps from '../../components/Map/Map';
 import { useState } from 'react';
 import DashLayout from '../../components/employer/Dashlayout';
+import Multiselect from '../../components/Multiselect';
+import { Dialog, Combobox } from '@headlessui/react';
+import { Fragment, useEffect } from 'react';
+
 export default function Jobs() {
+  const [items, setItems] = useState(['john', 'milos', 'steph', 'kathreine']);
+  const [selectedItems, setSelected] = useState([]);
+  let [isOpen, setIsOpen] = useState(true);
+  const [query, setquery] = useState('');
+
+  const filterdata = query
+    ? items.filter((data) => data.toLowerCase().includes(query.toLowerCase()))
+    : [];
+
+  console.log(filterdata);
+  const addTag = (item) => {
+    if (!selectedItems.includes(item)) {
+      setSelected(selectedItems.concat(item));
+    }
+  };
+
+  const removeTag = (item) => {
+    const filtered = selectedItems.filter((e) => e !== item);
+    setSelected(filtered);
+  };
+  console.log(selectedItems);
+
   const [point, setpoint] = useState({
     latitude: 0,
     longitude: 0,
@@ -27,6 +53,7 @@ export default function Jobs() {
     latitude: '',
     longitude: '',
   });
+  console.log(job.skills);
   return (
     <div>
       <div className="grid grid-flow-row grid-cols-1 mx-1 md:mx-10 p-3 ">
@@ -402,7 +429,15 @@ export default function Jobs() {
                             </select>
                           </div>
                         </div>
-
+                        <div className="col-span-6     gap-3">
+                          <label
+                            htmlFor="qualification"
+                            className="block text-sm font-medium text-gray-900 dark:text-gray-300"
+                          >
+                            Required skills
+                          </label>
+                          <Multiselect setjob={setjob} />
+                        </div>
                         <div className="col-span-6 sm:col-span-3  gap-3">
                           <label
                             htmlFor="qualification"
