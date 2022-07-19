@@ -2,14 +2,14 @@ const db = require('../config/sign_authdb');
 const db1 = require('../config/auth_db');
 const { randomUUID } = require('crypto');
 require('dotenv').config();
-// const {
-//   signupValidation,
-//   loginValidation,
-// } = require('../middleware/signValidator');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { getuserbyemail } = require('../config/sign_authdb');
 const { strict } = require('assert');
+
+exports.postjob = async (req, res) => {
+  const user = req.body;
+  console.log(user);
+};
 
 exports.getUsers = async (req, res) => {
   const { user } = req;
@@ -110,7 +110,7 @@ exports.Register = async (req, res) => {
           } else {
             const randomid = randomUUID();
             db1.execute(
-              'INSERT INTO users (id, name, username, email,number, password) VALUES (?,?,?,? ,?, ?)',
+              'INSERT INTO users (id, name, username, email, number, password) VALUES (?,?,?,? ,?, ?)',
               [randomid, name, username, email, number, hash],
               (error, result) => {
                 if (error) return res.send({ msg: 'error while registering' });
@@ -146,16 +146,15 @@ exports.Login = async (req, res) => {
       if (err) {
         res.throw(err);
       }
-
+      console.log(result);
       const data = {
         id: result[0].id,
         name: result[0].name,
         username: result[0].username,
         email: result[0].email,
         verified: result[0].verified,
-        Last_login: result[0].Last_login,
         number: result[0].number,
-        acctype: result[0].acctype,
+        usertype: result[0].usertype,
       };
       if (results) {
         const accessToken = jwt.sign(data, process.env.ACCESS_TOKEN_SECRET, {

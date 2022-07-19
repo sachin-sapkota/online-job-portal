@@ -1,4 +1,4 @@
-import DashLayout from '../../components/employee/DashLayout';
+import DashLayout from '../../components/employer/Dashlayout';
 import Maps from '../../components/Map/Map';
 import { useState } from 'react';
 export default function profile() {

@@ -14,7 +14,7 @@ export const UserData = [
     FavouriteJobs: 48,
   },
 ];
-const Dashboard = () => {
+export default function Dashboard() {
   const [userData, setUserData] = useState({
     labels: ['JobApplied', 'JobNotification', 'FavouriteJobs'],
     datasets: [
@@ -36,7 +36,7 @@ const Dashboard = () => {
     ],
   });
   return (
-    <DashLayout active={'dashboard'}>
+    <div>
       <div className="px-4">
         <div className=" flex flex-col ">
           <div className="text-xl md:text-3xl font-semibold mt-4">
@@ -97,8 +97,10 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-    </DashLayout>
+    </div>
   );
-};
+}
 
-export default Dashboard;
+Dashboard.getLayout = function getLayout(page) {
+  return <DashLayout active="dashboard">{page}</DashLayout>;
+};

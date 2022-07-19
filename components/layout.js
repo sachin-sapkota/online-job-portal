@@ -5,14 +5,15 @@ import Commandp from './Commandp';
 
 const Layout = ({ children }) => {
   const route = useRouter();
-  const path = route.pathname;
+  console.log(route);
+
   return (
     <div>
       <Commandp />
-      <Navbar />
+      {route.pathname === '/' || '/findjob' ? <Navbar /> : ''}
 
       {children}
-      <Footer />
+      {route.pathname === '/' ? <Footer /> : ''}
     </div>
   );
 };

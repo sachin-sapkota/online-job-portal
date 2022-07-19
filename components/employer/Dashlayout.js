@@ -1,14 +1,14 @@
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-
+import { useRouter } from 'next/router';
 import { HiOutlineMenuAlt1 } from 'react-icons/hi';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { GrClose } from 'react-icons/gr';
 import { ImSun } from 'react-icons/im';
 import { useTheme } from 'next-themes';
 import { FaRegBell } from 'react-icons/fa';
-import { dashboard } from '../../variables/variables';
+import { employerdashboard } from '../../variables/variables';
 
 const DashLayout = ({ children, active }) => {
   const [mounted, SetMounted] = useState(false);
@@ -33,7 +33,7 @@ const DashLayout = ({ children, active }) => {
     SetMounted(true);
     return () => SetMounted(false);
   }, []);
-  console.log('hello this is rendered again');
+
   useEffect(() => {
     window.addEventListener('scroll', changeBackground);
   }, []);
@@ -74,6 +74,7 @@ const DashLayout = ({ children, active }) => {
               <Image
                 className=" object-contain cursor-pointer"
                 src={require('../../images/logo3.png')}
+                width={125}
                 height={45}
                 alt={'logo'}
               />
@@ -101,7 +102,7 @@ const DashLayout = ({ children, active }) => {
           </div>
         </div>
         <div className="pr-5 xl:pr-4 flex flex-col gap-2 mt-7 ">
-          {dashboard.map((item) => {
+          {employerdashboard.map((item) => {
             return (
               <Link key={item.id} href={item.links}>
                 <div
@@ -113,7 +114,7 @@ const DashLayout = ({ children, active }) => {
                   } rounded-r-3xl hover:bg-black/20  `}
                 >
                   <div className="">{item.icon}</div>
-                  <div className="overflow-hidden whitespace-nowrap text-[15px] font-nunito font-semibold  text-gray-600 dark:text-gray-200">
+                  <div className="overflow-hidden whitespace-nowrap text-[15px] font-nunito font-semibold  text-gray-600 dark:text-gray-200 ">
                     {item?.title}
                   </div>
                 </div>

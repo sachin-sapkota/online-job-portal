@@ -12,6 +12,7 @@ const verifyToken = (req, res, next) => {
           message: 'User session finished please login again',
         });
       } else {
+        console.log(authData);
         req.body = authData;
       }
     });

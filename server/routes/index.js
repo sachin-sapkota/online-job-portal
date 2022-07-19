@@ -8,6 +8,7 @@ const {
   Logout,
   getuserprofilebyid,
   userprofile,
+  postjob,
 } = require('../controllers/Users');
 const verifyToken = require('../middleware/VerifyToken');
 
@@ -21,5 +22,5 @@ router.post('/logout', Logout);
 router.get('/profiles/:id', verifyToken, getuserprofilebyid);
 router.get('/profile', verifyToken, getuserprofile);
 router.get('/userprofile', verifyToken, userprofile);
-
+router.post('/postjob', verifyToken, postjob);
 module.exports = router;

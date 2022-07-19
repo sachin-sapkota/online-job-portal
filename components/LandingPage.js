@@ -45,18 +45,19 @@ const LandingPage = () => {
             </div>
             <div className="mt-5 ">
               <form onSubmit={handleSubmit}>
-                <div className="focus:bg-indigo-600 border-transparent flex items-center border-2 focus:outline-none border-white shadow-2xl w-full  py-2 pl-7 pr-2 rounded-[2.5rem] bg-white dark:bg-gray-800  ">
-                  <div className="focus:outline-none border-none ">
+                <div className="relative focus:bg-indigo-600 border-transparent flex items-center border-2 focus:outline-none border-white shadow-2xl w-[290px]  h-[60px]  py-2 pl-7 pr-2 rounded-[2.5rem] bg-white dark:bg-gray-800  ">
+                  <div className="absolute focus:outline-none border-none flex justify-around w-full  gap-1 ">
                     <input
                       type="text"
-                      className="border-transparent placeholder:font-bold placeholder-indigo-500 placeholder:text-xl focus:border-transparent border-4 appearance-none focus:ring-transparent dark:bg-gray-800 font-medium  "
+                      className="w-2/3 border-transparent placeholder:font-bold placeholder-indigo-500 md:placeholder:text-lg placeholder:text-md  focus:border-transparent border-4 appearance-none focus:ring-transparent dark:bg-gray-800 font-medium  "
                       placeholder="Search for any job"
                       onChange={(e) => setsearch(e.target.value)}
                     />
+
+                    <button className="bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 text-white font-bold py-2 px-4 rounded-3xl hover:bg-red-600">
+                      Search
+                    </button>
                   </div>
-                  <button className="bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 text-white font-bold py-2 px-4 rounded-3xl hover:bg-red-600">
-                    Search
-                  </button>
                 </div>
               </form>
             </div>
@@ -76,13 +77,13 @@ const LandingPage = () => {
       </div>
 
       <div className=" px-2 flex flex-col  mt-[6.3rem] select-none mb-[3rem]">
-        <div className="text-center font-bold font-ubuntu text-primary tracking-widest text-4xl dark:text-indigo-500">
+        <div className="text-center font-bold font-ubuntu text-primary  md:text-4xl text-2xl  dark:text-indigo-500">
           More easier to find a job
         </div>
-        <div className="text-center font-ubuntu font-bold text-4xl tracking-widest text-primary dark:text-indigo-500">
+        <div className="text-center font-ubuntu font-bold md:text-4xl text-2xl  text-primary dark:text-indigo-500">
           with our platform
         </div>
-        <div className="mt-2 tracking-wide  text-center px-7 text-md font-semibold mb-4">
+        <div className="mt-2   text-center px-7 md:text-md text-sm font-semibold mb-4 dark:text-gray-400 text-gray-700  ">
           The following features make our service easier to help you find
           suitable job from various companies.
         </div>
