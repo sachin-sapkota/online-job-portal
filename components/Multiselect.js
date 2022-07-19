@@ -47,6 +47,7 @@ const Multiselect = ({ setjob }) => {
             as="div"
             onChange={(data) => {
               addTag(data);
+              setquery(' ');
             }}
             className="relative divide-y dark:divide-gray-700 divide-gray-300  overflow-hidden w-full dark:bg-footer bg-gray-200  mx-auto shadow-2xl ring-1 ring-black/10"
           >
