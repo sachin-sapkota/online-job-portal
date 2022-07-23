@@ -1,26 +1,11 @@
 const express = require('express');
-const {
-  getUsers,
-  getuserprofile,
-  getuserbyusername,
-  Login,
-  Register,
-  Logout,
-  getuserprofilebyid,
-  userprofile,
-  postjob,
-} = require('../controllers/Users');
-const verifyToken = require('../middleware/VerifyToken');
 
+const employee = require('../routes/employee');
+const employer = require('../routes/employer');
+const user = require('../routes/user');
 const router = express.Router();
 
-router.get('/users', verifyToken, getUsers);
-router.post('/users', Register);
-router.post('/login', Login);
-router.get('/username', getuserbyusername);
-router.post('/logout', Logout);
-router.get('/profiles/:id', verifyToken, getuserprofilebyid);
-router.get('/profile', verifyToken, getuserprofile);
-router.get('/userprofile', verifyToken, userprofile);
-router.post('/postjob', verifyToken, postjob);
+router.use('/employee', employee);
+router.use('/employer', employer);
+router.use('/user', user);
 module.exports = router;

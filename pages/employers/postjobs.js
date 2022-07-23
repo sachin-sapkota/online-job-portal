@@ -2,38 +2,33 @@ import { MdOutlinePayment, MdPayments } from 'react-icons/md';
 import { BsCheckLg } from 'react-icons/bs';
 import { MdWorkOutline } from 'react-icons/md';
 import Maps from '../../components/Map/Map';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import DashLayout from '../../components/employer/Dashlayout';
 import Multiselect from '../../components/Multiselect';
-import { Dialog, Combobox } from '@headlessui/react';
-import { Fragment, useEffect } from 'react';
-
+import axios from 'axios';
 export default function Jobs() {
   const [items, setItems] = useState(['john', 'milos', 'steph', 'kathreine']);
-  const [selectedItems, setSelected] = useState([]);
-  let [isOpen, setIsOpen] = useState(true);
+  const [defaultValueItems, setdefaultValue] = useState([]);
   const [query, setquery] = useState('');
 
   const filterdata = query
     ? items.filter((data) => data.toLowerCase().includes(query.toLowerCase()))
     : [];
 
-  console.log(filterdata);
   const addTag = (item) => {
-    if (!selectedItems.includes(item)) {
-      setSelected(selectedItems.concat(item));
+    if (!defaultValueItems.includes(item)) {
+      setdefaultValue(defaultValueItems.concat(item));
     }
   };
 
   const removeTag = (item) => {
-    const filtered = selectedItems.filter((e) => e !== item);
-    setSelected(filtered);
+    const filtered = defaultValueItems.filter((e) => e !== item);
+    setdefaultValue(filtered);
   };
-  console.log(selectedItems);
 
   const [point, setpoint] = useState({
-    latitude: 0,
-    longitude: 0,
+    latitude: '',
+    longitude: '',
   });
   const [job, setjob] = useState({
     title: '',
@@ -41,6 +36,7 @@ export default function Jobs() {
     sector: '',
     website: '',
     salary_time: '',
+    deadline: '',
     salary_amt: '',
     job_type: '',
     experience: '',
@@ -53,7 +49,36 @@ export default function Jobs() {
     latitude: '',
     longitude: '',
   });
-  console.log(job.skills);
+  useEffect(() => {
+    setjob((prev) => {
+      return {
+        ...prev,
+        latitude: point.latitude,
+        longitude: point.longitude,
+      };
+    });
+  }, [point]);
+  useEffect(() => {
+    const jobs = JSON.parse(localStorage.getItem('job'));
+    if (jobs) {
+      setjob(jobs);
+    }
+  }, []);
+  useEffect(() => {
+    window.localStorage.setItem('job', JSON.stringify(job));
+  }, [job]);
+
+  const handlesubmit = (e) => {
+    e.preventDefault();
+    // localStorage.clear();
+    axios
+      .post('http://localhost:3000/api/employer/postjob', job)
+
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <div>
       <div className="grid grid-flow-row grid-cols-1 mx-1 md:mx-10 p-3 ">
@@ -87,10 +112,10 @@ export default function Jobs() {
           </div>
 
           <div className="grid grid-flow-row grid-cols-1 mx-2 md:mx-5 ">
-            <form action="#" method="post">
+            <form onSubmit={handlesubmit}>
               <div className="flex flex-col gap-5  px-5">
                 <div className="flex flex-col   gap-6 mt-2 md:mt-6 h-auto rounded-md  pt-8 ">
-                  <div className="shadow overflow-hidden sm:rounded-md">
+                  <div className="shadow overflow- sm:rounded-md">
                     <div className="px-4 py-5 bg-whiteback [&>*]:text-gray-900  [&>*]:dark:text-gray-300 dark:bg-darkcard sm:p-6">
                       <div className=" [&>*]:text-gray-900  [&>*]:dark:text-gray-300 grid grid-cols-6 gap-6">
                         <div className=" [&>*]:text-gray-900  [&>*]:dark:text-gray-300 col-span-6 ">
@@ -115,6 +140,7 @@ export default function Jobs() {
                                 return { ...prev, title: e.target.value };
                               })
                             }
+                            value={job.title}
                           />
                         </div>
                         <div className="col-span-6 ">
@@ -133,7 +159,6 @@ export default function Jobs() {
                               name="description"
                               rows={10}
                               className="shadow-sm dark:bg-black/20 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 dark:border-gray-600 rounded-md"
-                              defaultValue={''}
                               required
                               onChange={(e) =>
                                 setjob((prev) => {
@@ -143,6 +168,7 @@ export default function Jobs() {
                                   };
                                 })
                               }
+                              value={job.description}
                             />
                           </div>
                         </div>
@@ -162,6 +188,12 @@ export default function Jobs() {
                             id="deadline"
                             className="mt-1 focus:ring-indigo-500  dark:bg-black/20  bg-white focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 dark:border-gray-600 rounded-md"
                             required
+                            onChange={(e) =>
+                              setjob((prev) => {
+                                return { ...prev, deadline: e.target.value };
+                              })
+                            }
+                            value={job.deadline}
                           />
                         </div>
 
@@ -179,7 +211,15 @@ export default function Jobs() {
                             id="sector"
                             name="sector"
                             className=" mr-2 block w-full py-2 px-3 border dark:bg-black/20 text-gray-900 dark:text-gray-500 border-gray-300 dark:border-gray-600  rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                            onChange={(e) =>
+                              setjob((prev) => {
+                                return { ...prev, sector: e.target.value };
+                              })
+                            }
                           >
+                            <option defaultValue disabled>
+                              Choose sector
+                            </option>
                             <option className="dark:bg-darkcard/90 bg-white ">
                               Aerospace
                             </option>
@@ -311,6 +351,12 @@ export default function Jobs() {
                               id="company-website"
                               className="focus:ring-indigo-500 dark:bg-black/20  focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 dark:border-gray-600"
                               placeholder="www.example.com"
+                              onChange={(e) =>
+                                setjob((prev) => {
+                                  return { ...prev, website: e.target.value };
+                                })
+                              }
+                              value={job.website}
                             />
                           </div>
                         </div>
@@ -327,10 +373,21 @@ export default function Jobs() {
                           </label>
                           <div className="mt-1 flex rounded-md shadow-sm">
                             <select
+                              onChange={(e) =>
+                                setjob((prev) => {
+                                  return {
+                                    ...prev,
+                                    salary_time: e.target.value,
+                                  };
+                                })
+                              }
                               id="salary-duration"
                               name="salary-duration"
                               className=" mr-2 block w-1/2 py-2 px-3 border dark:bg-black/20 text-gray-900 dark:text-gray-500 border-gray-300 dark:border-gray-600  rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                             >
+                              <option defaultValue disabled>
+                                Salary duration{' '}
+                              </option>
                               <option className="dark:bg-darkcard/90 bg-white ">
                                 Monthly
                               </option>
@@ -345,11 +402,21 @@ export default function Jobs() {
                               </option>
                             </select>
                             <input
+                              disabled={job.salary_time === 'Negotiable'}
                               type="text"
                               name="salary-amount"
                               id="salary-amount"
                               className="pl-2  dark:bg-black/20 bg-white focus:ring-indigo-500  focus:border-indigo-500  block w-1/2 rounded-none rounded-l-md sm:text-sm border-gray-300 dark:border-gray-600"
                               placeholder="Salary"
+                              onChange={(e) =>
+                                setjob((prev) => {
+                                  return {
+                                    ...prev,
+                                    salary_amt: e.target.value,
+                                  };
+                                })
+                              }
+                              value={job.salary_amt}
                             />
                             <span className="dark:bg-black/20 inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 dark:border-gray-600 bg-gray-50 text-gray-500 text-sm">
                               NPR
@@ -369,10 +436,18 @@ export default function Jobs() {
                           </label>
                           <div className="mt-1 flex rounded-md shadow-sm">
                             <select
+                              onChange={(e) =>
+                                setjob((prev) => {
+                                  return { ...prev, job_type: e.target.value };
+                                })
+                              }
                               id="jobtype"
                               name="jobtype"
                               className=" mr-2 block w-full py-2 px-3 border dark:bg-black/20 text-gray-900 dark:text-gray-500 border-gray-300 dark:border-gray-600  rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                             >
+                              <option defaultValue disabled>
+                                Choose Jobtype
+                              </option>
                               <option className="dark:bg-darkcard/90 bg-white ">
                                 Freelance
                               </option>
@@ -401,10 +476,22 @@ export default function Jobs() {
                           </label>
                           <div className="mt-1 flex rounded-md shadow-sm">
                             <select
+                              onChange={(e) =>
+                                setjob((prev) => {
+                                  return {
+                                    ...prev,
+                                    experience: e.target.value,
+                                  };
+                                })
+                              }
                               id="experience"
                               name="experience"
                               className=" mr-2 block w-full py-2 px-3 border dark:bg-black/20 text-gray-900 dark:text-gray-500 border-gray-300 dark:border-gray-600  rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                             >
+                              {' '}
+                              <option defaultValue disabled>
+                                Choose experience
+                              </option>
                               <option className="dark:bg-darkcard/90 bg-white ">
                                 Fresh
                               </option>
@@ -450,10 +537,21 @@ export default function Jobs() {
                           </label>
                           <div className="mt-1 flex rounded-md shadow-sm">
                             <select
+                              onChange={(e) =>
+                                setjob((prev) => {
+                                  return {
+                                    ...prev,
+                                    qualification: e.target.value,
+                                  };
+                                })
+                              }
                               id="qualification"
                               name="qualification"
                               className=" mr-2 block w-full py-2 px-3 border dark:bg-black/20 text-gray-900 dark:text-gray-500 border-gray-300 dark:border-gray-600  rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                             >
+                              <option defaultValue disabled>
+                                Choose qualification
+                              </option>
                               <option className="dark:bg-darkcard/90 bg-white ">
                                 High School or Equivalent
                               </option>
@@ -483,11 +581,11 @@ export default function Jobs() {
                 <div className="bg-transparent flex flex-col h-auto rounded-md">
                   <span>
                     <span className="font-medium font-sans dark:text-gray-400 text-gray-800">
-                      Address/ l
+                      Address/ location
                     </span>
                   </span>
 
-                  <div className="shadow overflow-hidden sm:rounded-md">
+                  <div className="shadow overflow- sm:rounded-md">
                     <div className="px-4 py-5 bg-white dark:bg-darkcard sm:p-6 flex flex-col">
                       <div className="grid grid-cols-6 gap-6">
                         <div className=" [&>*]:text-gray-900  [&>*]:dark:text-gray-300 col-span-6 sm:col-span-3">
@@ -508,7 +606,7 @@ export default function Jobs() {
                             className=" appearance-none mt-1 block w-full py-2 px-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-black/20 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                           >
                             <option
-                              selected
+                              defaultValue
                               className="dark:bg-darkcard/90 bg-white "
                             >
                               Nepal
@@ -527,19 +625,26 @@ export default function Jobs() {
                             </span>
                           </label>
                           <select
+                            onChange={(e) =>
+                              setjob((prev) => {
+                                return { ...prev, state: e.target.value };
+                              })
+                            }
                             id="state"
                             name="state"
                             autoComplete="size-of-company"
                             required
                             className=" appearance-none mt-1 block w-full py-2 px-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-black/20 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                           >
+                            <option defaultValue disabled>
+                              Choose state
+                            </option>
                             <option className="dark:bg-darkcard/90 bg-white ">
                               Province No. 1
                             </option>
                             <option className="dark:bg-darkcard/90 bg-white ">
                               Madhesh Province
                             </option>
-
                             <option className="dark:bg-darkcard/90 bg-white ">
                               Bagmati Province
                             </option>
@@ -569,6 +674,12 @@ export default function Jobs() {
                             </span>
                           </label>
                           <input
+                            onChange={(e) =>
+                              setjob((prev) => {
+                                return { ...prev, city: e.target.value };
+                              })
+                            }
+                            value={job.city}
                             type="text"
                             name="city"
                             id="city"
@@ -588,6 +699,12 @@ export default function Jobs() {
                             </span>
                           </label>
                           <input
+                            onChange={(e) =>
+                              setjob((prev) => {
+                                return { ...prev, address: e.target.value };
+                              })
+                            }
+                            value={job.address}
                             type="text"
                             name="address"
                             id="address"
@@ -607,6 +724,12 @@ export default function Jobs() {
                             </span>
                           </label>
                           <input
+                            onChange={(e) =>
+                              setjob((prev) => {
+                                return { ...prev, zipcode: e.target.value };
+                              })
+                            }
+                            value={job.zipcode}
                             type="number"
                             name="zip"
                             id="zip"
@@ -623,7 +746,7 @@ export default function Jobs() {
                           </label>
                           <input
                             type="number"
-                            value={point.latitude}
+                            value={job.latitude}
                             name="latitude"
                             className="mt-1 focus:ring-indigo-500  dark:bg-black/20  bg-white focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 dark:border-gray-600 rounded-md"
                             readOnly
@@ -640,7 +763,7 @@ export default function Jobs() {
                             type="number"
                             name="longitude"
                             id="longitude"
-                            value={point.longitude}
+                            value={job.longitude}
                             autoComplete="zip"
                             className="mt-1 focus:ring-indigo-500  dark:bg-black/20  bg-white focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-600 rounded-md"
                             readOnly

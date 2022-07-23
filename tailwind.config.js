@@ -24,7 +24,8 @@ module.exports = {
 
       animation: {
         animate_right: 'animate_right .5s ease-in-out',
-        animate_left: 'animate_left 1s ease-in-out',
+        animate_left_off: 'animate_left_off 2s ease-in-out',
+        animate_left_on: 'animate_left_on 0.5s ease-in-out',
         blurry: 'blurry 8s infinite ease-in-out',
         scaler: 'scaler 9s infinite  ',
         animate_diagonal_on: 'animate_diagonal_on .3s ease-in-out',
@@ -55,10 +56,15 @@ module.exports = {
           '100%': { transform: 'translate(100%, -100% )' },
         },
 
-        animate_left: {
+        animate_left_on: {
+          '0%': { transform: 'translateX(100%)' },
+
+          '100%': { transform: 'translateX(0%)' },
+        },
+        animate_left_off: {
           '0%': { transform: 'translateX(0%)' },
 
-          '100%': { transform: 'translateX(-1%)' },
+          '100%': { transform: 'translateX(100%)' },
         },
 
         animate_down: {

@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
   return (
     <div>
       <Commandp />
-      {route.pathname === '/' || '/findjob' ? <Navbar /> : ''}
+      {route.pathname === '/' ? <Navbar /> : ''}
 
       {children}
       {route.pathname === '/' ? <Footer /> : ''}

@@ -1,47 +1,110 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
-import Navbar from '../components/Navbar';
 import { CgGoogle, CgFacebook, CgTwitter } from 'react-icons/cg';
 const login = () => {
   const router = useRouter();
+  const [loggeduser, setloggeduser] = useState(false);
   const [user, Setuser] = useState({
     email: '',
     password: '',
   });
+  const [usertype, setusertype] = useState('employee');
   const handleSubmit = async (e) => {
     e.preventDefault();
-    axios.post('http://localhost:3000/api/login', {
+    const post = await axios.post('http://localhost:3000/api/login', {
       email: user.email,
       password: user.password,
+      usertype: usertype,
     });
-    // router
+  };
+  const getprofiles = () => {
+    axios
+      .get('http://localhost:3000/api/profile', { withCredentials: true })
 
-    //   .then((res) => console.log(res))
-    //   .catch((err) => console.log(err));
+      .then((res) => {
+        console.log(res.data);
+        if (res?.data?.success) {
+          setloggeduser(true);
+        } else {
+          setloggeduser(false);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setloggeduser(false);
+      });
   };
 
+  useEffect(() => {
+    getprofiles();
+    console.log('logggedddd', loggeduser);
+  }, []);
+  useEffect(() => {
+    if (loggeduser) {
+      router.push('/');
+    }
+    if (!loggeduser) {
+      router.push('/login');
+    }
+  }, [loggeduser]);
   return (
     <div className="">
       <Head>
         <title>Login</title>
       </Head>
-      <Navbar />
-      <div className=" py-8 h-screen w-screen flex justify-center items-center">
-        <div className="grid items-center md:grid-cols-2 sm:grid-cols-1 grid-cols-1 grid-rows-2 md:grid-rows-1 justify-center    gap-3 md:gap-8 lg:gap-[5rem] text-gray-800">
-          <div className="flex items-center justify-center mb-4 md:mb-0 min-w-[250px] min-h-[250px] max-h-[300px] max-w-[300px] sm:max-w-[300px] md:max-w-[400px] md:max-h-[400px] z-[-1]">
+
+      <div className=" pt-5 h-screen w-full flex justify-center items-center">
+        <div className="grid items-center md:grid-cols-2 sm:grid-cols-1 grid-cols-1  justify-center    gap-3 md:gap-8 lg:gap-[5rem] text-gray-800">
+          <div className="items-center justify-center mb-1 md:mb-0 min-w-[250px] min-h-auto  hidden md:flex md:max-w-[400px] md:max-h-[200px] z-[-1]">
             <Image
               src={require('../images/draw2.svg')}
               className="object-contain rounded-md"
               alt={''}
             />
           </div>
-          <div className="min-w-[300px] max-w-[300px] flex items-center justify-center">
+          <div className="min-w-[300px] bg-gray-300 dark:bg-darkcard p-5 rounded-xl w-[350px] max-w-[350px] flex items-center justify-center">
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
+                <div className="flex items-center justify-center mb-4 ">
+                  <Image
+                    className="object-contain "
+                    src={require('../images/logo3.png')}
+                    width={135}
+                    height={45}
+                    alt={'logo'}
+                  />
+                </div>
+                <div className="flex justify-between items-center mb-4 gap-3">
+                  <div
+                    onClick={() => {
+                      setusertype('employee');
+                    }}
+                    className={`bg-gray-200 p-3 rounded-xl font-bold font-sans text-sm text-center text-gray-700  transition-all duration-400 cursor-pointer ${
+                      usertype == 'employee'
+                        ? 'bg-indigo-700 text-white'
+                        : 'hover:bg-indigo-200 hover:text-black'
+                    }`}
+                  >
+                    Login as Freelancer
+                  </div>
+                  <div
+                    onClick={() => {
+                      setusertype('employer');
+                    }}
+                    className={`bg-gray-200 p-3 rounded-lg font-bold font-sans text-sm text-center text-gray-700  transition-all duration-400 cursor-pointer ${
+                      usertype == 'employer'
+                        ? 'bg-indigo-700 text-white'
+                        : 'hover:bg-indigo-200 hover:text-black'
+                    }`}
+                  >
+                    Login as Employers
+                  </div>
+                </div>
+
                 <input
                   type="text"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
@@ -100,7 +163,7 @@ const login = () => {
                 Sign in
               </button>
               <div className="dark:text-white text-sm flex mt-2">
-                Don't have a account?{' '}
+                Don't have a account?
                 <Link href="/signup">
                   <div className="pl-1 text-indigo-600">Register</div>
                 </Link>

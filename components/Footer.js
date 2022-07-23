@@ -61,9 +61,9 @@ import Link from 'next/link';
 
 const Footer = () => {
   return (
-    <div className="relative  bg-deep-purple-accent-400 dark:bg-deep-purple-900">
+    <div className="relative font-nunito text-sm bg-deep-purple-accent-400 dark:bg-darkback">
       <svg
-        className="absolute top-0 w-full h-6 -mt-5 sm:-mt-10 sm:h-16 dark:text-deep-purple-900 text-deep-purple-accent-400"
+        className="absolute top-0 w-full h-6 -mt-5 sm:-mt-10 sm:h-16 dark:text-darkback text-deep-purple-accent-400"
         preserveAspectRatio="none"
         viewBox="0 0 1440 54"
       >
@@ -73,21 +73,21 @@ const Footer = () => {
         />
       </svg>
       <div className="px-4 pt-12 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
-        <div className="grid gap-16 row-gap-10 mb-8 lg:grid-cols-6 ">
+        <div className="grid gap-10 row-gap-10 mb-8 lg:grid-cols-6 ">
           <div className="md:max-w-md lg:col-span-2 flex flex-col mx-auto">
             <div className="flex items-center justify-center  inset-x-0 mx-auto  ">
               <div className="min-w-[82px] cursor-pointer select-none flex object-contain ">
                 <Image
                   className="object-contain"
-                  src={require('../images/footerimg.png')}
+                  src={require('../images/logo3.png')}
                   width={150}
                   height={100}
                   alt={'logo'}
                 />
               </div>
             </div>
-            <div className="mt-4 lg:max-w-sm">
-              <p className="text-sm text-deep-purple-100">
+            <div className="mt-1 lg:max-w-sm">
+              <p className="text-xs text-center px-16 text-deep-purple-100">
                 JOB XA is the freelancing platform for the modern day
                 freelancers and employers who want to find the best talent for
                 their projects.

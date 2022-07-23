@@ -11,3 +11,13 @@ export default function MyApp({ Component, pageProps }) {
     </ThemeProvider>
   );
 }
+
+// const router = useRouter();
+// if (router.pathname.startsWith("/employee") && role !== "employee") {
+//   allowed = false;
+// }
+// if (router.pathname.startsWith("/customer") && role !== "customer") {
+//   allowed = false;
+// }
+// const ComponentToRender = allowed ? Component : Home;
+// return <ComponentToRender {...pageProps} />

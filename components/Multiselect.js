@@ -1,14 +1,14 @@
 import { Dialog, Transition, Combobox } from '@headlessui/react';
 import { Fragment, useEffect, useState } from 'react';
-
+import { skills } from '../variables/skills';
 const Multiselect = ({ setjob }) => {
-  const [items, setItems] = useState(['john', 'milos', 'steph', 'kathreine']);
+  const [items, setItems] = useState(skills);
   const [selectedItems, setSelected] = useState([]);
   let [isOpen, setIsOpen] = useState(true);
   const [query, setquery] = useState('');
 
   const filterdata = query
-    ? items.filter((data) => data.toLowerCase().includes(query.toLowerCase()))
+    ? skills.filter((data) => data.toLowerCase().includes(query.toLowerCase()))
     : [];
 
   const addTag = (item) => {
@@ -23,8 +23,8 @@ const Multiselect = ({ setjob }) => {
   };
 
   useEffect(() => {
-    setjob({
-      skills: selectedItems,
+    setjob((prev) => {
+      return { ...prev, skills: selectedItems };
     });
   }, [selectedItems]);
 
@@ -47,7 +47,7 @@ const Multiselect = ({ setjob }) => {
             as="div"
             onChange={(data) => {
               addTag(data);
-              setquery(' ');
+              setquery('');
             }}
             className="relative divide-y dark:divide-gray-700 divide-gray-300  overflow-hidden w-full dark:bg-footer bg-gray-200  mx-auto shadow-2xl ring-1 ring-black/10"
           >

@@ -4,7 +4,7 @@ import { BiShow, BiHide } from 'react-icons/bi';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
-import Navbar from '../components/Navbar';
+
 import { CgGoogle, CgFacebook, CgTwitter } from 'react-icons/cg';
 import axios from 'axios';
 import { GiCheckMark } from 'react-icons/gi';
@@ -70,16 +70,14 @@ const signup = () => {
       .catch((err) => {
         console.log(err);
         setloggeduser(false);
-        alert(err.response.data.message);
       });
   };
-  console.log(loggeduser, 'outside');
+
   useEffect(() => {
     getprofiles();
     console.log('logggedddd', loggeduser);
   }, []);
   useEffect(() => {
-    console.log(loggeduser, ' inside use effect');
     if (loggeduser) {
       router.push('/');
     }
@@ -142,7 +140,7 @@ const signup = () => {
         setsucess(res.data.msg);
         seterror('');
       })
-      .catch((err) => console.log(err.response.data.msg));
+      .catch((err) => console.log(err?.response?.data?.msg));
     if (error) {
       console.log(error);
     }
@@ -155,7 +153,7 @@ const signup = () => {
           <Head>
             <title>Sign up</title>
           </Head>
-          <Navbar />
+
           <div className=" pt-8 h-screen w-screen flex justify-center items-center">
             <div className="grid items-center md:grid-cols-2 sm:grid-cols-1 grid-cols-1 grid-rows-1 md:grid-rows-1 justify-center    gap-3 md:gap-8 lg:gap-[5rem] text-gray-800">
               <div className=" hidden md:flex items-center justify-center mb-4 md:mb-0 min-w-[250px] min-h-[250px] max-h-[300px] max-w-[300px] sm:max-w-[300px] md:max-w-[400px] md:max-h-[400px] z-[-1]">

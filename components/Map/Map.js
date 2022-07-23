@@ -43,8 +43,22 @@ const Maps = ({ setpoint }) => {
       ref.trigger();
     }
   }, []);
-  console.log(marker);
+
+  // useEffect(() => {
+  //   props.setpoint({
+  //     latitude: marker.latitude,
+  //     longitude: marker.longitude,
+  //   });
+  // }, [marker, props.setpoint]);
+
   useEffect(() => {
+    // props.setjob((prev) => {
+    //   return {
+    //     ...prev,
+    //     latitude: marker.latitude,
+    //     longitude: marker.longitude,
+    //   };
+    // });
     setpoint({
       latitude: marker.latitude,
       longitude: marker.longitude,

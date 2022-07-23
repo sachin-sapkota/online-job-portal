@@ -28,7 +28,7 @@ const Navbar = () => {
   };
 
   const { data, error, isValidating } = useSWR(
-    'http://localhost:3000/api/userprofile',
+    'http://localhost:3000/api/user/userprofile',
     async (apiURL) => await fetch(apiURL).then((res) => res.json())
   );
   console.log(data);
@@ -83,14 +83,14 @@ const Navbar = () => {
       <div
         className={`${
           Navbar
-            ? ` w-full  px-3 rounded-b-md justify-between sm:justify-between md:justify-center transition duration-300 bg-deep-purple-900 shadow-purple-900/60 bg-opacity-80 backdrop-blur-sm ease-in flex h-[60px]  fixed text-white dark:bg-black/40 shadow-2xl z-[100]`
+            ? ` w-full  px-3 rounded-b-md justify-between sm:justify-between md:justify-center transition duration-300 bg-gray-400 bg-opacity-90 backdrop-blur-sm ease-in flex h-[60px]  fixed  dark:bg-black/40 shadow-2xl z-[100]`
             : 'flex justify-between sm:justify-between md:justify-center bg-transparent absolute  h-[60px]  w-full mt-1 pr-2  '
         } select-none  `}
       >
         <div className="inset-y-0 my-auto ">
           <Image
             className="object-contain"
-            src={require('../images/footerimg.png')}
+            src={require('../images/logo3.png')}
             width={125}
             height={40}
             alt={'logo'}
@@ -99,12 +99,12 @@ const Navbar = () => {
         <div className="  mx-1 flex md:hidden sm:flex order-last justify-center items-center ">
           <GiHamburgerMenu className="cursor-pointer " onClick={toggle} />
         </div>
-        <div className="select-none hidden sm:hidden md:flex-1 md:flex justify-center items-center gap-4 font-sans font-semibold text-sm">
+        <div className="select-none hidden sm:hidden md:flex-1 md:flex justify-center items-center gap-4 font-nunito font-bold  text-sm">
           <div className=" hover:translate-y-[-1px] cursor-pointer active:text-red-600   ">
             <Link href="/findworker"> Find Worker</Link>
           </div>
           <div className="hover:translate-y-[-1px] cursor-pointer active:text-red-600   ">
-            <Link href="/find work">Find Work</Link>
+            <Link href="/findwork">Find Work</Link>
           </div>
           <div className="hover:translate-y-[-1px] cursor-pointer active:text-red-600   ">
             <Link href="/explore">Explore</Link>
@@ -119,10 +119,10 @@ const Navbar = () => {
         <div
           className={`${
             Ham
-              ? `fixed    md:hidden select-none h-[300px] sm:rounded-bl-[250px] rounded-bl-[180px]  flex flex-col sm:flex-col  order-last  sm:order-last inset-0 left-2/4 uppercase bg-black/60 backdrop-blur-sm   ${
+              ? `fixed    md:hidden select-none h-screen  flex flex-col sm:flex-col  order-last  sm:order-last inset-0 left-1/4 uppercase bg-white dark:bg-darkcard    ${
                   !Navbar ? 'backdrop-blur-sm' : ' '
-                } text-white  justify-center items-center gap-4 font-sans font-semibold text-sm animate-animate_diagonal_on z-[100]  `
-              : 'hidden '
+                }  justify-center items-center gap-5 font-nunito font-bold  text-md animate-animate_left_on z-[100]  `
+              : 'hidden'
           }`}
         >
           <div
@@ -160,7 +160,9 @@ const Navbar = () => {
               Navbar
                 ? 'text-white flex justify-center items-center border-2 font-medium shadow-sm border-indigo-600 rounded-md px-2 hover:bg-indigo-700 hover:text-white  '
                 : 'flex justify-center items-center border-2 font-medium shadow-sm border-indigo-600 rounded-md px-2 hover:bg-indigo-700 hover:text-white text-black dark:text-white'
-            } ${logged ? 'hidden' : ' '} font-bold font-sans whitespace-nowrap 
+            } ${
+              logged ? 'hidden' : ' '
+            } font-nunito font-bold whitespace-nowrap 
    `}
           >
             <Link href="/login"> Login</Link>
@@ -177,14 +179,17 @@ const Navbar = () => {
               logged ? 'flex hover:cursor-pointer z-[10]' : 'hidden'
             }`}
           >
-            <Menu as="div" className="relative inline-block text-left ">
+            <Menu
+              as="div"
+              className="relative inline-block text-left place-self-center"
+            >
               <div>
-                <Menu.Button className="inline-flex w-full justify-center">
+                <Menu.Button className="inline-flex w-full justify-center items-center  ">
                   <Avatar
                     name={data?.name?.split(' ')[0]}
                     size="31px"
                     textSizeRatio={3}
-                    className="rounded-full"
+                    className="rounded-full "
                   ></Avatar>
                 </Menu.Button>
               </div>
@@ -197,27 +202,30 @@ const Navbar = () => {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-195"
               >
-                <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                  <div className="flex flex-col items-center py-2 gap-1">
+                <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-200 dark:divide-gray-700 rounded-md shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none bg-white dark:bg-darkcard">
+                  <div className="flex flex-col items-center py-2 gap-1 bg-gray-300">
                     <Avatar
                       name={data?.name?.split(' ')[0]}
                       size="40px"
                       textSizeRatio={3}
                       className="rounded-full"
                     ></Avatar>
-                    <div className="capitalize font-semibold text-gray-800">
+                    <div className="capitalize font-semibold text-gray-800 dark:text-gray-400">
                       {data?.name}
                     </div>
+                    <span className="text-sm text-gray-600 dark:text-gray-500">
+                      @{data?.username}
+                    </span>
                   </div>
 
-                  <div className="px-1 py-1 bg-white  ">
+                  <div className="px-1 py-1 bg-gray-200 dark:bg-darkcard rounded-b-md  font-nunito ">
                     <Menu.Item>
                       {({ active }) => (
                         <div
                           className={`${
                             active
                               ? 'bg-indigo-600 text-white'
-                              : 'text-gray-900'
+                              : 'dark:text-gray-400 text-gray-800'
                           }  flex w-full items-center group-hover:bg-indigo-800 hover:cursor-pointer hover:bg-indigo-300   rounded-md px-2 py-2 text-sm`}
                         >
                           <Link href="/employee/profile">Dashboard</Link>
@@ -230,7 +238,7 @@ const Navbar = () => {
                           className={`${
                             active
                               ? 'bg-indigo-600 text-white'
-                              : 'text-gray-900'
+                              : 'dark:text-gray-400 text-gray-800'
                           }  flex w-full items-center group-hover:bg-indigo-800  hover:bg-indigo-300   rounded-md px-2 py-2 text-sm`}
                         >
                           <Link href="/employee/profile">My Profile</Link>
@@ -243,7 +251,7 @@ const Navbar = () => {
                           className={`${
                             active
                               ? 'bg-indigo-600 text-white'
-                              : 'text-gray-900'
+                              : 'dark:text-gray-400 '
                           }  flex w-full items-center group-hover:bg-indigo-800 hover:cursor-pointer hover:bg-indigo-300   rounded-md px-2 py-2 text-sm`}
                         >
                           <Link href="/employee/profile">Applied Jobs</Link>
@@ -257,7 +265,7 @@ const Navbar = () => {
                           className={`${
                             active
                               ? 'bg-indigo-600 text-white'
-                              : 'text-gray-900'
+                              : 'dark:text-gray-400 text-gray-800'
                           }  flex w-full items-center group-hover:bg-indigo-800 hover:cursor-pointer hover:bg-indigo-300   rounded-md px-2 py-2 text-sm`}
                         >
                           <Link href="/employee/profile">Favourite Jobs</Link>
@@ -271,7 +279,7 @@ const Navbar = () => {
                           className={`${
                             active
                               ? 'bg-indigo-600 text-white'
-                              : 'text-gray-900'
+                              : 'dark:text-gray-400 text-gray-800'
                           }  flex w-full items-center group-hover:bg-indigo-800 hover:cursor-pointer hover:bg-indigo-300   rounded-md px-2 py-2 text-sm`}
                         >
                           Logout
