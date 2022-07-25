@@ -96,9 +96,9 @@ export default function Dashboard() {
           <div className="bg-white min-w-[220px] w-auto  max-h-[30vw] rounded-md pt-4 px-5 hover:overflow-scroll overflow-hidden no-scrollbar hidden md:hidden lg:flex lg:flex-col dark:bg-gray-800">
             <div className="text-sm  font-medium font-sans ">Notifications</div>
             <div className="flex flex-col gap-4 text-xs mt-2 ">
-              {message.map((message) => {
+              {message.map((message, i) => {
                 const a = (
-                  <div className="flex items-center ">
+                  <div className="flex items-center " key={i}>
                     <div className="rounded-full min-w-[30px] min-h-[30px] w-7 h-7  flex items-center justify-center  bg-gray-200 text-indigo-600">
                       <RiSuitcaseLine />
                     </div>
@@ -119,9 +119,12 @@ export default function Dashboard() {
             Jobs Applied Recently
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 mt-5 md:px-6 px-2 gap-3  ">
-            {appliedjobs.map((b) => {
+            {appliedjobs.map((b, i) => {
               return (
-                <div className="md:px-8  h-[80px] border-[1px] backdrop-blur-sm dark:bg-gray-700 border-indigo-100 rounded-lg p-2 flex justify-start gap-3 items-center hover:shadow-xl hover:translate-y-[-2px] transform-gpu transition-all duration-300 ease-in-out   ">
+                <div
+                  key={i}
+                  className="md:px-8  h-[80px] border-[1px] backdrop-blur-sm dark:bg-gray-700 border-indigo-100 rounded-lg p-2 flex justify-start gap-3 items-center hover:shadow-xl hover:translate-y-[-2px] transform-gpu transition-all duration-300 ease-in-out   "
+                >
                   <div>{b.icons}</div>
                   <div className="flex  flex-col font-sans font-medium">
                     <span className="text-sm">{b.title}</span>

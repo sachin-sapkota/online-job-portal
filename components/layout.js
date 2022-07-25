@@ -5,12 +5,12 @@ import Commandp from './Commandp';
 
 const Layout = ({ children }) => {
   const route = useRouter();
-  console.log(route);
 
+  const Navbarlinks = ['/', '/findjob', '/blogs', '/about', '/findpeople'];
   return (
     <div>
       <Commandp />
-      {route.pathname === '/' ? <Navbar /> : ''}
+      {Navbarlinks.includes(route.pathname) ? <Navbar /> : ''}
 
       {children}
       {route.pathname === '/' ? <Footer /> : ''}

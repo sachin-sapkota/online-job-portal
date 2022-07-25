@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import DashLayout from '../../components/employer/Dashlayout';
 import Multiselect from '../../components/Multiselect';
 import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 export default function Jobs() {
   const [items, setItems] = useState(['john', 'milos', 'steph', 'kathreine']);
   const [defaultValueItems, setdefaultValue] = useState([]);
@@ -70,17 +71,45 @@ export default function Jobs() {
 
   const handlesubmit = (e) => {
     e.preventDefault();
-    // localStorage.clear();
+    localStorage.removeItem('job');
     axios
       .post('http://localhost:3000/api/employer/postjob', job)
 
       .then((res) => {
+        if (res?.data?.success) {
+          toast.success('Job Posted successfully!');
+        }
         console.log(res);
       })
       .catch((err) => console.log(err));
   };
   return (
     <div>
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        gutter={8}
+        containerClassName=""
+        containerStyle={{}}
+        toastOptions={{
+          // Define default options
+          className: '',
+          duration: 5000,
+          style: {
+            background: '#363636',
+            color: '#fff',
+          },
+
+          // Default options for specific types
+          success: {
+            duration: 3000,
+            theme: {
+              primary: 'green',
+              secondary: 'black',
+            },
+          },
+        }}
+      />
       <div className="grid grid-flow-row grid-cols-1 mx-1 md:mx-10 p-3 ">
         <div className=" flex flex-col">
           <div className="text-xl sm:text-2xl md:text-3xl font-semibold mt-4 font-sans">

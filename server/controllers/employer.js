@@ -20,16 +20,20 @@ exports.postjob = async (req, res) => {
     address: req.body.address,
     latitude: req.body.latitude,
     longitude: req.body.longitude,
+    city: req.body.city,
   };
-  console.log(job, 'posting dfata');
+
   const id = req.user.id;
+  const employer_name = req.user.name;
   const randomid = randomUUID();
   db1.execute(
-    `INSERT INTO job (id,employer_id,  title, description, deadline, sector, job_type, skills, salary_time, salary_amt, experience, qualification, address, latitude,longitude) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+    `INSERT INTO job (id,employer_id, employer_name,  title,city, description, deadline, sector, job_type, skills, salary_time, salary_amt, experience, qualification, address, latitude,longitude,post_date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now())`,
     [
       randomid,
       id,
+      employer_name,
       job.title,
+      job.city,
       job.description,
       job.deadline,
       job.sector,

@@ -52,3 +52,30 @@ exports.getuserbyusername = async (req, res) => {
     }
   );
 };
+
+exports.searchjobByName = async (req, res) => {
+  const name = req.query.name;
+  console.log(name, 'in searchjobByName');
+  db1.execute(
+    `SELECT * FROM job WHERE title LIKE ? `,
+    ['%' + name + '%'],
+    (err, result) => {
+      if (result.length) {
+        console.log(result);
+        return res.send(result);
+      } else {
+        return res.send({ msg: 'name not found', success: false });
+      }
+    }
+  );
+};
+
+exports.getalljobs = async (req, res) => {
+  db1.execute(`SELECT * FROM job `, [], (err, result) => {
+    if (result.length) {
+      return res.send(result);
+    } else {
+      return res.send({ msg: 'no jobs found', success: false });
+    }
+  });
+};
