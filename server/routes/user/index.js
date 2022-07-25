@@ -4,6 +4,7 @@ const {
   getuserprofile,
   searchjobByName,
   getalljobs,
+  getjobbyid,
 } = require('../../controllers/user');
 const { Login, Register, Logout } = require('../../controllers/signwork');
 const permission = require('../../middleware/permission');
@@ -16,4 +17,5 @@ router.post('/logout', Logout);
 router.get('/userprofile', authenticate, getuserprofile);
 router.get('/searchjobByName', searchjobByName);
 router.get('/getalljobs', getalljobs);
+router.get('/getjobbyid/:id', getjobbyid);
 module.exports = router;

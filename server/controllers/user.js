@@ -79,3 +79,14 @@ exports.getalljobs = async (req, res) => {
     }
   });
 };
+
+exports.getjobbyid = async (req, res) => {
+  const id = req.params.id;
+  db1.execute(`SELECT * FROM job WHERE id=?`, [id], (err, result) => {
+    if (result.length) {
+      return res.send(result);
+    } else {
+      return res.send({ msg: 'no jobs found', success: false });
+    }
+  });
+};
