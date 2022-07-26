@@ -11,6 +11,7 @@ import { HiOutlineLocationMarker } from 'react-icons/hi';
 import { AiOutlineFieldTime } from 'react-icons/ai';
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import Link from 'next/link';
+
 const findjob = () => {
   const { mutate } = useSWRConfig();
   const router = useRouter();
@@ -95,13 +96,13 @@ const findjob = () => {
           }
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => router.push('/login'));
 
     mutate('http://localhost:3000/api/employee/getfavjob');
   };
 
   const favjobs =
-    getfavjobs.data[0]?.job_id !== undefined
+    getfavjobs?.data?.job_id !== undefined
       ? [getfavjobs.data.map((a) => a.job_id)][0]
       : [];
   console.log(favjobs);
@@ -131,7 +132,7 @@ const findjob = () => {
         }}
       />
 
-      <div className="pt-10 h-[150px] min-h-[150px] w-full flex items-center justify-center bg-gray-200  dark:bg-darkback mt-10">
+      <div className="pt-10 h-[180px] min-h-[180px] w-full flex items-center justify-center bg-gray-200  dark:bg-darkback ">
         <form>
           <div className="relative ">
             <BiSearch className="absolute left-2 w-6 h-6 inset-y-0 my-auto text-gray-500 " />
@@ -170,7 +171,7 @@ const findjob = () => {
               <div className="relative " key={i}>
                 <div
                   onClick={() => like(b.id)}
-                  className="absolute z-10 top-3 right-3 cursor-pointer flex-none"
+                  className="absolute z-10 top-3 right-3 cursor-cell flex-none"
                 >
                   {favjobs.includes(b.id) ? (
                     <BsBookmarkFill className="w-4 h-4 " />

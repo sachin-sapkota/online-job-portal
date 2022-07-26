@@ -15,8 +15,15 @@ exports.userprofile = async (req, res) => {
 };
 
 exports.getuserprofile = async (req, res) => {
-  if (Object.keys(req.body).length === 0) {
-    return res.status(400).send({ success: false });
+  if (req.user.id === undefined) {
+    return res.status(401).send({ success: false });
+  } else {
+    return res.send({ data: req.user, success: true });
+  }
+};
+exports.getuserstate = async (req, res) => {
+  if (req.user.id === undefined) {
+    return res.status(401).send({ success: false });
   } else {
     return res.send({ success: true });
   }
@@ -89,4 +96,21 @@ exports.getjobbyid = async (req, res) => {
       return res.send({ msg: 'no jobs found', success: false });
     }
   });
+};
+
+exports.getemployerdetail = async (req, res) => {
+  const id = req.params.id;
+  console.log(id, 'idddddddddddddd');
+  db1.execute(
+    `SELECT name, address, est_data, sector,number, email, website, facebook, whatsapp, linkedin, twitter  FROM employer WHERE id=?`,
+    [id],
+    (err, result) => {
+      console.log(result);
+      if (result?.length) {
+        return res.send(result);
+      } else {
+        return res.send({ msg: 'employer not found', success: false });
+      }
+    }
+  );
 };

@@ -11,7 +11,7 @@ import axios from 'axios';
 import Avatar from 'react-avatar';
 import useSWR from 'swr';
 import { Menu, Transition } from '@headlessui/react';
-
+import toast, { Toaster } from 'react-hot-toast';
 const Navbar = () => {
   const [mounted, SetMounted] = useState(false);
   const { theme, setTheme } = useTheme();
@@ -26,25 +26,16 @@ const Navbar = () => {
       setNavbar(false);
     }
   };
-
-  const { data, error, isValidating } = useSWR(
-    'http://localhost:3000/api/user/userprofile',
-    async (apiURL) => await fetch(apiURL).then((res) => res.json())
-  );
-  console.log(data);
-  const [logged, setLogged] = useState(typeof data?.name !== 'undefined');
-
   useEffect(() => {
-    async function logger() {
-      if (typeof data?.name !== typeof undefined) {
-        setLogged(true);
-      } else {
-        setLogged(false);
-      }
-    }
-
-    logger();
-  }, [data, error]);
+    toast(theme + 'mode enabled!', {
+      icon: '👏',
+      style: {
+        borderRadius: '10px',
+        background: '#333',
+        color: '#fff',
+      },
+    });
+  }, [theme]);
 
   useEffect(() => {
     window.addEventListener('scroll', changeBackground);
@@ -55,6 +46,24 @@ const Navbar = () => {
       setHam(false);
     }
   }, []);
+  const { data, error, isValidating } = useSWR(
+    'http://localhost:3000/api/user/userprofile',
+    async (apiURL) => await fetch(apiURL).then((res) => res.json())
+  );
+
+  const [logged, setLogged] = useState(typeof data?.name !== 'undefined');
+
+  useEffect(() => {
+    async function logger() {
+      if (typeof data?.data?.name !== typeof undefined) {
+        setLogged(true);
+      } else {
+        setLogged(false);
+      }
+    }
+
+    logger();
+  }, [data, error]);
 
   useEffect(() => {
     document.addEventListener('keydown', escFunction);
@@ -72,14 +81,38 @@ const Navbar = () => {
   }
   const handleLogout = async (e) => {
     e.preventDefault();
-    await axios.post('http://localhost:3000/api/logout', {
+    await axios.post('http://localhost:3000/api/user/logout', {
       withCredentials: true,
     });
     router.reload();
   };
+  console.log(logged, 'logged');
 
   return (
     <div className="relative ">
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        gutter={6}
+        containerClassName=""
+        containerStyle={{}}
+        toastOptions={{
+          className: '',
+          duration: 1000,
+          style: {
+            background: '#363636',
+            color: '#fff',
+          },
+
+          success: {
+            duration: 3000,
+            theme: {
+              primary: 'green',
+              secondary: 'black',
+            },
+          },
+        }}
+      />
       <div
         className={`${
           Navbar
@@ -100,10 +133,19 @@ const Navbar = () => {
           <GiHamburgerMenu className="cursor-pointer " onClick={toggle} />
         </div>
         <div className="select-none hidden sm:hidden md:flex-1 md:flex justify-center items-center gap-4 font-nunito font-bold  text-sm">
-          <div className=" hover:translate-y-[-1px] cursor-pointer active:text-red-600   ">
+          <div
+            className={`${
+              data?.data?.usertype === 'employee' ? 'hidden' : ''
+            } hover:translate-y-[-1px] cursor-pointer active:text-red-600   `}
+          >
             <Link href="/findworker"> Find Worker</Link>
           </div>
-          <div className="hover:translate-y-[-1px] cursor-pointer active:text-red-600   ">
+          <div
+            className={`${
+              data?.data?.usertype === 'employer' ? 'hidden' : ''
+            } hover:translate-y-[-1px] cursor-pointer active:text-red-600   `}
+          >
+            {' '}
             <Link href="/findwork">Find Work</Link>
           </div>
           <div className="hover:translate-y-[-1px] cursor-pointer active:text-red-600   ">
@@ -170,7 +212,9 @@ const Navbar = () => {
 
           <button
             className=" rounded-full  p-1 md:order-first transition ease-in-out duration-200"
-            onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+            onClick={() => {
+              setTheme(theme === 'light' ? 'dark' : 'light');
+            }}
           >
             {theme === 'light' ? <MdDarkMode /> : <RiSunFill />}
           </button>
@@ -186,7 +230,7 @@ const Navbar = () => {
               <div>
                 <Menu.Button className="inline-flex w-full justify-center items-center  ">
                   <Avatar
-                    name={data?.name?.split(' ')[0]}
+                    name={data?.data?.name?.split(' ')[0]}
                     size="31px"
                     textSizeRatio={3}
                     className="rounded-full "
@@ -202,19 +246,19 @@ const Navbar = () => {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-195"
               >
-                <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-200 dark:divide-gray-700 rounded-md shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none bg-white dark:bg-darkcard">
-                  <div className="flex flex-col items-center py-2 gap-1 bg-gray-300">
+                <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-200 overflow-hidden dark:divide-gray-700 rounded-md shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none ">
+                  <div className="flex flex-col items-center py-2 gap-1 bg-gray-300/70 dark:bg-black/70 backdrop-blur-sm">
                     <Avatar
-                      name={data?.name?.split(' ')[0]}
+                      name={data?.data?.name?.split(' ')[0]}
                       size="40px"
                       textSizeRatio={3}
                       className="rounded-full"
                     ></Avatar>
-                    <div className="capitalize font-semibold text-gray-800 dark:text-gray-400">
-                      {data?.name}
+                    <div className="capitalize font-semibold text-gray-800 dark:text-gray-300">
+                      {data?.data?.name}
                     </div>
                     <span className="text-sm text-gray-600 dark:text-gray-500">
-                      @{data?.username}
+                      @{data?.data?.username}
                     </span>
                   </div>
 

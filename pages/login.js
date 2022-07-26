@@ -5,6 +5,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import { CgGoogle, CgFacebook, CgTwitter } from 'react-icons/cg';
+import toast from 'react-hot-toast';
 const login = () => {
   const router = useRouter();
   const [loggeduser, setloggeduser] = useState(false);
@@ -15,15 +16,27 @@ const login = () => {
   const [usertype, setusertype] = useState('employee');
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const post = await axios.post('http://localhost:3000/api/login', {
-      email: user.email,
-      password: user.password,
-      usertype: usertype,
-    });
+    await axios
+      .post('http://localhost:3000/api/user/login', {
+        email: user.email,
+        password: user.password,
+        usertype: usertype,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+        err?.response?.data.msg !== undefined
+          ? toast.error(err.response.data.msg)
+          : '';
+      });
   };
   const getprofiles = () => {
     axios
-      .get('http://localhost:3000/api/profile', { withCredentials: true })
+      .get('http://localhost:3000/api/user/userstate', {
+        withCredentials: true,
+      })
 
       .then((res) => {
         console.log(res.data);
@@ -35,6 +48,7 @@ const login = () => {
       })
       .catch((err) => {
         console.log(err);
+        // err?.data?.msg !== undefined ? toast.error(err.data.msg) : '';
         setloggeduser(false);
       });
   };

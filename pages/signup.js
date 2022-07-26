@@ -10,7 +10,7 @@ import axios from 'axios';
 import { GiCheckMark } from 'react-icons/gi';
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
-
+import toast, { Toaster } from 'react-hot-toast';
 const email_regex = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
 const password_regex = /^(?=.*?[a-z])(?=.*?[0-9]).{8,}$/;
 const username_regex = /^(?=.*?[a-z])(?=.*?[0-9]).{4,}$/;
@@ -34,7 +34,7 @@ const signup = () => {
   const [sucess, setsucess] = useState('');
 
   const userRef = useRef();
-  const errRef = useRef();
+
   const [validusername, setvalidusername] = useState(false);
   const [usernamefocus, setusernamefocus] = useState(false);
 
@@ -55,40 +55,9 @@ const signup = () => {
 
   const [loggeduser, setloggeduser] = useState(false);
 
-  const getprofiles = () => {
-    axios
-      .get('http://localhost:3000/api/profile', { withCredentials: true })
+  const fetcher = (url) => fetch(url).then((res) => res.json());
+  const data = useSWR('http://localhost:3000/api/user/userstate', fetcher);
 
-      .then((res) => {
-        console.log(res.data);
-        if (res.data.success) {
-          setloggeduser(true);
-        } else {
-          setloggeduser(false);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        setloggeduser(false);
-      });
-  };
-
-  useEffect(() => {
-    getprofiles();
-    console.log('logggedddd', loggeduser);
-  }, []);
-  useEffect(() => {
-    if (loggeduser) {
-      router.push('/');
-    }
-    if (!loggeduser) {
-      router.push('/signup');
-    }
-  }, [loggeduser]);
-
-  useEffect(() => {
-    loggeduser != typeof undefined ? userRef.current.focus() : null;
-  }, []);
   useEffect(() => {
     const result = name_regex.test(user.name);
 
@@ -98,7 +67,18 @@ const signup = () => {
     const result = number_regex.test(user.number);
     setvalidnumber(result);
   }, [user.number]);
-
+  useEffect(() => {
+    async function getData() {
+      if (typeof data?.data !== typeof undefined) {
+        if (data.data?.success) {
+          setloggeduser(true);
+        } else {
+          setloggeduser(false);
+        }
+      }
+    }
+    getData();
+  }, [data.data]);
   useEffect(() => {
     const result = email_regex.test(user.email);
     setvalidemail(result);
@@ -126,25 +106,37 @@ const signup = () => {
     e.preventDefault();
 
     axios
-      .post('http://localhost:3000/api/users', {
-        name: user.name,
-        email: user.email,
-        password: user.password,
-        confPassword: user.confpassword,
-        usertype: usertype,
-        number: user.number,
-        username: user.username,
-      })
+      .post(
+        'http://localhost:3000/api/user/register',
+        {
+          name: user.name,
+          email: user.email,
+          password: user.password,
+          confPassword: user.confpassword,
+          usertype: usertype,
+          number: user.number,
+          username: user.username,
+        },
+        { useCredential: true }
+      )
 
       .then((res) => {
-        setsucess(res.data.msg);
-        seterror('');
+        console.log(res.data.msg, 'signup success');
       })
-      .catch((err) => console.log(err?.response?.data?.msg));
+      .catch((err) =>
+        err?.response?.data?.msg !== undefined
+          ? toast.error(err?.response?.data?.msg)
+          : ''
+      );
     if (error) {
       console.log(error);
     }
   };
+  if (data?.data?.success) {
+    router.push('/');
+  }
+
+  if (data.error) return <div> error occured </div>;
 
   return (
     <>
@@ -153,8 +145,30 @@ const signup = () => {
           <Head>
             <title>Sign up</title>
           </Head>
+          <Toaster
+            position="top-center"
+            reverseOrder={false}
+            gutter={6}
+            containerClassName=""
+            containerStyle={{}}
+            toastOptions={{
+              className: '',
+              duration: 1000,
+              style: {
+                background: '#363636',
+                color: '#fff',
+              },
 
-          <div className=" pt-8 h-screen w-screen flex justify-center items-center">
+              success: {
+                duration: 3000,
+                theme: {
+                  primary: 'green',
+                  secondary: 'black',
+                },
+              },
+            }}
+          />
+          <div className=" pt-8 w-full  h-screen  flex justify-center items-center bg-whiteback dark:bg-darkback">
             <div className="grid items-center md:grid-cols-2 sm:grid-cols-1 grid-cols-1 grid-rows-1 md:grid-rows-1 justify-center    gap-3 md:gap-8 lg:gap-[5rem] text-gray-800">
               <div className=" hidden md:flex items-center justify-center mb-4 md:mb-0 min-w-[250px] min-h-[250px] max-h-[300px] max-w-[300px] sm:max-w-[300px] md:max-w-[400px] md:max-h-[400px] z-[-1]">
                 <Image
@@ -163,7 +177,16 @@ const signup = () => {
                   alt={''}
                 />
               </div>
-              <div className="min-w-[300px] max-w-[300px] flex items-center justify-center">
+              <div className="min-w-[350px] p-5 py-8 rounded-xl dark:bg-darkback max-w-[360px] flex flex-col items-center justify-center">
+                <div className="flex items-center justify-center mb-4 ">
+                  <Image
+                    className="object-contain "
+                    src={require('../images/logo3.png')}
+                    width={135}
+                    height={45}
+                    alt={'logo'}
+                  />
+                </div>
                 <form onSubmit={handleSubmit}>
                   <div className="flex justify-between items-center mb-4">
                     <div
@@ -383,7 +406,10 @@ const signup = () => {
                           placeholder="Confirm Password"
                           onChange={(e) =>
                             Setuser((prev) => {
-                              return { ...prev, confpassword: e.target.value };
+                              return {
+                                ...prev,
+                                confpassword: e.target.value,
+                              };
                             })
                           }
                           required

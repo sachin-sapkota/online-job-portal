@@ -5,7 +5,7 @@ const authenticate = (req, res, next) => {
   const token = req.cookies.accessToken;
   console.log(token);
   if (typeof token === 'undefined') {
-    res.status(401);
+    res.status(401).json({ success: false, msg: 'user not logged in ' });
   } else {
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, authData) => {
       if (err) {

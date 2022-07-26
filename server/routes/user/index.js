@@ -2,9 +2,11 @@ const express = require('express');
 
 const {
   getuserprofile,
+  getuserstate,
   searchjobByName,
   getalljobs,
   getjobbyid,
+  getemployerdetail,
 } = require('../../controllers/user');
 const { Login, Register, Logout } = require('../../controllers/signwork');
 const permission = require('../../middleware/permission');
@@ -15,7 +17,9 @@ router.post('/register', Register);
 router.post('/login', Login);
 router.post('/logout', Logout);
 router.get('/userprofile', authenticate, getuserprofile);
+router.get('/userstate', authenticate, getuserstate);
 router.get('/searchjobByName', searchjobByName);
 router.get('/getalljobs', getalljobs);
 router.get('/getjobbyid/:id', getjobbyid);
+router.get('/getemployerdetail/:id', getemployerdetail);
 module.exports = router;

@@ -6,11 +6,18 @@ import Commandp from './Commandp';
 const Layout = ({ children }) => {
   const route = useRouter();
 
-  const Navbarlinks = ['/', '/findjob', '/blogs', '/about', '/findpeople'];
+  // const Navbarlinks = ['/', '/findjob', '/blogs', '/about', '/findpeople'];
   return (
     <div>
       <Commandp />
-      {Navbarlinks.includes(route.pathname) ? <Navbar /> : ''}
+      {route.pathname.startsWith('/employee') ||
+      route.pathname.startsWith('/employer') ||
+      route.pathname.startsWith('/employer') ||
+      route.pathname.startsWith('/employer') ? (
+        ''
+      ) : (
+        <Navbar />
+      )}
 
       {children}
       {route.pathname === '/' ? <Footer /> : ''}
