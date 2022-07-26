@@ -53,35 +53,32 @@ exports.Register = async (req, res) => {
 };
 
 exports.Login = async (req, res) => {
-  console.log(req.body, 'body');
-
+  console.log(req.user, 'inside loginnnn');
   const email = req.body.email;
   const usertype = req.body.usertype;
-
+  console.log(req.body, 'this is from login');
   db1.execute(
     `SELECT * FROM ${usertype} WHERE email= ?`,
     [email],
     (err, result) => {
-      console.log(result, 'result');
-      console.log(err, 'error');
       if (err) {
-        console.log('helllfdjkldfjkldjfkldjflk');
         return res
-          .status(400)
-          .json({ msg: 'Email not found!', success: false });
-      } else {
-        // if (result.length == 0) {
-        //   return res.status(400).json({
-        //     msg: 'Email is incorrect!',
-        //     success: false,
-        //   });
-        // }
-        console.log(result.password, 'password');
-        bcrypt.compare(req.body.password, result?.password, (err, results) => {
+          .sendStatus(400)
+          .send({ msg: 'Email or password is incorrect!', success: false });
+      }
+      if (!result.length) {
+        return res.send({
+          msg: 'Email or password is incorrect!',
+          success: false,
+        });
+      }
+
+      bcrypt.compare(
+        req.body.password,
+        result[0]['password'],
+        (err, results) => {
           if (err) {
-            res
-              .status(400)
-              .json({ success: false, msg: 'Password incorrect!' });
+            res.throw(err);
           }
           console.log(result);
           const data = {
@@ -109,12 +106,16 @@ exports.Login = async (req, res) => {
               secure: false,
             });
 
-            res.status(200).json({ success: true });
+            res
+              .status(200)
+              .json({ success: true, msg: 'Welcome back ' + data.name + '!' });
           } else {
-            res.status(401).json({ msg: 'password incorrect', success: false });
+            res
+              .status(401)
+              .json({ msg: 'Password incorrect!', success: false });
           }
-        });
-      }
+        }
+      );
     }
   );
 };

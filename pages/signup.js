@@ -121,7 +121,9 @@ const signup = () => {
       )
 
       .then((res) => {
-        console.log(res.data.msg, 'signup success');
+        res?.data?.msg !== undefined
+          ? toast.success('Sign up Successfull!')
+          : '';
       })
       .catch((err) =>
         err?.response?.data?.msg !== undefined

@@ -107,7 +107,7 @@ const findjob = () => {
       : [];
   console.log(favjobs);
   return (
-    <div className=" w-full flex flex-col h-auto bg-whiteback dark:bg-darkback">
+    <div className=" w-full flex flex-col h-screen bg-whiteback dark:bg-darkback">
       <Toaster
         position="top-center"
         reverseOrder={false}

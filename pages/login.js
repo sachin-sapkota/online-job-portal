@@ -23,7 +23,11 @@ const login = () => {
         usertype: usertype,
       })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        res?.data?.msg !== undefined ? toast.success(res.data?.msg) : '';
+        if (res?.data?.success) {
+          router.push('/');
+        }
       })
       .catch((err) => {
         console.log(err.response.data);
