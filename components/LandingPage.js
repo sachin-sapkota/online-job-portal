@@ -88,11 +88,11 @@ const LandingPage = () => {
           suitable job from various companies.
         </div>
         <div className="flex gap-16  md:gap-10 lg:gap-16 md:flex-row flex-col justify-center text-center  md:items-start mt-2  ">
-          <div className="mt-0 mx-auto md:mt-[100px] min-w-[200px] min-h-[180px] w-[280px] h-[190px]  md:w-[350px] md:h-[200px] bg-white dark:bg-white/10 shadow-primary/20  drop-shadow-md shadow-xl   p-4 rounded-xl flex flex-col items-center justify-center ">
+          <div className=" bg-gradient-to-t  from-deep-purple-300/50 to-transparent dark:from-darkcard dark:to-transparent mt-0 mx-auto md:mt-[100px] min-w-[200px] min-h-[180px] w-[280px] h-[190px]  md:w-[350px] md:h-[200px]   shadow-primary/20  drop-shadow-md shadow-xl   p-4 rounded-xl flex flex-col items-center justify-center ">
             <div>
               <FaRegHandshake className="rounded-full overflow-hidden text-primary text-[5.5rem] dark:text-indigo-400 " />
             </div>
-            <span className="font-bold font-sans tracking-wide ">
+            <span className="font-bold font-nunito tracking-wide ">
               Easy Applying
             </span>
             <span className=" text-sm tracking-wide font-semibold ">
@@ -100,7 +100,7 @@ const LandingPage = () => {
             </span>
           </div>
 
-          <div className="mt-0 mx-auto md:mt-[10px] min-w-[200px] min-h-[180px] w-[280px] h-[190px]  md:w-[350px] md:h-[200px] bg-white dark:bg-white/10 shadow-primary/20  drop-shadow-md shadow-xl   p-4 rounded-xl flex flex-col items-center justify-center ">
+          <div className=" bg-gradient-to-t  from-deep-purple-300/50 to-transparent dark:from-darkcard dark:to-transparent mt-0 mx-auto md:mt-[10px] min-w-[200px] min-h-[180px] w-[280px] h-[190px]  md:w-[350px] md:h-[200px]  shadow-primary/20  drop-shadow-md shadow-xl   p-4 rounded-xl flex flex-col items-center justify-center ">
             <div className="">
               <FaSuitcase className=" rounded-full overflow-hidden  text-[5rem] text-primary dark:text-indigo-400  " />
             </div>
@@ -110,7 +110,7 @@ const LandingPage = () => {
             </span>
           </div>
 
-          <div className="mt-0 mx-auto md:mt-[100px] min-w-[200px] min-h-[180px] w-[280px] h-[190px]  md:w-[350px] md:h-[200px] bg-white dark:bg-white/10 shadow-primary/20  drop-shadow-md shadow-xl   p-4 rounded-xl flex flex-col items-center justify-center ">
+          <div className="mt-0 mx-auto md:mt-[100px] min-w-[200px] min-h-[180px] w-[280px] h-[190px]  md:w-[350px] md:h-[200px] bg-gradient-to-t  from-deep-purple-300/50 to-transparent dark:from-darkcard dark:to-transparent shadow-primary/20  drop-shadow-md shadow-xl   p-4 rounded-xl flex flex-col items-center justify-center ">
             <div>
               <MdSupportAgent className="rounded-full overflow-hidden text-primary text-[5rem] dark:text-indigo-400  " />
             </div>
@@ -170,7 +170,7 @@ const LandingPage = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2  mt-8">
         <div className="sm:pl-5 px-5 md:pl-9">
-          <div className="text-3xl font-sans tracking-wider text-gray-700 dark:text-gray-300 font-bold  text-center sm:text-left te">
+          <div className="text-3xl font-nunito tracking-wider text-gray-700 dark:text-gray-300 font-bold  text-center sm:text-left te">
             Explore by Categories
           </div>
           <div className="text-sm text-slate-600 text-left mt-4 dark:text-gray-300 hidden sm:text-left">
@@ -182,7 +182,7 @@ const LandingPage = () => {
               <div className="text-footer dark:text-white bg-white rounded-[0.7rem] p-2 dark:bg-gray-700">
                 <SiAppstore />
               </div>
-              <div className="text-xs font-sans">App Development</div>
+              <div className="text-xs font-nunito">App Development</div>
               <div></div>
             </div>
 
@@ -190,7 +190,7 @@ const LandingPage = () => {
               <div className="text-footer dark:text-white bg-white rounded-[0.7rem] p-2 dark:bg-gray-700">
                 <RiMoneyDollarCircleFill />
               </div>
-              <div className="text-xs font-sans">Finance</div>
+              <div className="text-xs font-nunito">Finance</div>
               <div></div>
             </div>
 
@@ -198,7 +198,7 @@ const LandingPage = () => {
               <div className="text-footer dark:text-white bg-white rounded-[0.7rem] p-2 dark:bg-gray-700">
                 <SiAltiumdesigner />
               </div>
-              <div className="text-xs font-sans">Graphics Design</div>
+              <div className="text-xs font-nunito">Graphics Design</div>
               <div></div>
             </div>
 
@@ -206,7 +206,7 @@ const LandingPage = () => {
               <div className="text-footer dark:text-white bg-white rounded-[0.7rem] p-2 dark:bg-gray-700">
                 <RiServiceFill />
               </div>
-              <div className="text-xs font-sans">Services</div>
+              <div className="text-xs font-nunito">Services</div>
               <div></div>
             </div>
 
@@ -214,7 +214,7 @@ const LandingPage = () => {
               <div className="text-footer dark:text-white bg-white rounded-[0.7rem] p-2 dark:bg-gray-700">
                 <GiTeacher />
               </div>
-              <div className="text-xs font-sans">Teacher</div>
+              <div className="text-xs font-nunito">Teacher</div>
               <div></div>
             </div>
 
@@ -222,7 +222,7 @@ const LandingPage = () => {
               <div className="text-footer dark:text-white bg-white rounded-[0.7rem] p-2 dark:bg-gray-700">
                 <MdOutlineSecurity />
               </div>
-              <div className="text-xs font-sans">Security</div>
+              <div className="text-xs font-nunito">Security</div>
               <div className=""></div>
             </div>
 
@@ -230,7 +230,7 @@ const LandingPage = () => {
               <div className="text-footer dark:text-white bg-white rounded-[0.7rem] p-2 dark:bg-gray-700">
                 <CgWebsite />
               </div>
-              <div className="text-xs font-sans">Web Development</div>
+              <div className="text-xs font-nunito">Web Development</div>
               <div></div>
             </div>
 
@@ -238,7 +238,7 @@ const LandingPage = () => {
               <div className="text-footer dark:text-white bg-white rounded-[0.7rem] p-2 dark:bg-gray-700">
                 <CgGames />
               </div>
-              <div className="text-xs font-sans">Game Developers</div>
+              <div className="text-xs font-nunito">Game Developers</div>
               <div></div>
             </div>
           </div>
@@ -246,11 +246,11 @@ const LandingPage = () => {
         <div className="flex justify-center items-center ">
           <div className="flex flex-col items-center justify-center ">
             <div className="shadow-lg bg-footer/90 text-white rounded-3xl md:p-6 sm:p-5 p-5 mx-5 sm:mx-5  mt-9 flex flex-col divide-y divide-gray-600 gap-4 min-h-[280px] min-w-[280px] max-w-[410px] dark:bg-gray-700">
-              <div className="font-bold font-sans text-lg text-center">
+              <div className="font-bold font-nunito text-lg text-center">
                 Popular Categories
               </div>
               <div className="flex  ">
-                <span className="flex-1 flex items-center  font-sans font-medium">
+                <span className="flex-1 flex items-center  font-nunito font-medium">
                   System analyst
                 </span>
                 <div className="bg-footer bg-opacity-60 text-indigo-600 px-3 py-1 mt-1 rounded-xl flex items-center justify-center">
@@ -258,7 +258,7 @@ const LandingPage = () => {
                 </div>
               </div>
               <div className="flex">
-                <span className="flex-1 flex items-center   font-sans font-medium">
+                <span className="flex-1 flex items-center   font-nunito font-medium">
                   Frontend Developer
                 </span>
                 <div className="bg-footer bg-opacity-60 text-indigo-600 px-3 py-1 rounded-xl mt-1  flex items-center justify-center">
@@ -266,7 +266,7 @@ const LandingPage = () => {
                 </div>
               </div>
               <div className="flex">
-                <span className="flex-1 flex items-center  font-sans font-medium">
+                <span className="flex-1 flex items-center  font-nunito font-medium">
                   Backend Developer
                 </span>
                 <div className="bg-footer bg-opacity-60 text-indigo-600 px-3 py-1 mt-1  rounded-xl flex items-center justify-center">
@@ -274,7 +274,7 @@ const LandingPage = () => {
                 </div>
               </div>
               <div className="flex">
-                <span className="flex-1 flex items-center   font-sans font-medium">
+                <span className="flex-1 flex items-center   font-nunito font-medium">
                   Full stack Developer
                 </span>
                 <div className="bg-footer bg-opacity-60 text-indigo-600 px-3 py-1 mt-1  rounded-xl flex items-center justify-center">
@@ -295,7 +295,7 @@ const LandingPage = () => {
       </div>
 
       <div className="w-full px-4 pt-16 grid grid-cols-1  md:grid-cols-3 lg:grid-cols-5 pb-20">
-        <div className="font-bold  underline underline-offset-8 mb-4 md:pl-6 mt-3 md:text-left text-center col-span-1 lg:col-span-2 text-3xl tracking-wide font-sans dark:text-gray-300 text-gray-700">
+        <div className="font-bold  underline underline-offset-8 mb-4 md:pl-6 mt-3 md:text-left text-center col-span-1 lg:col-span-2 text-3xl tracking-wide font-nunito dark:text-gray-300 text-gray-700">
           Frequently asked Questions
         </div>
         <div className="[&>*]:mt-3 [&>*]:py-5 col-span-1  md:col-span-2 lg:col-span-3 mx-auto w-full max-w-lg rounded-2xl bg-transparent p-2">
@@ -312,7 +312,7 @@ const LandingPage = () => {
                     } h-5 w-5 text-purple-500`}
                   />
                 </Disclosure.Button>
-                <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-600 dark:text-gray-200 font-sans">
+                <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-600 dark:text-gray-200 font-nunito">
                   JobXa is different form other online job boards in many ways.
                   It is a job board that is focused on the job seekers.
                   <br />
@@ -341,7 +341,7 @@ const LandingPage = () => {
                     } h-5 w-5 text-purple-500`}
                   />
                 </Disclosure.Button>
-                <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-600 dark:text-gray-200 font-sans">
+                <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-600 dark:text-gray-200 font-nunito">
                   Yes. JobXa offers a variety of tools to help you in your job
                   search, including:
                   <br />
@@ -372,7 +372,7 @@ const LandingPage = () => {
                     } h-5 w-5 text-purple-500`}
                   />
                 </Disclosure.Button>
-                <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-600 dark:text-gray-200 font-sans">
+                <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-600 dark:text-gray-200 font-nunito">
                   Visit our Find work page and view our current job openings.
                   After reviewing the requirements, if your skills meet the
                   specific requirements for one or more positions, please click
@@ -398,7 +398,7 @@ const LandingPage = () => {
                     } h-5 w-5 text-purple-500`}
                   />
                 </Disclosure.Button>
-                <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-600 dark:text-gray-200 font-sans">
+                <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-600 dark:text-gray-200 font-nunito">
                   Yes. Each position has a dedicated recruiter assigned to it.
                   When you apply to a position, the recruiter is notified of
                   your interest and will follow up with you in the event your
@@ -419,7 +419,7 @@ const LandingPage = () => {
                     } h-5 w-5 text-purple-500`}
                   />
                 </Disclosure.Button>
-                <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-600 dark:text-gray-200 font-sans">
+                <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-600 dark:text-gray-200 font-nunito">
                   I no postion meets my current interest, you can Submit Resume
                   to us for future consideration. We can put it in our database
                   which will be searchable by recruiters when future position
@@ -450,7 +450,7 @@ const LandingPage = () => {
                     } h-5 w-5 text-purple-500`}
                   />
                 </Disclosure.Button>
-                <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-600 dark:text-gray-200 font-sans">
+                <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-600 dark:text-gray-200 font-nunito">
                   Typically employers will use your salary history to guide an
                   appropriate offer for your next position. It is common to
                   receive a moderate increase on your current total

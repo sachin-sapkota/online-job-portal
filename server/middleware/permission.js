@@ -9,6 +9,7 @@ const permission = (req, res, next) => {
     'changepassword',
     'deleteaccount',
     'editresume',
+    'getalljobs',
   ];
   const employerpermission = [
     'postjob',

@@ -29,6 +29,11 @@ const findjob = () => {
     getlikedjob
   );
 
+  const profile = useSWR(
+    'http://localhost:3000/api/user/userprofile',
+    async (apiURL) => await fetch(apiURL).then((res) => res.json())
+  );
+
   useEffect(() => {
     if (searchstatus) {
       const timer = setTimeout(() => setsearch(tempsearch), 800);
@@ -68,8 +73,8 @@ const findjob = () => {
   );
 
   if (error) return 'An error has occurred.';
-  if (!data) return 'Loading...';
-
+  if (!data && !profile.data?.data) return 'Loading...';
+  console.log(profile?.data?.data);
   const jobdata =
     typeof datas != 'undefined' && datas.length > 0 ? datas : data;
 
@@ -102,7 +107,7 @@ const findjob = () => {
   };
 
   const favjobs =
-    getfavjobs?.data?.job_id !== undefined
+    getfavjobs?.data !== undefined && getfavjobs?.data[0]?.job_id !== undefined
       ? [getfavjobs.data.map((a) => a.job_id)][0]
       : [];
   console.log(favjobs);
@@ -149,8 +154,8 @@ const findjob = () => {
                   ? router.query.search
                   : tempsearch
               }
-              className="pl-10 dark:bg-darkcard dark:border-gray-600  pr-[88px] form-control block w-[460px] min-w-[260px] h-md placeholder:text-sm  placeholder:font-nunito text-normal font-normal text-gray-700 rounded-md bg-white bg-clip-padding border border-solid border-gray-300  transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              placeholder="Search"
+              className="pl-10 dark:bg-darkcard dark:border-gray-600  pr-[88px] form-control  w-[260px] max-w-[400px] h-md placeholder:text-sm  placeholder:font-nunito text-normal font-normal text-gray-700 rounded-md bg-white bg-clip-padding border border-solid border-gray-300  transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              placeholder="Search for any jobs"
             />
             <button
               type="submit"
@@ -164,14 +169,18 @@ const findjob = () => {
         </form>
       </div>
       <div className="flex mt-8 scroll-smooth px-9 ">
-        <div className=" w-[200px] flex-none h-auto   bg-gray-300 dark:bg-darkcard rounded-md"></div>
-        <div className=" flex-1 h-auto  rounded-md grid  grid-cols-1 lg:grid-cols-2 gap-4 p-3 ">
+        {/* <div className=" w-[200px] flex-none h-auto   bg-gray-300 dark:bg-darkcard rounded-md"></div> */}
+        <div className=" flex-1 min-w-[260px] h-auto  rounded-md grid  grid-cols-1 lg:grid-cols-2 gap-4 p-3 ">
           {jobdata?.map((b, i) => {
             return (
-              <div className="relative " key={i}>
+              <div className="relative z-0" key={i}>
                 <div
                   onClick={() => like(b.id)}
-                  className="absolute z-10 top-3 right-3 cursor-cell flex-none"
+                  className={`${
+                    profile?.data?.data?.usertype === 'employer'
+                      ? 'hidden '
+                      : ''
+                  }absolute z-[1] top-3 right-3 cursor-cell flex-none`}
                 >
                   {favjobs.includes(b.id) ? (
                     <BsBookmarkFill className="w-4 h-4 " />

@@ -1,5 +1,9 @@
 const db1 = require('../config/auth_db');
 
+exports.getresume = async (req, res) => {
+  return res.send({ msg: 'get resume' });
+};
+
 exports.getUsers = async (req, res) => {
   const { user } = req;
   if (!user)

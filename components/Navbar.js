@@ -26,16 +26,6 @@ const Navbar = () => {
       setNavbar(false);
     }
   };
-  useEffect(() => {
-    toast(theme + 'mode enabled!', {
-      icon: '👏',
-      style: {
-        borderRadius: '10px',
-        background: '#333',
-        color: '#fff',
-      },
-    });
-  }, [theme]);
 
   useEffect(() => {
     window.addEventListener('scroll', changeBackground);
@@ -116,8 +106,8 @@ const Navbar = () => {
       <div
         className={`${
           Navbar
-            ? ` w-full  px-3 rounded-b-md justify-between sm:justify-between md:justify-center transition duration-300 bg-gray-400 bg-opacity-90 backdrop-blur-sm ease-in flex h-[60px]  fixed  dark:bg-black/40 shadow-2xl z-[100]`
-            : 'flex justify-between sm:justify-between md:justify-center bg-transparent absolute  h-[60px]  w-full mt-1 pr-2  '
+            ? ` w-full ring-1 ring-opacity-5 ring-gray-300/80 dark:ring-gray-800/10 py-1  px-3 justify-between sm:justify-between md:justify-center transition duration-300 bg-whiteback bg-opacity-90 backdrop-blur-sm ease-in flex h-[65px]  fixed  dark:bg-black/40 shadow-2xl z-[100]`
+            : 'flex justify-between sm:justify-between md:justify-center bg-transparent absolute  h-[70px] py-1  w-full mt-1 pr-2  '
         } select-none  `}
       >
         <div className="inset-y-0 my-auto ">
@@ -145,8 +135,7 @@ const Navbar = () => {
               data?.data?.usertype === 'employer' ? 'hidden' : ''
             } hover:translate-y-[-1px] cursor-pointer active:text-red-600   `}
           >
-            {' '}
-            <Link href="/findwork">Find Work</Link>
+            <Link href="/findjob">Find Work</Link>
           </div>
           <div className="hover:translate-y-[-1px] cursor-pointer active:text-red-600   ">
             <Link href="/explore">Explore</Link>
@@ -168,10 +157,10 @@ const Navbar = () => {
           }`}
         >
           <div
-            className="md:hidden  block sm:block cursor-cell font-light "
+            className="md:hidden  block sm:block  font-light "
             onClick={toggle}
           >
-            <CgCloseR className="text-white text-3xl" />
+            <CgCloseR className="dark:text-white text-black text-3xl" />
           </div>
 
           <div className="hover:translate-y-[-1px]  cursor-pointer active:text-red-600   ">
@@ -200,20 +189,33 @@ const Navbar = () => {
           <div
             className={`${
               Navbar
-                ? 'text-white flex justify-center items-center border-2 font-medium shadow-sm border-indigo-600 rounded-md px-2 hover:bg-indigo-700 hover:text-white  '
+                ? 'text-gray-900 dark:text-white font-bold flex justify-center items-center border-2  shadow-sm border-indigo-600 rounded-md px-2 hover:bg-indigo-700 hover:text-white  '
                 : 'flex justify-center items-center border-2 font-medium shadow-sm border-indigo-600 rounded-md px-2 hover:bg-indigo-700 hover:text-white text-black dark:text-white'
             } ${
               logged ? 'hidden' : ' '
-            } font-nunito font-bold whitespace-nowrap 
+            } font-nunito font-bold whitespace-nowrap text-lg
    `}
           >
             <Link href="/login"> Login</Link>
           </div>
 
           <button
-            className=" rounded-full  p-1 md:order-first transition ease-in-out duration-200"
+            className=" rounded-full inset-y-0 my-auto  p-1 md:order-first transition linear duration-200"
             onClick={() => {
               setTheme(theme === 'light' ? 'dark' : 'light');
+              toast(
+                theme === 'light'
+                  ? 'Dark mode enabled!'
+                  : 'Light mode enabled!',
+                {
+                  icon: '👏',
+                  style: {
+                    borderRadius: '10px',
+                    background: '#333',
+                    color: '#fff',
+                  },
+                }
+              );
             }}
           >
             {theme === 'light' ? <MdDarkMode /> : <RiSunFill />}
@@ -246,8 +248,8 @@ const Navbar = () => {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-195"
               >
-                <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-200 overflow-hidden dark:divide-gray-700 rounded-md shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none ">
-                  <div className="flex flex-col items-center py-2 gap-1 bg-gray-300/70 dark:bg-black/70 backdrop-blur-sm">
+                <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-200 overflow-hidden dark:divide-gray-700 rounded-md shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none bg-black/20 backdrop-blur-sm">
+                  <div className="flex flex-col items-center py-2 gap-1 bg-gray-300/80 dark:bg-black/70 backdrop-blur-sm">
                     <Avatar
                       name={data?.data?.name?.split(' ')[0]}
                       size="40px"
@@ -262,7 +264,7 @@ const Navbar = () => {
                     </span>
                   </div>
 
-                  <div className="px-1 py-1 bg-gray-200 dark:bg-darkcard rounded-b-md  font-nunito ">
+                  <div className="px-1 py-1 bg-gray-200 dark:bg-footer rounded-b-md  font-nunito ">
                     <Menu.Item>
                       {({ active }) => (
                         <div

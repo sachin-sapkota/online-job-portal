@@ -31,7 +31,7 @@ export default function Document() {
           rel="stylesheet"
         ></link>
       </Head>
-      <body>
+      <body className="font-nunito">
         <Main />
         <NextScript />
       </body>

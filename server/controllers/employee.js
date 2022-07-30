@@ -75,3 +75,7 @@ exports.deleteaccount = async (req, res) => {
 exports.editresume = async (req, res) => {
   return res.send({ msg: 'editresume' });
 };
+
+exports.postresume = async (req, res) => {
+  return res.send({ msg: 'post resume' });
+};

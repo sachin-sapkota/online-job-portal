@@ -14,6 +14,7 @@
     "@lottiefiles/lottie-interactivity": "^1.6.0",
     "@lottiefiles/react-lottie-player": "^3.4.7",
     "@mapbox/mapbox-gl-geocoder": "^2.3.0",
+    "@react-pdf/renderer": "^2.3.0",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@types/mapbox__mapbox-gl-geocoder": "^4.7.2",
     "axios": "^0.27.2",

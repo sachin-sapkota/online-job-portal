@@ -1,10 +1,9 @@
 import Head from 'next/head';
 import LandingPage from '../components/LandingPage';
-import Layout from '../components/Layout';
 
 export default function Home() {
   return (
-    <Layout>
+    <div>
       <Head>
         <title>Job Xa</title>
         <meta name="title" content="Job Xa" />
@@ -21,6 +20,6 @@ export default function Home() {
         <meta name="language" content="English"></meta>
       </Head>
       <LandingPage />
-    </Layout>
+    </div>
   );
 }

@@ -31,8 +31,8 @@ exports.Register = async (req, res) => {
             const randomid = randomUUID();
 
             db1.execute(
-              `INSERT INTO ${usertype} (id, name, username, email, number, password) VALUES (?,?,?,? ,?, ?)`,
-              [randomid, name, username, email, number, hash],
+              `INSERT INTO ${usertype} (id, name, username, email, number, password,usertype) VALUES (?,?,?,? ,?,?, ?)`,
+              [randomid, name, username, email, number, hash, usertype],
               (error, result) => {
                 if (error) return res.send({ msg: 'error while registering' });
                 else {
@@ -53,14 +53,14 @@ exports.Register = async (req, res) => {
 };
 
 exports.Login = async (req, res) => {
-  console.log(req.user, 'inside loginnnn');
   const email = req.body.email;
   const usertype = req.body.usertype;
-  console.log(req.body, 'this is from login');
+  console.log(usertype);
   db1.execute(
     `SELECT * FROM ${usertype} WHERE email= ?`,
     [email],
     (err, result) => {
+      console.log(result, 'result');
       if (err) {
         return res
           .sendStatus(400)
@@ -82,11 +82,11 @@ exports.Login = async (req, res) => {
           }
           console.log(result);
           const data = {
-            id: result[0].id,
-            name: result[0].name,
-            username: result[0].username,
-            email: result[0].email,
-            usertype: result[0].usertype,
+            id: result[0]?.id,
+            name: result[0]?.name,
+            username: result[0]?.username,
+            email: result[0]?.email,
+            usertype: result[0]?.usertype,
           };
           if (results) {
             const accessToken = jwt.sign(

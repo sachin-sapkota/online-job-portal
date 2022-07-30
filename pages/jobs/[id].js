@@ -8,6 +8,7 @@ import { TbLanguage } from 'react-icons/tb';
 import { AiOutlineUser } from 'react-icons/ai';
 import { RiMoneyDollarBoxLine } from 'react-icons/ri';
 import { GiSandsOfTime } from 'react-icons/gi';
+import useSWR from 'swr';
 import {
   GrLinkedinOption,
   GrInstagram,
@@ -17,6 +18,9 @@ import {
 
 const job = (props) => {
   console.log(props);
+
+  const { data, error } = useSWR('http://localhost:3000/api/');
+
   return (
     <div className="w-full h-screen pt-10">
       {props?.job?.map((a, i) => {
