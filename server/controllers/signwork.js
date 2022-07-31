@@ -60,7 +60,6 @@ exports.Login = async (req, res) => {
     `SELECT * FROM ${usertype} WHERE email= ?`,
     [email],
     (err, result) => {
-      console.log(result, 'result');
       if (err) {
         return res
           .sendStatus(400)
@@ -80,7 +79,7 @@ exports.Login = async (req, res) => {
           if (err) {
             res.throw(err);
           }
-          console.log(result);
+
           const data = {
             id: result[0]?.id,
             name: result[0]?.name,

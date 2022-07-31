@@ -73,7 +73,7 @@ const findjob = () => {
   );
 
   if (error) return 'An error has occurred.';
-  if (!data && !profile.data?.data) return 'Loading...';
+  if (!data) return 'Loading...';
   console.log(profile?.data?.data);
   const jobdata =
     typeof datas != 'undefined' && datas.length > 0 ? datas : data;

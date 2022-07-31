@@ -52,7 +52,7 @@ exports.getuserbyusername = async (req, res) => {
     `SELECT * FROM auth_login WHERE username=? `,
     [username],
     (err, result) => {
-      if (result.length) {
+      if (result.length === undefined) {
         return res.status(409).send({
           msg: 'This username is already taken!',
           success: false,

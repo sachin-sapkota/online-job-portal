@@ -36,24 +36,11 @@ const Navbar = () => {
       setHam(false);
     }
   }, []);
-  const { data, error, isValidating } = useSWR(
+  const { data, error } = useSWR(
     'http://localhost:3000/api/user/userprofile',
     async (apiURL) => await fetch(apiURL).then((res) => res.json())
   );
-
-  const [logged, setLogged] = useState(typeof data?.name !== 'undefined');
-
-  useEffect(() => {
-    async function logger() {
-      if (typeof data?.data?.name !== typeof undefined) {
-        setLogged(true);
-      } else {
-        setLogged(false);
-      }
-    }
-
-    logger();
-  }, [data, error]);
+  const [logged, setLogged] = useState(typeof data?.data?.name !== 'undefined');
 
   useEffect(() => {
     document.addEventListener('keydown', escFunction);
@@ -66,9 +53,7 @@ const Navbar = () => {
   const toggle = () => {
     setHam(!Ham);
   };
-  if (!mounted) {
-    return null;
-  }
+
   const handleLogout = async (e) => {
     e.preventDefault();
     await axios.post('http://localhost:3000/api/user/logout', {
@@ -76,8 +61,23 @@ const Navbar = () => {
     });
     router.reload();
   };
-  console.log(logged, 'logged');
 
+  useEffect(() => {
+    if (typeof data !== typeof undefined) {
+      if (data?.data?.name) {
+        setLogged(true);
+      } else {
+        setLogged(false);
+      }
+    }
+    if (error) {
+      setLogged(false);
+    }
+  }, [data?.data?.name, error]);
+  if (!mounted) {
+    return null;
+  }
+  console.log(data);
   return (
     <div className="relative ">
       <Toaster
