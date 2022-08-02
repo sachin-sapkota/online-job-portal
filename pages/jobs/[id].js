@@ -9,6 +9,7 @@ import { AiOutlineUser } from 'react-icons/ai';
 import { RiMoneyDollarBoxLine } from 'react-icons/ri';
 import { GiSandsOfTime } from 'react-icons/gi';
 import useSWR from 'swr';
+import Link from 'next/link';
 import {
   GrLinkedinOption,
   GrInstagram,
@@ -202,6 +203,9 @@ const job = (props) => {
                   <span className="font-nunito text-[14px] font-semibold mt-8">
                     Key Responsibilities
                   </span>
+                  <span className="inline-block text-[13px]  mt-2 font-nunito text-gray-800 dark:text-gray-300">
+                    {a.keyres}
+                  </span>
                 </div>
                 {/* 
                          work and experience */}
@@ -209,10 +213,8 @@ const job = (props) => {
                   <span className="font-nunito text-[14px] font-semibold mt-8">
                     Skills and Experience
                   </span>
-                </div>
-                <div className="flex flex-col mt-3">
-                  <span className="font-nunito text-[14px] font-semibold mt-8">
-                    Key Responsibilities
+                  <span className="inline-block text-[13px]  mt-2 font-nunito text-gray-800 dark:text-gray-300">
+                    {a.skillsandexperience}
                   </span>
                 </div>
 
@@ -257,103 +259,39 @@ const job = (props) => {
                 </div>
 
                 <div className="bg-gray-200 dark:bg-darkcard p-5 flex flex-col gap-4 mt-5 rounded-md">
-                  <div className="flex items-center justify-start gap-4">
-                    <BsCalendar4 className="w-[0.90rem] h-[0.90rem]  text-indigo-400" />
-                    <div className="flex flex-col ">
-                      <span className="font-nunito text-[14px] font-semibold">
-                        Date Posted:
+                  <div className="flex items-center justify-start  gap-4">
+                    <Avatar
+                      name={a.employer_name}
+                      size="60px"
+                      textSizeRatio={3}
+                      className="rounded-lg "
+                    ></Avatar>
+                    <span className="flex flex-col">
+                      <span className="text-lg font-semibold capitalize">
+                        {a.employer_name}
                       </span>
-                      <span className="font-nunito text-[14px] text-gray-700 dark:text-gray-400 ">
-                        {a.post_date}
+
+                      <span className="text-sm ">
+                        <Link href={`/employerdetail/${a.employer_id}`}>
+                          View company profile
+                        </Link>
                       </span>
-                    </div>
+                    </span>
                   </div>
 
-                  <div className="flex items-center justify-start gap-4">
-                    <GoLocation className="w-[0.98rem] h-[0.98rem]  text-indigo-400" />
-                    <div className="flex flex-col ">
-                      <span className="font-nunito text-[14px] font-semibold">
-                        Location:
-                      </span>
-                      <span className="font-nunito text-[14px] text-gray-700 dark:text-gray-400 ">
-                        {a.address}, {a.city}
-                      </span>
-                    </div>
-                  </div>
+                  <div className="flex items-center justify-start gap-4"></div>
 
-                  <div className="flex items-center justify-start gap-4">
-                    <GiSandsOfTime className="w-[0.98rem] h-[0.98rem]  text-indigo-400" />
-                    <div className="flex flex-col ">
-                      <span className="font-nunito text-[14px] font-semibold">
-                        Deadline
-                      </span>
-                      <span className="font-nunito text-[14px] text-gray-700 dark:text-gray-400 ">
-                        {a.deadline}
-                      </span>
-                    </div>
-                  </div>
+                  <div className="flex items-center justify-start gap-4"></div>
 
-                  <div className="flex items-center justify-start gap-4">
-                    <RiMoneyDollarBoxLine className="w-[0.98rem] h-[0.98rem]  text-indigo-400" />
-                    <div className="flex flex-col ">
-                      <span className="font-nunito text-[14px] font-semibold">
-                        Salary
-                      </span>
-                      <span className="font-nunito text-[14px] text-gray-700 dark:text-gray-400 ">
-                        {a.salary_time !== 'negotiable'
-                          ? 'Rs' + a.salary_amt + '/' + a.salary_time
-                          : 'Negotiable'}
-                      </span>
-                    </div>
-                  </div>
+                  <div className="flex items-center justify-start gap-4"></div>
 
-                  <div className="flex items-center justify-start gap-4">
-                    <AiOutlineUser className="w-[0.98rem] h-[0.98rem]  text-indigo-400" />
-                    <div className="flex flex-col ">
-                      <span className="font-nunito text-[14px] font-semibold">
-                        Job Sector:
-                      </span>
-                      <span className="font-nunito text-[14px] text-gray-700 dark:text-gray-400 ">
-                        {a.sector}
-                      </span>
-                    </div>
-                  </div>
+                  <div className="flex items-center justify-start gap-4"></div>
 
-                  <div className="flex items-center justify-start gap-4">
-                    <TbLanguage className="w-4 h-5  text-indigo-400" />
-                    <div className="flex flex-col ">
-                      <span className="font-nunito text-[14px] font-semibold">
-                        Job Type:
-                      </span>
-                      <span className="font-nunito text-[14px] text-gray-700 dark:text-gray-400 ">
-                        {a.job_type}
-                      </span>
-                    </div>
-                  </div>
+                  <div className="flex items-center justify-start gap-4"></div>
 
-                  <div className="flex items-center justify-start gap-4">
-                    <FaGraduationCap className="w-3 h-3 text-indigo-400" />
-                    <div className="flex flex-col ">
-                      <span className="font-nunito text-[14px] font-semibold">
-                        Qualification:
-                      </span>
-                      <span className="font-nunito text-[14px] text-gray-700 dark:text-gray-400 ">
-                        {a.qualification}
-                      </span>
-                    </div>
-                  </div>
+                  <div className="flex items-center justify-start gap-4"></div>
 
-                  <div className="flex items-center justify-start gap-4">
-                    <AiOutlineUser className="w-[0.98rem] h-[0.98rem]  text-indigo-400" />
-                    <div className="flex flex-col ">
-                      <span className="font-nunito text-[14px] font-semibold">
-                        Min. Experience:
-                      </span>
-                      <span className="font-nunito text-[14px] text-gray-700 dark:text-gray-400 ">
-                        {a.experience}
-                      </span>
-                    </div>
-                  </div>
+                  <div className="flex items-center justify-start gap-4"></div>
                 </div>
                 {/* 
                         socail media */}

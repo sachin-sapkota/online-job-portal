@@ -4,6 +4,7 @@ let url = {
 };
 const api = axios.create({
   baseURL: url.test,
+  withCredentials: true,
   headers: {
     Accept: 'application/json',
   },

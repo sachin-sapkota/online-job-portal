@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const authenticate = (req, res, next) => {
   const token = req.cookies.accessToken;
-  console.log(token);
+
   if (typeof token === 'undefined') {
     res.status(401).json({ success: false, msg: 'user not logged in ' });
   } else {
@@ -13,7 +13,6 @@ const authenticate = (req, res, next) => {
           message: 'User session finished please login again',
         });
       } else {
-        console.log(authData, 'authdata');
         req.user = authData;
       }
     });

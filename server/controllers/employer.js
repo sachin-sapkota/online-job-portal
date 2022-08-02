@@ -21,13 +21,15 @@ exports.postjob = async (req, res) => {
     latitude: req.body.latitude,
     longitude: req.body.longitude,
     city: req.body.city,
+    skex: req.body.skex,
+    keyres: req.body.keyres,
   };
 
   const id = req.user.id;
   const employer_name = req.user.name;
   const randomid = randomUUID();
   db1.execute(
-    `INSERT INTO job (id,employer_id, employer_name,  title,city, description, deadline, sector, job_type, skills, salary_time, salary_amt, experience, qualification, address, latitude,longitude,post_date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now())`,
+    `INSERT INTO job (id,employer_id, employer_name,  title,city, description, keyres, skillsandexperience,deadline, sector, job_type, skills, salary_time, salary_amt, experience, qualification, address, latitude,longitude,post_date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now())`,
     [
       randomid,
       id,
@@ -35,6 +37,8 @@ exports.postjob = async (req, res) => {
       job.title,
       job.city,
       job.description,
+      job.keyres,
+      job.skex,
       job.deadline,
       job.sector,
       job.job_type,
@@ -48,7 +52,7 @@ exports.postjob = async (req, res) => {
       job.longitude,
     ],
     (error, result) => {
-      if (error) return res.send({ msg: 'error while registering' });
+      if (error) return res.send({ msg: 'error while posting job' });
       else {
         res.send({ msg: 'job posted successfully', success: true });
       }

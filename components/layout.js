@@ -13,6 +13,8 @@ const Layout = ({ children }) => {
       {route.pathname.startsWith('/employee') ||
       route.pathname.startsWith('/employer') ? (
         ''
+      ) : route.pathname === '/' ? (
+        ''
       ) : (
         <Navbar />
       )}

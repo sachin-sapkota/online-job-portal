@@ -106,7 +106,24 @@ exports.getemployerdetail = async (req, res) => {
   const id = req.params.id;
   console.log(id, 'idddddddddddddd');
   db1.execute(
-    `SELECT name, address, est_data, sector,number, email, website, facebook, whatsapp, linkedin, twitter  FROM employer WHERE id=?`,
+    `SELECT name, address,description,zipcode,latitude, longitude, size_of_company, est_date, sector,number, email, website, facebook, whatsapp, linkedin, twitter  FROM employer WHERE id=?`,
+    [id],
+    (err, result) => {
+      console.log(result);
+      if (result?.length) {
+        return res.send(result);
+      } else {
+        return res.send({ msg: 'employer not found', success: false });
+      }
+    }
+  );
+};
+
+exports.getemployeedetail = async (req, res) => {
+  const id = req.params.id;
+  console.log(id, 'idddddddddddddd');
+  db1.execute(
+    `SELECT name, gender, email, profile_img,username, account_status, website, salary_time, salary_amount, category, description, facebook, whatsapp, youtube, linkedin, city, address, latitude, Last_login  FROM employee WHERE id=?`,
     [id],
     (err, result) => {
       console.log(result);

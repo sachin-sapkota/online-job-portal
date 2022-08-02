@@ -10,8 +10,6 @@ exports.applyjob = async (req, res) => {
   return res.send({ msg: 'apply job' });
 };
 exports.postfavjob = async (req, res) => {
-  console.log(req.user, 'user');
-  console.log(req.body, 'body');
   id = req.user.id;
   usertype = req.user.usertype;
   job_id = req.body.data.job_id;
@@ -78,4 +76,42 @@ exports.editresume = async (req, res) => {
 
 exports.postresume = async (req, res) => {
   return res.send({ msg: 'post resume' });
+};
+exports.posteducation = async (req, res) => {
+  id = req.user.id;
+  data = req.body.education;
+  console.log(req.user);
+  console.log(req.body);
+  db1.execute(
+    `INSERT INTO education (employee_id, title, institute, fromdate, todate, description) VALUES( ?,?,?,?,?,?) `,
+    [id, data.title, data.institute, data.from, data.to, data.description],
+    (error, result) => {
+      if (error) {
+        res.send({ msg: ' error posting education ', success: false });
+      }
+
+      if (result) {
+        res.send({ msg: 'education data posted', success: true });
+      }
+    }
+  );
+};
+
+exports.geteducation = async (req, res) => {
+  id = req.user.id;
+  db1.execute(
+    `SELECT * FROM education WHERE employee_id=?`,
+    [id],
+    (error, result) => {
+      if (error) {
+        return res.send({
+          msg: 'error while getting education ',
+          success: false,
+        });
+      }
+      if (result) {
+        return res.send(result);
+      }
+    }
+  );
 };

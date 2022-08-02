@@ -9,23 +9,12 @@ import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 export default function Jobs() {
   const [items, setItems] = useState(['john', 'milos', 'steph', 'kathreine']);
-  const [defaultValueItems, setdefaultValue] = useState([]);
+
   const [query, setquery] = useState('');
 
   const filterdata = query
     ? items.filter((data) => data.toLowerCase().includes(query.toLowerCase()))
     : [];
-
-  const addTag = (item) => {
-    if (!defaultValueItems.includes(item)) {
-      setdefaultValue(defaultValueItems.concat(item));
-    }
-  };
-
-  const removeTag = (item) => {
-    const filtered = defaultValueItems.filter((e) => e !== item);
-    setdefaultValue(filtered);
-  };
 
   const [point, setpoint] = useState({
     latitude: '',
@@ -34,6 +23,8 @@ export default function Jobs() {
   const [job, setjob] = useState({
     title: '',
     description: '',
+    keyres: '',
+    skex: '',
     sector: '',
     website: '',
     salary_time: '',
@@ -82,6 +73,7 @@ export default function Jobs() {
         console.log(res);
       })
       .catch((err) => console.log(err));
+    e.target.reset();
   };
   return (
     <div>
@@ -123,20 +115,6 @@ export default function Jobs() {
                 <MdWorkOutline className="w-6 h-6 text-indigo-500" />
               </div>
               <div className="font-semibold ">Job Detail</div>
-            </div>
-
-            <div className="flex items-center justify-center gap-3 ">
-              <div className="w-14 h-14 rounded-full bg-gray-200 p-1 flex items-center justify-center">
-                <MdOutlinePayment className="w-6 h-6 text-indigo-500" />
-              </div>
-              <div className="font-semibold ">Payments</div>
-            </div>
-
-            <div className="flex items-center justify-center gap-3 ">
-              <div className="w-14 h-14 rounded-full bg-gray-200 p-1 flex items-center justify-center">
-                <BsCheckLg className="w-6 h-6 text-indigo-500" />
-              </div>
-              <div className="font-semibold ">Confirmation</div>
             </div>
           </div>
 
@@ -201,6 +179,64 @@ export default function Jobs() {
                             />
                           </div>
                         </div>
+
+                        <div className="col-span-6 ">
+                          <label
+                            htmlFor="Key responsibilities"
+                            className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                          >
+                            Key Responsibilities
+                            <span className="text-red-600 dark:text-red-300">
+                              *
+                            </span>
+                          </label>
+                          <div className="mt-1">
+                            <textarea
+                              name=""
+                              rows={5}
+                              className="shadow-sm dark:bg-black/20 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 dark:border-gray-600 rounded-md"
+                              required
+                              onChange={(e) =>
+                                setjob((prev) => {
+                                  return {
+                                    ...prev,
+                                    keyres: e.target.value,
+                                  };
+                                })
+                              }
+                              value={job.keyres}
+                            />
+                          </div>
+                        </div>
+
+                        <div className="col-span-6 ">
+                          <label
+                            htmlFor="skillandexperience"
+                            className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                          >
+                            Skills and Experience
+                            <span className="text-red-600 dark:text-red-300">
+                              *
+                            </span>
+                          </label>
+                          <div className="mt-1">
+                            <textarea
+                              rows={5}
+                              className="shadow-sm dark:bg-black/20 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 dark:border-gray-600 rounded-md"
+                              required
+                              onChange={(e) =>
+                                setjob((prev) => {
+                                  return {
+                                    ...prev,
+                                    skex: e.target.value,
+                                  };
+                                })
+                              }
+                              value={job.skex}
+                            />
+                          </div>
+                        </div>
+
                         <div className=" [&>*]:text-gray-900  [&>*]:dark:text-gray-300 col-span-6 sm:col-span-3">
                           <label
                             htmlFor="deadline"
@@ -252,9 +288,8 @@ export default function Jobs() {
                             <option className="dark:bg-darkcard/90 bg-white ">
                               Aerospace
                             </option>
-
                             <option className="dark:bg-darkcard/90 bg-white ">
-                              Agriculture &amp; Forestry
+                              Apps Development
                             </option>
 
                             <option className="dark:bg-darkcard/90 bg-white ">
@@ -268,7 +303,9 @@ export default function Jobs() {
                             <option className="dark:bg-darkcard/90 bg-white ">
                               Aviation
                             </option>
-
+                            <option className="dark:bg-darkcard/90 bg-white ">
+                              Development
+                            </option>
                             <option className="dark:bg-darkcard/90 bg-white ">
                               Education
                             </option>
@@ -359,6 +396,9 @@ export default function Jobs() {
 
                             <option className="dark:bg-darkcard/90 bg-white ">
                               Travel &amp; Hospitality
+                            </option>
+                            <option className="dark:bg-darkcard/90 bg-white ">
+                              Web developpment
                             </option>
                           </select>
                         </div>

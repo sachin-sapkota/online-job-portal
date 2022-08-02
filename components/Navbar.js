@@ -36,7 +36,7 @@ const Navbar = () => {
       setHam(false);
     }
   }, []);
-  const { data, error } = useSWR(
+  const { data, error, isValidating } = useSWR(
     'http://localhost:3000/api/user/userprofile',
     async (apiURL) => await fetch(apiURL).then((res) => res.json())
   );
@@ -64,7 +64,7 @@ const Navbar = () => {
 
   useEffect(() => {
     if (typeof data !== typeof undefined) {
-      if (data?.data?.name) {
+      if (data?.data?.name !== undefined) {
         setLogged(true);
       } else {
         setLogged(false);
@@ -73,7 +73,7 @@ const Navbar = () => {
     if (error) {
       setLogged(false);
     }
-  }, [data?.data?.name, error]);
+  }, [data, error, isValidating]);
   if (!mounted) {
     return null;
   }

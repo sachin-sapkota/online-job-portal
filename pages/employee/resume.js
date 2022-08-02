@@ -2,7 +2,11 @@ import DashLayout from '../../components/employee/DashLayout';
 import { BsPlus } from 'react-icons/bs';
 import { useState } from 'react';
 import { MdClose } from 'react-icons/md';
+import axios from 'axios';
+import useSWR, { useSWRConfig } from 'swr';
+import api from '../../api/api';
 const resume = () => {
+  const { mutate } = useSWRConfig();
   const [showed, setshowed] = useState(false);
   const [education, seteducation] = useState({
     title: '',
@@ -11,19 +15,37 @@ const resume = () => {
     to: '',
     description: '',
   });
-  const [data, setdata] = useState([
-    {
-      education1: 'hello',
-    },
-  ]);
+  const fetcher = (url) => api.get(url).then((res) => res.data);
 
-  const submited = (e) => {
+  const { data, error } = useSWR('/api/employee/geteducation', fetcher);
+
+  const submited = async (e) => {
     e.preventDefault();
     e.target.reset();
     setshowed(false);
-    setdata([...data, education]);
+
+    await axios
+      .post(
+        'http://localhost:3000/api/employee/posteducation',
+        {
+          education,
+        },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        console.log(res);
+        // if (res.data?.success) {
+        //   if (res?.data?.like) {
+        //     toast.success('Added to liked jobs!');
+        //   } else {
+        //     toast.success('Removed from liked jobs!');
+        //   }
+        // }
+      })
+      .catch((err) => console.log(err));
+    mutate('http://localhost:3000/api/employee/geteducation', true);
   };
-  console.log(data);
+
   return (
     <div className="h-screen w-full">
       <div className=" flex flex-col w-full ">
@@ -34,7 +56,7 @@ const resume = () => {
           Fill the details and get your professional C.V. ready in seconds.
         </div>
         <div className="text-sm text-red-400 dark:text-red-300">
-          Fill the form wisely as this data can be seen and download by the
+          Fill the form wisel as this data can be seen and download by the
           employer. Mind to not fill any personal details other than personal
           qualification and skills.
         </div>
@@ -60,9 +82,9 @@ const resume = () => {
             <div
               className={`${
                 showed
-                  ? ' bg-white/50 w-full h-[500px]  rounded-md  dark:bg-black/50 backdrop-blur-sm   '
+                  ? ' bg-white/50 w-full h-[550px]  rounded-md  dark:bg-black/50 backdrop-blur-sm   '
                   : 'h-0 w-full'
-              } absolute overflow-hidden transition-all ease-in-out duration-400 `}
+              } absolute overflow-hidden transition-all ease-in-out duration-600 z-[10] `}
             >
               <div className=" border-indigo-600 flex flex-col">
                 <form onSubmit={submited} className="p-5 pt-7 relative">
@@ -162,33 +184,43 @@ const resume = () => {
           </div>
           {/*           
             education map */}
-          {/* <div className={`${! ? "hidden" : ""}`}>
-                            <form onSubmit={createTopic} className="mt-5 p-6 flex flex-col shadow-md">
-                                <input className="font-sans shadow appearance-none border focus:outline-blue-800 focus:shadow-none border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight" type="text" placeholder="Topic"
-                                    onChange={(e) =>
-                                        setTopic((prev) => {
-                                            return { ...prev, title: e.target.value }
-                                        })} required />
-                                <textarea className="resize h-[200px] font-sans shadow appearance-none border focus:outline-blue-800 focus:shadow-none border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight" type="text" placeholder="Content"
-                                    onChange={(e) =>
-                                        setTopic((prev) => {
-                                            return { ...prev, Content: e.target.value }
-                                        })} required />
-                                <div className='mt-5 mb-5'>
-                                    <button onClick={() => {
-                                        setAddTopic(false)
-                                    }}
-                                        className="float-left flex items-center gap-2 font-sans text-lg hover:translate-y-0.5 transition-all bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                                        Cancel
-                                    </button>
-                                    <button
-                                        className="float-right flex items-center gap-2 font-sans text-lg hover:translate-y-0.5 transition-all bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit"
-                                    >
-                                        Add
-                                    </button>
-                                </div>
-                            </form>
-                        </div> */}
+          {data?.map((a, i) => {
+            return (
+              <div key={i} className="pl-5">
+                <ol className="relative border-l border-gray-200 dark:border-gray-700">
+                  <li className="mb-10 ml-6">
+                    <span className="flex absolute -left-3 justify-center items-center w-6 h-6 bg-blue-200 rounded-full ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
+                      <svg
+                        aria-hidden="true"
+                        className="w-3 h-3 text-blue-600 dark:text-blue-400"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                          clipRule="evenodd"
+                        ></path>
+                      </svg>
+                    </span>
+                    <h3 className="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">
+                      {a.title}
+                    </h3>
+                    <time className="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+                      {a.fromdate} - {a.todate}
+                    </time>
+                    <p className="mb-1 text-base font-normal text-gray-700 dark:text-gray-300">
+                      {a.institute}
+                    </p>
+                    <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+                      {a.description}
+                    </p>
+                  </li>
+                </ol>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

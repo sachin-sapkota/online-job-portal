@@ -73,7 +73,7 @@ const findjob = () => {
   );
 
   if (error) return 'An error has occurred.';
-  if (!data) return 'Loading...';
+  if (!data && typeof data === undefined) return 'Loading...';
   console.log(profile?.data?.data);
   const jobdata =
     typeof datas != 'undefined' && datas.length > 0 ? datas : data;
@@ -246,15 +246,3 @@ const findjob = () => {
 };
 
 export default findjob;
-// const fetcher = (url) => fetch(url).then((res) => res.json());
-// const API = 'http://localhost:3000/api/user/getalljobs';
-// export async function getServerSideProps() {
-//   const repoInfo = await fetcher(API);
-//   return {
-//     props: {
-//       datas: {
-//         [API]: repoInfo,
-//       },
-//     },
-//   };
-// }
