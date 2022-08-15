@@ -32,6 +32,13 @@ exports.getuserstate = async (req, res) => {
     return res.send({ success: true });
   }
 };
+exports.getusertype = async (req, res) => {
+  if (req.user.id === undefined) {
+    return res.status(401).send({ success: false });
+  } else {
+    return res.send({ data: req.user.usertype, success: true });
+  }
+};
 
 exports.getuserprofilebyid = async (req, res) => {
   db1.execute(
@@ -104,7 +111,7 @@ exports.getjobbyid = async (req, res) => {
 
 exports.getemployerdetail = async (req, res) => {
   const id = req.params.id;
-  console.log(id, 'idddddddddddddd');
+
   db1.execute(
     `SELECT name, address,description,zipcode,latitude, longitude, size_of_company, est_date, sector,number, email, website, facebook, whatsapp, linkedin, twitter  FROM employer WHERE id=?`,
     [id],

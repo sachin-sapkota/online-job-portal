@@ -22,7 +22,7 @@ const employerdetail = (props) => {
       <div className="w-full h-screen pt-10">
         {props?.employerdetail?.map((a, i) => {
           return (
-            <div key={i} className="grid grid-cols-8  pt-[50px] scroll-smooth">
+            <div key={i} className="grid grid-cols-8  pt-[50px] ">
               <div className=" col-start-2 col-end-8   h-[300px]">
                 {/* profile section */}
                 <div className="flex flex-col ">

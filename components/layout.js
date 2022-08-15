@@ -10,8 +10,8 @@ const Layout = ({ children }) => {
   return (
     <div>
       <Commandp />
-      {route.pathname.startsWith('/employee') ||
-      route.pathname.startsWith('/employer') ? (
+      {route.pathname.startsWith('/employee/') ||
+      route.pathname.startsWith('/employer/') ? (
         ''
       ) : route.pathname === '/' ? (
         ''

@@ -9,6 +9,7 @@ const {
   getemployerdetail,
   getemployeedetail,
   getresume,
+  getusertype,
 } = require('../../controllers/user');
 const { Login, Register, Logout } = require('../../controllers/signwork');
 const permission = require('../../middleware/permission');
@@ -26,4 +27,5 @@ router.get('/getjobbyid/:id', getjobbyid);
 router.get('/getemployerdetail/:id', getemployerdetail);
 router.get('/getemployeedetail/:id', getemployeedetail);
 router.get('/getresume', getresume);
+router.get('/getusertype', authenticate, getusertype);
 module.exports = router;

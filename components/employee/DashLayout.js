@@ -216,7 +216,6 @@ import { GrClose } from 'react-icons/gr';
 import { ImSun } from 'react-icons/im';
 import { useTheme } from 'next-themes';
 import { FaRegBell } from 'react-icons/fa';
-// import { employerdashboard } from '../../variables/variables';
 
 const DashLayout = ({ children, active }) => {
   const [mounted, SetMounted] = useState(false);

@@ -168,7 +168,7 @@ const findjob = () => {
           </div>
         </form>
       </div>
-      <div className="flex mt-8 scroll-smooth px-9 ">
+      <div className="flex mt-8  px-9 ">
         {/* <div className=" w-[200px] flex-none h-auto   bg-gray-300 dark:bg-darkcard rounded-md"></div> */}
         <div className=" flex-1 min-w-[260px] h-auto  rounded-md grid  grid-cols-1 lg:grid-cols-2 gap-4 p-3 ">
           {jobdata?.map((b, i) => {
@@ -215,7 +215,7 @@ const findjob = () => {
                           className="flex gap-1 text-ellipsis overflow-hidden  text-gray-600 dark:text-gray-400 font-semibold 
  text-[13px] font-nunito cursor-pointer items-center capitalize"
                         >
-                          <BiBriefcase className="w-4 h-4 max-w-4 max-w-4 flex-none" />{' '}
+                          <BiBriefcase className="w-4 h-4 max-w-4 max-w-4 flex-none" />
                           <div className="text-ellipsis overflow-hidden">
                             {b.employer_name}
                           </div>

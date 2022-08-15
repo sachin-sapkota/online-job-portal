@@ -26,15 +26,15 @@ export const dashboard = [
     icon: <AiOutlineIdcard className="w-6 h-6 text-gray-600 " />,
   },
   {
-    id: 'appliedjob',
+    id: 'appliedjobs',
     title: 'Applied Jobs',
     links: '/employee/appliedjobs',
     icon: <BsBriefcase className="w-6 h-6 text-gray-600 " />,
   },
   {
-    id: 'favoritejob',
+    id: 'favouritejobs',
     title: 'Favourite Jobs',
-    links: '/employee/favoritejobs',
+    links: '/employee/favouritejobs',
     icon: <AiOutlineHeart className="w-6 h-6 text-gray-600 " />,
   },
   ,
