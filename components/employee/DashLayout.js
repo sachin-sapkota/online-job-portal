@@ -205,18 +205,20 @@ import { dashboard } from '../../variables/variables';
 // };
 
 // export default DashLayout;
-
-import { useState, useEffect, useCallback } from 'react';
+import api from '../../api/api';
+import { useState, useEffect, useCallback, Fragment } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Avatar from 'react-avatar';
+import { Menu, Transition } from '@headlessui/react';
 import { HiOutlineMenuAlt1 } from 'react-icons/hi';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { GrClose } from 'react-icons/gr';
 import { ImSun } from 'react-icons/im';
 import { useTheme } from 'next-themes';
 import { FaRegBell } from 'react-icons/fa';
-
+import useSWR from 'swr';
 const DashLayout = ({ children, active }) => {
   const [mounted, SetMounted] = useState(false);
   const [Navbar, setNavbar] = useState(false);
@@ -228,7 +230,13 @@ const DashLayout = ({ children, active }) => {
       setisshow(false);
     }
   }, []);
-  console.log(theme);
+
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    await api.post('/api/user/logout').catch((ee) => console.log(ee));
+    router.reload();
+  };
+
   const changeBackground = () => {
     if (window.scrollY > 15) {
       setNavbar(true);
@@ -252,6 +260,30 @@ const DashLayout = ({ children, active }) => {
       document.removeEventListener('keydown', escFunction);
     };
   }, [escFunction]);
+
+  const { data, error, isValidating } = useSWR(
+    '/api/user/userprofile',
+    async (apiURL) =>
+      await api
+        .get(apiURL)
+        .then((res) => res.data)
+        .catch((err) => console.log(err))
+  );
+  const [logged, setLogged] = useState(typeof data?.data?.name !== 'undefined');
+
+  useEffect(() => {
+    if (typeof data !== typeof undefined) {
+      if (data?.data?.name !== undefined) {
+        setLogged(true);
+      } else {
+        setLogged(false);
+      }
+    }
+    if (error) {
+      setLogged(false);
+    }
+  }, [data, error, isValidating]);
+
   if (!mounted) {
     return null;
   }
@@ -321,7 +353,7 @@ const DashLayout = ({ children, active }) => {
                   } rounded-r-3xl hover:bg-black/20  `}
                 >
                   <div className="">{item.icon}</div>
-                  <div className="overflow-hidden whitespace-nowrap text-[15px] font-nunito font-semibold  text-gray-600 dark:text-gray-200 ">
+                  <div className="overflow-hidden whitespace-nowrap text-[15px] font-extrabold tracking-wider  text-gray-900 dark:text-gray-300 ">
                     {item?.title}
                   </div>
                 </div>
@@ -377,7 +409,118 @@ const DashLayout = ({ children, active }) => {
               <FaRegBell className="w-6 h-6" />
             </div>
 
-            <div className="rounded-full p-2 bg-gray-300 w-9 h-9"></div>
+            <div
+              className={`${
+                logged ? 'flex hover:cursor-pointer z-[10]' : 'hidden'
+              }`}
+            >
+              <Menu
+                as="div"
+                className="relative inline-block text-left place-self-center"
+              >
+                <div>
+                  <Menu.Button className="inline-flex w-full justify-center items-center  ">
+                    <Avatar
+                      name={data?.data?.name?.split(' ')[0]}
+                      size="31px"
+                      textSizeRatio={3}
+                      className="rounded-full "
+                    ></Avatar>
+                  </Menu.Button>
+                </div>
+                <Transition
+                  as={Fragment}
+                  enter="transition ease-out duration-200"
+                  enterFrom="transform opacity-0 scale-195"
+                  enterTo="transform opacity-100 scale-200"
+                  leave="transition ease-in duration-175"
+                  leaveFrom="transform opacity-100 scale-100"
+                  leaveTo="transform opacity-0 scale-195"
+                >
+                  <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-200 overflow-hidden dark:divide-gray-700 rounded-md shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none bg-black/20 backdrop-blur-sm">
+                    <div className="flex flex-col items-center py-2 gap-1 bg-gray-300/80 dark:bg-black/10 backdrop-blur-sm">
+                      <Avatar
+                        name={data?.data?.name?.split(' ')[0]}
+                        size="40px"
+                        textSizeRatio={3}
+                        className="rounded-full"
+                      ></Avatar>
+                      <div className="capitalize font-semibold text-gray-800 dark:text-gray-300">
+                        {data?.data?.name}
+                      </div>
+                      <span className="text-sm text-gray-600 dark:text-gray-500">
+                        @{data?.data?.username}
+                      </span>
+                    </div>
+
+                    <div className="px-1 py-1 bg-gray-200 dark:bg-footer rounded-b-md  font-nunito ">
+                      <Menu.Item>
+                        {({ active }) => (
+                          <div
+                            className={`${
+                              active
+                                ? 'bg-indigo-600 text-white'
+                                : 'dark:text-gray-400 text-gray-800'
+                            }  flex w-full items-center group-hover:bg-indigo-800 hover:cursor-pointer hover:bg-indigo-300   rounded-md px-2 py-2 text-sm`}
+                          >
+                            <Link href="/employers/dashboard">Dashboard</Link>
+                          </div>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <div
+                            className={`${
+                              active
+                                ? 'bg-indigo-600 text-white'
+                                : 'dark:text-gray-400 text-gray-800'
+                            }  flex w-full items-center group-hover:bg-indigo-800  hover:bg-indigo-300   rounded-md px-2 py-2 text-sm`}
+                          >
+                            <div
+                              className={`${
+                                data?.data?.usertype === 'employer'
+                                  ? 'hidden'
+                                  : ''
+                              } `}
+                            >
+                              <Link href={`/employeedetail/${data?.data?.id}`}>
+                                My Profile
+                              </Link>
+                            </div>
+                            <div
+                              className={`${
+                                data?.data?.usertype === 'employee'
+                                  ? 'hidden'
+                                  : ''
+                              } `}
+                            >
+                              <Link href={`/employerdetail/${data?.data?.id}`}>
+                                My Profile
+                              </Link>
+                            </div>
+                          </div>
+                        )}
+                      </Menu.Item>
+
+                      <Menu.Item>
+                        {({ active }) => (
+                          <div
+                            onClick={handleLogout}
+                            className={`${
+                              active
+                                ? 'bg-indigo-600 text-white'
+                                : 'dark:text-gray-400 text-gray-800'
+                            }  flex w-full items-center group-hover:bg-indigo-800 hover:cursor-pointer hover:bg-indigo-300   rounded-md px-2 py-2 text-sm`}
+                          >
+                            Logout
+                          </div>
+                        )}
+                      </Menu.Item>
+                    </div>
+                  </Menu.Items>
+                </Transition>
+              </Menu>
+            </div>
           </div>
         </div>
 

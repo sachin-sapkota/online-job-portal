@@ -6,9 +6,22 @@ import Link from 'next/link';
 import { TbPencil } from 'react-icons/tb';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import DashLayout from '../../components/employer/Dashlayout';
+import useSWR from 'swr';
+import api from '../../api/api';
+import SyncLoader from 'react-spinners/SyncLoader';
+
 export default function Manage() {
   const [active, setActive] = useState('Last 6 Months');
-
+  const { data, error, isValidating } = useSWR(
+    '/api/employer/getjobbyemployerid',
+    async (apiURL) =>
+      await api
+        .get(apiURL)
+        .then((res) => res.data)
+        .catch((err) => console.log(err))
+  );
+  if (!data) return <div>loading</div>;
+  console.log(data);
   return (
     <div>
       <div className="grid grid-flow-row grid-cols-1 mx-1 md:mx-10 ">
@@ -18,7 +31,7 @@ export default function Manage() {
           </div>
         </div>
 
-        <div className="bg-white rounded-md  p-3 dark:bg-gray-900">
+        <div className=" rounded-md  p-3 ">
           <div className="flex items-center justify-between mt-4 px-3">
             <div className="text-sm font-medium font-sans ">
               My Posted Job Listing
@@ -105,7 +118,7 @@ export default function Manage() {
           <div className="mt-8 -z-3  ">
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
               <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-900 dark:text-gray-400">
                   <tr>
                     <th scope="col" className="px-6   py-4 font-sans">
                       Title
@@ -132,9 +145,12 @@ export default function Manage() {
                 </thead>
 
                 <tbody>
-                  {data.map((a) => {
+                  {data?.result?.map((a, i) => {
                     return (
-                      <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                      <tr
+                        key={i}
+                        className="bg-white border-b dark:bg-darkcard dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                      >
                         <th
                           scope="row"
                           className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap"
@@ -146,17 +162,17 @@ export default function Manage() {
                             <span className="flex items-center gap-1  text-gray-400">
                               <MdLocationPin className="w-4 h-4" />
                               <span className="text-sm  w-[130px] truncate overflow-hidden whitespace-nowrap">
-                                london, paris
+                                {a.address}
                               </span>
                             </span>
                           </div>
                         </th>
 
-                        <td className="px-6 py-4 text-indigo-500  hidden md:table-cell">
+                        <td className="px-6 py-4   hidden md:table-cell">
                           10 Applied
                         </td>
                         <td className="px-6 py-4  hidden md:table-cell">
-                          2014-1
+                          {a.deadline}
                         </td>
                         <td className="px-6 py-4  hidden sm:table-cell">
                           Active
@@ -204,7 +220,7 @@ Manage.getLayout = function getLayout(page) {
   return <DashLayout active="managejob">{page}</DashLayout>;
 };
 
-export const data = [
+export const data1 = [
   {
     jobid: 1,
     title: 'Senior developer in React',

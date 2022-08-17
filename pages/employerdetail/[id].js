@@ -121,7 +121,7 @@ const employerdetail = (props) => {
                   {/* About section */}
                   <div className="mt-8 block">
                     <span className="font-nunito block text-[14px] font-semibold   ">
-                      Job Description
+                      Company Description:
                     </span>
                     <span className="inline-block text-[13px]  mt-2 font-nunito text-gray-800 dark:text-gray-300">
                       {a.description}

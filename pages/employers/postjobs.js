@@ -63,6 +63,7 @@ export default function Jobs() {
   const handlesubmit = (e) => {
     e.preventDefault();
     localStorage.removeItem('job');
+    e.target.reset();
     axios
       .post('http://localhost:3000/api/employer/postjob', job)
 
@@ -73,7 +74,6 @@ export default function Jobs() {
         console.log(res);
       })
       .catch((err) => console.log(err));
-    e.target.reset();
   };
   return (
     <div>

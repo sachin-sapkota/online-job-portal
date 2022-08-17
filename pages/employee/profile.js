@@ -1,19 +1,45 @@
 import DashLayout from '../../components/employee/DashLayout';
 import Maps from '../../components/Map/Map';
 import { useState } from 'react';
+import api from '../../api/api';
 export default function profile() {
   const [point, setpoint] = useState({
     latitude: 0,
     longitude: 0,
   });
-
+  const [data, setdata] = useState({
+    name: '',
+    email: '',
+    number: '',
+    website: '',
+    dob: '',
+    salary_time: '',
+    salary_amt: '',
+    allow_search: '',
+    category: '',
+    description: '',
+    fb: '',
+    wa: '',
+    li: '',
+    country: 'Nepal',
+    city: '',
+    address: '',
+    zipcode: '',
+  });
+  const handlesubmit = (e) => {
+    e.preventDefault();
+    api
+      .post('/editprofile', data)
+      .then((res) => res.data)
+      .catch((err) => console.log(err));
+  };
   return (
     <div>
       <div className="grid grid-flow-row grid-cols-1 mx-2 md:mx-5 ">
         <div className=" flex flex-col">
           <div className="text-xl md:text-3xl font-semibold ">Profile</div>
         </div>
-        <form action="#" method="post">
+        <form onSubmit={handlesubmit}>
           <div className="flex flex-col gap-5  px-5">
             <div className="flex flex-col   gap-6 mt-2 md:mt-6 h-auto rounded-md  pt-8 ">
               <div className="flex flex-col md:flex-row justify-start items-start md:items-center gap-5">
@@ -51,9 +77,6 @@ export default function profile() {
                         className="block text-sm font-medium text-gray-700"
                       >
                         Name
-                        <span className="text-red-600 dark:text-red-300">
-                          *
-                        </span>
                       </label>
                       <input
                         type="text"
@@ -61,7 +84,11 @@ export default function profile() {
                         id="name"
                         autoComplete="name"
                         className="mt-1 focus:ring-indigo-500  dark:bg-black/20  bg-white focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
-                        required
+                        onChange={(e) =>
+                          setdata((prev) => {
+                            return { ...prev, name: e.target.value };
+                          })
+                        }
                       />
                     </div>
 
@@ -71,9 +98,6 @@ export default function profile() {
                         className="block text-sm font-medium text-gray-700"
                       >
                         Email Address{' '}
-                        <span className="text-red-600 dark:text-red-300">
-                          *
-                        </span>
                       </label>
                       <input
                         type="email"
@@ -81,7 +105,11 @@ export default function profile() {
                         id="email-adress"
                         autoComplete="email-adress"
                         className="mt-1 focus:ring-indigo-500  dark:bg-black/20  bg-white focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        required
+                        onChange={(e) =>
+                          setdata((prev) => {
+                            return { ...prev, email: e.target.value };
+                          })
+                        }
                       />
                     </div>
 
@@ -90,10 +118,7 @@ export default function profile() {
                         htmlFor="phone-number"
                         className="block text-sm font-medium text-gray-700"
                       >
-                        Phone Number{' '}
-                        <span className="text-red-600 dark:text-red-300">
-                          *
-                        </span>
+                        Phone Number
                       </label>
                       <input
                         type="text"
@@ -101,7 +126,11 @@ export default function profile() {
                         id="phone-number"
                         autoComplete="phone"
                         className="mt-1 focus:ring-indigo-500  dark:bg-black/20  bg-white focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        required
+                        onChange={(e) =>
+                          setdata((prev) => {
+                            return { ...prev, number: e.target.value };
+                          })
+                        }
                       />
                     </div>
 
@@ -122,6 +151,11 @@ export default function profile() {
                           id="company-website"
                           className="focus:ring-indigo-500 dark:bg-black/20  focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                           placeholder="www.example.com"
+                          onChange={(e) =>
+                            setdata((prev) => {
+                              return { ...prev, website: e.target.value };
+                            })
+                          }
                         />
                       </div>
                     </div>
@@ -132,9 +166,6 @@ export default function profile() {
                         className="block text-sm font-medium text-gray-700 dark:text-gray-300"
                       >
                         Date of Birth
-                        <span className="text-red-600 dark:text-red-300">
-                          *
-                        </span>
                       </label>
                       <input
                         type="date"
@@ -142,7 +173,11 @@ export default function profile() {
                         id="dob"
                         autoComplete="dob"
                         className="mt-1 focus:ring-indigo-500  dark:bg-black/20  bg-white focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        required
+                        onChange={(e) =>
+                          setdata((prev) => {
+                            return { ...prev, dob: e.target.value };
+                          })
+                        }
                       />
                     </div>
 
@@ -152,15 +187,17 @@ export default function profile() {
                         className="block text-sm font-medium text-gray-900 dark:text-gray-300"
                       >
                         Salary
-                        <span className="text-red-600 dark:text-red-300">
-                          *
-                        </span>
                       </label>
                       <div className="mt-1 flex rounded-md shadow-sm">
                         <select
                           id="salary-duration"
                           name="salary-duration"
                           className=" mr-2 block w-1/2 py-2 px-3 border dark:bg-black/20 text-gray-900 dark:text-gray-500 border-gray-300  rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                          onChange={(e) =>
+                            setdata((prev) => {
+                              return { ...prev, salary_time: e.target.value };
+                            })
+                          }
                         >
                           <option className="dark:bg-darkcard/90 bg-white ">
                             Monthly
@@ -178,6 +215,11 @@ export default function profile() {
                           id="salary-amount"
                           className="pl-2  dark:bg-black/20 bg-white focus:ring-indigo-500  focus:border-indigo-500  block w-1/2 rounded-none rounded-l-md sm:text-sm border-gray-300"
                           placeholder="Salary"
+                          onChange={(e) =>
+                            setdata((prev) => {
+                              return { ...prev, salary_amt: e.target.value };
+                            })
+                          }
                         />
                         <span className="dark:bg-black/20 inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
                           NPR
@@ -191,15 +233,17 @@ export default function profile() {
                         className="block text-sm font-medium text-gray-700 dark:text-gray-300"
                       >
                         Allow in Search and Listing
-                        <span className="text-red-600 dark:text-red-300">
-                          *
-                        </span>
                       </label>
                       <select
                         id="allow-search"
                         name="allow-search"
                         autoComplete="allow-search"
                         className=" dark:bg-black/20 appearance-none transition bg-clip-padding ease-in-out mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        onChange={(e) =>
+                          setdata((prev) => {
+                            return { ...prev, allow_search: e.target.value };
+                          })
+                        }
                       >
                         <option className="dark:bg-darkcard/90 bg-white ">
                           Yes
@@ -215,14 +259,16 @@ export default function profile() {
                         className="block text-sm font-medium text-gray-700"
                       >
                         Category
-                        <span className="text-red-600 dark:text-red-300">
-                          *
-                        </span>
                       </label>
                       <select
                         id="category"
                         name="category"
                         className="dark:bg-black/20 mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        onChange={(e) =>
+                          setdata((prev) => {
+                            return { ...prev, category: e.target.value };
+                          })
+                        }
                       >
                         <option className="dark:bg-darkcard/90 bg-white ">
                           Accounting/Finance
@@ -358,10 +404,7 @@ export default function profile() {
                         htmlFor="about-yourself"
                         className="block text-sm font-medium text-gray-700 dark:text-gray-300"
                       >
-                        Candidate Description{' '}
-                        <span className="text-red-600 dark:text-red-300">
-                          *
-                        </span>
+                        Candidate Description
                       </label>
                       <div className="mt-1">
                         <textarea
@@ -370,7 +413,11 @@ export default function profile() {
                           rows={10}
                           className="shadow-sm dark:bg-black/20 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                           defaultValue={''}
-                          required
+                          onChange={(e) =>
+                            setdata((prev) => {
+                              return { ...prev, description: e.target.value };
+                            })
+                          }
                         />
                       </div>
                     </div>
@@ -384,7 +431,7 @@ export default function profile() {
                   Social Network
                 </span>
                 <span className="text-xs font-medium text-red-800 dark:text-red-400 pl-3 ">
-                  Not required
+                  Not
                 </span>
               </span>
 
@@ -404,6 +451,11 @@ export default function profile() {
                         id="company-name"
                         autoComplete="given-name"
                         className="mt-1 focus:ring-indigo-500  dark:bg-black/20  bg-white focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        onChange={(e) =>
+                          setdata((prev) => {
+                            return { ...prev, fb: e.target.value };
+                          })
+                        }
                       />
                     </div>
 
@@ -420,22 +472,11 @@ export default function profile() {
                         id="whatsapp"
                         autoComplete="given-name"
                         className="mt-1 focus:ring-indigo-500  dark:bg-black/20  bg-white focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                      />
-                    </div>
-
-                    <div className=" [&>*]:text-gray-900  [&>*]:dark:text-gray-300 col-span-6 sm:col-span-3">
-                      <label
-                        htmlFor="Twitter"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Facebook
-                      </label>
-                      <input
-                        type="text"
-                        name="Twitter"
-                        id="Twitter"
-                        autoComplete="Twitter"
-                        className="mt-1 focus:ring-indigo-500  dark:bg-black/20  bg-white focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        onChange={(e) =>
+                          setdata((prev) => {
+                            return { ...prev, wa: e.target.value };
+                          })
+                        }
                       />
                     </div>
 
@@ -452,6 +493,11 @@ export default function profile() {
                         id="linkedin"
                         autoComplete="linkedin"
                         className="mt-1 focus:ring-indigo-500  dark:bg-black/20  bg-white focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        onChange={(e) =>
+                          setdata((prev) => {
+                            return { ...prev, li: e.target.value };
+                          })
+                        }
                       />
                     </div>
                   </div>
@@ -474,19 +520,15 @@ export default function profile() {
                         htmlFor="country"
                         className="block text-sm font-medium text-gray-700"
                       >
-                        Country{' '}
-                        <span className="text-red-600 dark:text-red-300">
-                          *
-                        </span>
+                        Country
                       </label>
                       <select
                         id="size-of-company"
                         name="size-of-company"
                         autoComplete="size-of-company"
-                        required
                         className=" appearance-none mt-1 block w-full py-2 px-3 border border-gray-300 bg-white dark:bg-black/20 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       >
-                        <option className="dark:bg-darkcard/90 bg-white ">
+                        <option className="dark:bg-darkcard/90 bg-white selected">
                           Nepal
                         </option>
                       </select>
@@ -497,10 +539,7 @@ export default function profile() {
                         htmlFor="city"
                         className="block text-sm font-medium text-gray-700"
                       >
-                        City{' '}
-                        <span className="text-red-600 dark:text-red-300">
-                          *
-                        </span>
+                        City
                       </label>
                       <input
                         type="text"
@@ -508,6 +547,11 @@ export default function profile() {
                         id="city"
                         autoComplete="city"
                         className="mt-1 focus:ring-indigo-500  dark:bg-black/20  bg-white focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        onChange={(e) =>
+                          setdata((prev) => {
+                            return { ...prev, city: e.target.value };
+                          })
+                        }
                       />
                     </div>
 
@@ -517,9 +561,6 @@ export default function profile() {
                         className="block text-sm font-medium text-gray-700"
                       >
                         Address{' '}
-                        <span className="text-red-600 dark:text-red-300">
-                          *
-                        </span>
                       </label>
                       <input
                         type="text"
@@ -527,6 +568,11 @@ export default function profile() {
                         id="address"
                         autoComplete="address"
                         className="mt-1 focus:ring-indigo-500  dark:bg-black/20  bg-white focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        onChange={(e) =>
+                          setdata((prev) => {
+                            return { ...prev, address: e.target.value };
+                          })
+                        }
                       />
                     </div>
 
@@ -535,10 +581,7 @@ export default function profile() {
                         htmlFor="zip"
                         className="block text-sm font-medium text-gray-700"
                       >
-                        Zip Code{' '}
-                        <span className="text-red-600 dark:text-red-300">
-                          *
-                        </span>
+                        Zip Code
                       </label>
                       <input
                         type="number"
@@ -546,6 +589,11 @@ export default function profile() {
                         id="zip"
                         autoComplete="zip"
                         className="mt-1 focus:ring-indigo-500  dark:bg-black/20  bg-white focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        onChange={(e) =>
+                          setdata((prev) => {
+                            return { ...prev, zipcode: e.target.value };
+                          })
+                        }
                       />
                     </div>
                     <div className=" [&>*]:text-gray-900  [&>*]:dark:text-gray-300 col-span-6 sm:col-span-3">
@@ -585,12 +633,13 @@ export default function profile() {
                     <Maps setpoint={setpoint} />
                   </div>
                   <div className="px-4 py-3 bg-whiteback dark:bg-darkcard text-right sm:px-6 flex justify-start ">
-                    <button
+                    <div
+                      onClick={handlesubmit}
                       type="submit"
                       className="inline-flex justify-center py-2 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                       Save
-                    </button>
+                    </div>
                   </div>
                 </div>
               </div>

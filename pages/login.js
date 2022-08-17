@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { CgGoogle, CgFacebook, CgTwitter } from 'react-icons/cg';
 import toast from 'react-hot-toast';
+import api from '../api/api';
 const login = () => {
   const router = useRouter();
   const [loggeduser, setloggeduser] = useState(false);
@@ -16,25 +17,47 @@ const login = () => {
   const [usertype, setusertype] = useState('employee');
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios
-      .post('http://localhost:3000/api/user/login', {
-        email: user.email,
-        password: user.password,
-        usertype: usertype,
-      })
-      .then((res) => {
-        console.log(res.data);
-        res?.data?.msg !== undefined ? toast.success(res.data?.msg) : '';
-        if (res?.data?.success) {
-          router.push('/');
-        }
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-        err?.response?.data.msg !== undefined
-          ? toast.error(err.response.data.msg)
-          : '';
-      });
+    if (usertype === 'employee') {
+      await api
+        .post('/api/employee/login', {
+          email: user.email,
+          password: user.password,
+          usertype: usertype,
+        })
+        .then((res) => {
+          console.log(res.data);
+          res?.data?.msg !== undefined ? toast.success(res.data?.msg) : '';
+          if (res?.data?.success) {
+            router.push('/');
+          }
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+          err?.response?.data.msg !== undefined
+            ? toast.error(err.response.data.msg)
+            : '';
+        });
+    } else {
+      await api
+        .post('/api/employer/login', {
+          email: user.email,
+          password: user.password,
+          usertype: usertype,
+        })
+        .then((res) => {
+          console.log(res.data);
+          res?.data?.msg !== undefined ? toast.success(res.data?.msg) : '';
+          if (res?.data?.success) {
+            router.push('/');
+          }
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+          err?.response?.data.msg !== undefined
+            ? toast.error(err.response.data.msg)
+            : '';
+        });
+    }
   };
   const getprofiles = () => {
     axios
@@ -59,7 +82,6 @@ const login = () => {
 
   useEffect(() => {
     getprofiles();
-    console.log('logggedddd', loggeduser);
   }, []);
   useEffect(() => {
     if (loggeduser) {

@@ -4,7 +4,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const Footer = () => {
-  console.log('hello footer');
   return (
     <div className="relative font-nunito text-sm bg-deep-purple-accent-400 dark:bg-darkback">
       <svg

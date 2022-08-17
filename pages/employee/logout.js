@@ -59,7 +59,7 @@ export default function logout() {
                         as="h3"
                         className="text-lg leading-6 font-medium text-gray-900"
                       >
-                        Deactivate account
+                        Logout
                       </Dialog.Title>
                       <div className="mt-2">
                         <p className="text-sm text-gray-500">

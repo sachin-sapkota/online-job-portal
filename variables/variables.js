@@ -45,7 +45,7 @@ export const dashboard = [
     icon: <FaRegBell className="w-6 h-6 text-gray-600 " />,
   },
   {
-    id: 'changepassowrd',
+    id: 'changepassword',
     title: 'Change Password',
     links: '/employee/changepassword',
     icon: <RiLockPasswordLine className="w-6 h-6 text-gray-600 " />,

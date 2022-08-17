@@ -7,11 +7,12 @@ import { CgCloseR } from 'react-icons/cg';
 import { useTheme } from 'next-themes';
 import { RiSunFill } from 'react-icons/ri';
 import { MdDarkMode } from 'react-icons/md';
-import axios from 'axios';
+import SyncLoader from 'react-spinners/SyncLoader';
 import Avatar from 'react-avatar';
 import useSWR from 'swr';
 import { Menu, Transition } from '@headlessui/react';
 import toast, { Toaster } from 'react-hot-toast';
+import api from '../api/api';
 const Navbar = () => {
   const [mounted, SetMounted] = useState(false);
   const { theme, setTheme } = useTheme();
@@ -37,9 +38,14 @@ const Navbar = () => {
     }
   }, []);
   const { data, error, isValidating } = useSWR(
-    'http://localhost:3000/api/user/userprofile',
-    async (apiURL) => await fetch(apiURL).then((res) => res.json())
+    '/api/user/userprofile',
+    async (apiURL) =>
+      await api
+        .get(apiURL)
+        .then((res) => res.data)
+        .catch((err) => console.log(err))
   );
+
   const [logged, setLogged] = useState(typeof data?.data?.name !== 'undefined');
 
   useEffect(() => {
@@ -56,9 +62,7 @@ const Navbar = () => {
 
   const handleLogout = async (e) => {
     e.preventDefault();
-    await axios.post('http://localhost:3000/api/user/logout', {
-      withCredentials: true,
-    });
+    await api.post('/api/user/logout').catch((ee) => console.log(ee));
     router.reload();
   };
 
@@ -77,7 +81,12 @@ const Navbar = () => {
   if (!mounted) {
     return null;
   }
-  console.log(data);
+  if (!data && !error && logged)
+    return (
+      <div className="flex h-screen w-screeen items-center justify-center">
+        <SyncLoader />
+      </div>
+    );
   return (
     <div className="relative ">
       <Toaster
@@ -106,19 +115,21 @@ const Navbar = () => {
       <div
         className={`${
           Navbar
-            ? ` w-full ring-1 ring-opacity-5 ring-gray-300/80 dark:ring-gray-800/10 py-1  px-3 justify-between sm:justify-between md:justify-center transition duration-300 bg-whiteback bg-opacity-90 backdrop-blur-sm ease-in flex h-[65px]  fixed  dark:bg-black/40 shadow-2xl z-[100]`
+            ? ` w-full ring-1 ring-opacity-5 ring-gray-300/80 dark:ring-gray-800/10 py-1  px-3 justify-between sm:justify-between md:justify-center transition duration-300 bg-whiteback/50  backdrop-blur-sm ease-in flex h-[65px]  fixed  dark:bg-black/40 shadow-2xl z-[100]`
             : 'flex justify-between sm:justify-between md:justify-center bg-transparent absolute  h-[70px] py-1  w-full mt-1 pr-2  '
         } select-none  `}
       >
-        <div className="inset-y-0 my-auto ">
-          <Image
-            className="object-contain"
-            src={require('../images/logo3.png')}
-            width={125}
-            height={40}
-            alt={'logo'}
-          />
-        </div>
+        <Link href="/">
+          <div className="inset-y-0 my-auto ">
+            <Image
+              className="object-contain"
+              src={require('../images/logo3.png')}
+              width={125}
+              height={40}
+              alt={'logo'}
+            />
+          </div>
+        </Link>
         <div className="  mx-1 flex md:hidden sm:flex order-last justify-center items-center ">
           <GiHamburgerMenu className="cursor-pointer " onClick={toggle} />
         </div>
@@ -126,24 +137,24 @@ const Navbar = () => {
           <div
             className={`${
               data?.data?.usertype === 'employee' ? 'hidden' : ''
-            } hover:translate-y-[-1px] cursor-pointer active:text-red-600   `}
+            } hover:translate-y-[-1px] cursor-pointer active:text-red-600  font-extrabold text-lg  `}
           >
             <Link href="/findworker"> Find Worker</Link>
           </div>
           <div
             className={`${
               data?.data?.usertype === 'employer' ? 'hidden' : ''
-            } hover:translate-y-[-1px] cursor-pointer active:text-red-600   `}
+            } hover:translate-y-[-1px] cursor-pointer active:text-red-600 font-extrabold text-lg   `}
           >
             <Link href="/findjob">Find Work</Link>
           </div>
-          <div className="hover:translate-y-[-1px] cursor-pointer active:text-red-600   ">
-            <Link href="/explore">Explore</Link>
+          <div className="hover:translate-y-[-1px] cursor-pointer active:text-red-600 font-extrabold text-lg   ">
+            <Link href="/contact">Contact </Link>
           </div>
-          <div className="hover:translate-y-[-1px] cursor-pointer active:text-red-600   ">
+          <div className="hover:translate-y-[-1px] cursor-pointer active:text-red-600 font-extrabold text-lg   ">
             <Link href="/blog">Blog</Link>
           </div>
-          <div className="hover:translate-y-[-1px] cursor-pointer active:text-red-600   ">
+          <div className="hover:translate-y-[-1px] cursor-pointer active:text-red-600  font-extrabold text-lg  ">
             <Link href="/aboutus">About Us</Link>
           </div>
         </div>
@@ -163,14 +174,25 @@ const Navbar = () => {
             <CgCloseR className="dark:text-white text-black text-3xl" />
           </div>
 
-          <div className="hover:translate-y-[-1px]  cursor-pointer active:text-red-600   ">
+          <div
+            className={`${
+              data?.data?.usertype === 'employee' ? 'hidden' : ''
+            } hover:translate-y-[-1px] cursor-pointer active:text-red-600   `}
+          >
             <Link href="/findworker"> Find Worker</Link>
           </div>
-          <div className="hover:translate-y-[-1px] cursor-pointer active:text-red-600   ">
-            <Link href="/">Find Work</Link>
+          <div
+            className={`${
+              data?.data?.usertype === 'employer' ? 'hidden' : ''
+            } hover:translate-y-[-1px] cursor-pointer active:text-red-600   `}
+          >
+            <Link href="/findjob">Find Work</Link>
           </div>
           <div className="hover:translate-y-[-1px] cursor-pointer active:text-red-600   ">
             <Link href="/">Explore</Link>
+          </div>
+          <div className="hover:translate-y-[-1px] cursor-pointer active:text-red-600 font-extrabold text-lg   ">
+            <Link href="/contact">Contact </Link>
           </div>
           <div className="hover:translate-y-[-1px] cursor-pointer active:text-red-600   ">
             <Link href="/">Blog</Link>
@@ -249,7 +271,7 @@ const Navbar = () => {
                 leaveTo="transform opacity-0 scale-195"
               >
                 <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-200 overflow-hidden dark:divide-gray-700 rounded-md shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none bg-black/20 backdrop-blur-sm">
-                  <div className="flex flex-col items-center py-2 gap-1 bg-gray-300/80 dark:bg-black/70 backdrop-blur-sm">
+                  <div className="flex flex-col items-center py-2 gap-1 bg-gray-300/80 dark:bg-black/10 backdrop-blur-sm">
                     <Avatar
                       name={data?.data?.name?.split(' ')[0]}
                       size="40px"
@@ -274,7 +296,7 @@ const Navbar = () => {
                               : 'dark:text-gray-400 text-gray-800'
                           }  flex w-full items-center group-hover:bg-indigo-800 hover:cursor-pointer hover:bg-indigo-300   rounded-md px-2 py-2 text-sm`}
                         >
-                          <Link href="/employee/profile">Dashboard</Link>
+                          <Link href="/employers/dashboard">Dashboard</Link>
                         </div>
                       )}
                     </Menu.Item>
@@ -287,37 +309,32 @@ const Navbar = () => {
                               : 'dark:text-gray-400 text-gray-800'
                           }  flex w-full items-center group-hover:bg-indigo-800  hover:bg-indigo-300   rounded-md px-2 py-2 text-sm`}
                         >
-                          <Link href="/employee/profile">My Profile</Link>
-                        </div>
-                      )}
-                    </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <div
-                          className={`${
-                            active
-                              ? 'bg-indigo-600 text-white'
-                              : 'dark:text-gray-400 '
-                          }  flex w-full items-center group-hover:bg-indigo-800 hover:cursor-pointer hover:bg-indigo-300   rounded-md px-2 py-2 text-sm`}
-                        >
-                          <Link href="/employee/profile">Applied Jobs</Link>
+                          <div
+                            className={`${
+                              data?.data?.usertype === 'employer'
+                                ? 'hidden'
+                                : ''
+                            } `}
+                          >
+                            <Link href={`/employeedetail/${data?.data?.id}`}>
+                              My Profile
+                            </Link>
+                          </div>
+                          <div
+                            className={`${
+                              data?.data?.usertype === 'employee'
+                                ? 'hidden'
+                                : ''
+                            } `}
+                          >
+                            <Link href={`/employerdetail/${data?.data?.id}`}>
+                              My Profile
+                            </Link>
+                          </div>
                         </div>
                       )}
                     </Menu.Item>
 
-                    <Menu.Item>
-                      {({ active }) => (
-                        <div
-                          className={`${
-                            active
-                              ? 'bg-indigo-600 text-white'
-                              : 'dark:text-gray-400 text-gray-800'
-                          }  flex w-full items-center group-hover:bg-indigo-800 hover:cursor-pointer hover:bg-indigo-300   rounded-md px-2 py-2 text-sm`}
-                        >
-                          <Link href="/employee/profile">Favourite Jobs</Link>
-                        </div>
-                      )}
-                    </Menu.Item>
                     <Menu.Item>
                       {({ active }) => (
                         <div

@@ -11,22 +11,18 @@ import { GiSandsOfTime } from 'react-icons/gi';
 import toast, { Toaster } from 'react-hot-toast';
 import useSWR from 'swr';
 import Link from 'next/link';
-import {
-  GrLinkedinOption,
-  GrInstagram,
-  GrTwitter,
-  GrFacebookOption,
-} from 'react-icons/gr';
-import axios from 'axios';
+// import {
+//   GrLinkedinOption,
+//   GrInstagram,
+//   GrTwitter,
+//   GrFacebookOption,
+// } from 'react-icons/gr';
 import api from '../../api/api';
 const job = (props) => {
-  // const { data, error } = useSWR('http://localhost:3000/api/');
   const applyjob = async (id) => {
-    console.log(id);
     const data = await api.post('/api/employee/applyjob', { id });
     const msg = data.data.msg;
     typeof msg !== 'undefined' ? toast.success(msg) : '';
-    // typeof data.data.posted !== undefined ? setposted(data.data.posted)
   };
   return (
     <div className="w-full h-screen pt-10">
@@ -55,7 +51,7 @@ const job = (props) => {
       />
       {props?.job?.map((a, i) => {
         return (
-          <div key={a.id} className="grid grid-cols-8  pt-[50px] scroll-smooth">
+          <div key={i} className="grid grid-cols-8  pt-[50px] scroll-smooth">
             <div className=" col-start-2 col-end-8 lg:col-end-6  h-[300px]">
               {/* profile section */}
               <div className="flex flex-col ">
@@ -93,11 +89,11 @@ const job = (props) => {
                 </div>
                 <div className="flex flex-col mt-4 ">
                   <div
-                    className="flex gap-3 lg:hidden cursor:pointer "
+                    className="flex gap-3 lg:hidden select-none cursor-pointer "
                     onClick={() => applyjob(a.id)}
                   >
-                    <span className="flex-1 bg-blue-700 text-white rounded-md text-center font-nunito text-[13px] py-2 place-self-center ">
-                      Apply for job
+                    <span className="flex-1 bg-blue-700 capitalize text-white rounded-md text-center font-nunito text-[13px] py-2 place-self-center ">
+                      apply for job
                     </span>
                     <div className="bg-gray-200 py-3 px-3  rounded-md flex items-center justify-center">
                       <BsFillBookmarkHeartFill className="text-indigo-700 w-3 h-3" />{' '}
@@ -223,7 +219,7 @@ const job = (props) => {
                 </div>
                 {/* About section */}
                 <div className="mt-8 block">
-                  <span className="font-nunito block text-[14px] font-semibold   ">
+                  <span className=" block text-[14px] font-semibold   ">
                     Job Description
                   </span>
                   <span className="inline-block text-[13px]  mt-2 font-nunito text-gray-800 dark:text-gray-300">
@@ -282,10 +278,10 @@ const job = (props) => {
             <div className="hidden lg:flex lg:flex-col col-span-2 p-0 lg:px-4">
               <div className="flex flex-col">
                 <div
-                  className="cursor-pointer flex gap-3"
+                  className="cursor-pointer select-none flex gap-3"
                   onClick={() => applyjob(a.id)}
                 >
-                  <span className="flex-1 bg-blue-700 text-white rounded-md text-center font-nunito text-[13px] py-2 ">
+                  <span className="flex-1  bg-blue-700 text-white rounded-md text-center font-nunito text-[13px] py-2 ">
                     Apply For Job
                   </span>
                   <div className="bg-gray-200 py-2 px-3 rounded-md flex items-center justify-center flex-none">
@@ -313,20 +309,6 @@ const job = (props) => {
                       </span>
                     </span>
                   </div>
-
-                  <div className="flex items-center justify-start gap-4"></div>
-
-                  <div className="flex items-center justify-start gap-4"></div>
-
-                  <div className="flex items-center justify-start gap-4"></div>
-
-                  <div className="flex items-center justify-start gap-4"></div>
-
-                  <div className="flex items-center justify-start gap-4"></div>
-
-                  <div className="flex items-center justify-start gap-4"></div>
-
-                  <div className="flex items-center justify-start gap-4"></div>
                 </div>
                 {/* 
                         socail media */}
