@@ -1,10 +1,5 @@
-import Multiselect from '../components/Multiselect';
 const findworker = () => {
-  return (
-    <div>
-      <Multiselect />
-    </div>
-  );
+  return <div></div>;
 };
 
 export default findworker;

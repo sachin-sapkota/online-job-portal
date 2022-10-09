@@ -22,7 +22,7 @@ const employerdetail = (props) => {
       <div className="w-full h-screen pt-10">
         {props?.employerdetail?.map((a, i) => {
           return (
-            <div key={i} className="grid grid-cols-8  pt-[50px] scroll-smooth">
+            <div key={i} className="grid grid-cols-8  pt-[50px] ">
               <div className=" col-start-2 col-end-8   h-[300px]">
                 {/* profile section */}
                 <div className="flex flex-col ">
@@ -121,7 +121,7 @@ const employerdetail = (props) => {
                   {/* About section */}
                   <div className="mt-8 block">
                     <span className="font-nunito block text-[14px] font-semibold   ">
-                      Job Description
+                      Company Description:
                     </span>
                     <span className="inline-block text-[13px]  mt-2 font-nunito text-gray-800 dark:text-gray-300">
                       {a.description}

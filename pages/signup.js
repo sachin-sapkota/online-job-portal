@@ -16,7 +16,7 @@ const password_regex = /^(?=.*?[a-z])(?=.*?[0-9]).{8,}$/;
 const username_regex = /^(?=.*?[a-z])(?=.*?[0-9]).{4,}$/;
 const name_regex = /^[a-zA-Z]+ [a-zA-Z]+$/;
 const number_regex = /(98|97)\d{8}/g;
-
+import api from '../api/api';
 const signup = () => {
   const router = useRouter();
   const [usertype, setusertype] = useState('employee');
@@ -30,8 +30,6 @@ const signup = () => {
     password: '',
     confpassword: '',
   });
-  const [error, seterror] = useState('');
-  const [sucess, setsucess] = useState('');
 
   const userRef = useRef();
 
@@ -55,9 +53,6 @@ const signup = () => {
 
   const [loggeduser, setloggeduser] = useState(false);
 
-  const fetcher = (url) => fetch(url).then((res) => res.json());
-  const data = useSWR('http://localhost:3000/api/user/userstate', fetcher);
-
   useEffect(() => {
     const result = name_regex.test(user.name);
 
@@ -67,18 +62,7 @@ const signup = () => {
     const result = number_regex.test(user.number);
     setvalidnumber(result);
   }, [user.number]);
-  useEffect(() => {
-    async function getData() {
-      if (typeof data?.data !== typeof undefined) {
-        if (data.data?.success) {
-          setloggeduser(true);
-        } else {
-          setloggeduser(false);
-        }
-      }
-    }
-    getData();
-  }, [data.data]);
+
   useEffect(() => {
     const result = email_regex.test(user.email);
     setvalidemail(result);
@@ -104,11 +88,10 @@ const signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    axios
-      .post(
-        'http://localhost:3000/api/user/register',
-        {
+    e.target.reset();
+    if (usertype === 'employee') {
+      await api
+        .post('/api/employee/register', {
           name: user.name,
           email: user.email,
           password: user.password,
@@ -116,29 +99,77 @@ const signup = () => {
           usertype: usertype,
           number: user.number,
           username: user.username,
-        },
-        { useCredential: true }
-      )
-
-      .then((res) => {
-        res?.data?.msg !== undefined
-          ? toast.success('Sign up Successfull!')
-          : '';
-      })
-      .catch((err) =>
-        err?.response?.data?.msg !== undefined
-          ? toast.error(err?.response?.data?.msg)
-          : ''
-      );
-    if (error) {
-      console.log(error);
+        })
+        .then((res) => {
+          console.log(res?.data);
+          res?.data?.msg !== undefined ? toast.success(res?.data?.msg) : '';
+          if (res?.data?.success) {
+            router.push('/');
+          }
+        })
+        .catch((err) =>
+          err?.response?.data?.msg !== undefined
+            ? toast.error(err?.response?.data?.msg)
+            : ''
+        );
+    } else {
+      await api
+        .post('/api/employer/register', {
+          name: user.name,
+          email: user.email,
+          password: user.password,
+          confPassword: user.confpassword,
+          usertype: usertype,
+          number: user.number,
+          username: user.username,
+        })
+        .then((res) => {
+          res?.data?.msg !== undefined
+            ? toast.success('Sign up Successfull!')
+            : '';
+          if (res?.data?.success) {
+            router.push('/');
+          }
+        })
+        .catch((err) =>
+          err?.response?.data?.msg !== undefined
+            ? toast.error(err?.response?.data?.msg)
+            : ''
+        );
     }
   };
-  if (data?.data?.success) {
-    router.push('/');
-  }
 
-  if (data.error) return <div> error occured </div>;
+  const getprofiles = () => {
+    axios
+      .get('http://localhost:3000/api/user/userstate', {
+        withCredentials: true,
+      })
+
+      .then((res) => {
+        console.log(res.data);
+        if (res?.data?.success) {
+          setloggeduser(true);
+        } else {
+          setloggeduser(false);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        // err?.data?.msg !== undefined ? toast.error(err.data.msg) : '';
+        setloggeduser(false);
+      });
+  };
+
+  useEffect(() => {
+    getprofiles();
+  }, []);
+  useEffect(() => {
+    if (loggeduser) {
+      router.push('/');
+    }
+    if (!loggeduser) {
+    }
+  }, [loggeduser]);
 
   return (
     <>
@@ -480,12 +511,12 @@ const signup = () => {
                       <Link href="/login">Login </Link>
                     </div>
                   </div>
-                  <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5 dark:text-white">
+                  {/* <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5 dark:text-white">
                     <div className="text-center font-semibold mx-4 mb-0">
                       OR
                     </div>
-                  </div>
-                  <div className="flex gap-4 items-center justify-start">
+                  </div> */}
+                  {/* <div className="flex gap-4 items-center justify-start">
                     <div className="pr-4 font-semibold dark:text-white">
                       Sign up with
                     </div>
@@ -499,7 +530,7 @@ const signup = () => {
                     <div className="shadow-md flex border-[1px] rounded-full justify-center items-center border-none w-[40px] h-[40px] p-[1px] bg-indigo-700 text-white">
                       <CgTwitter />
                     </div>
-                  </div>
+                  </div> */}
                 </form>
               </div>
             </div>

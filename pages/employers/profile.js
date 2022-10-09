@@ -51,9 +51,6 @@ export default function profile() {
                         className="block text-sm font-medium text-gray-700"
                       >
                         Name
-                        <span className="text-red-600 dark:text-red-300">
-                          *
-                        </span>
                       </label>
                       <input
                         type="text"
@@ -61,7 +58,6 @@ export default function profile() {
                         id="name"
                         autoComplete="name"
                         className="mt-1 focus:ring-indigo-500  dark:bg-black/20  bg-white focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md "
-                        required
                       />
                     </div>
 
@@ -71,9 +67,6 @@ export default function profile() {
                         className="block text-sm font-medium text-gray-700"
                       >
                         Email Address{' '}
-                        <span className="text-red-600 dark:text-red-300">
-                          *
-                        </span>
                       </label>
                       <input
                         type="email"
@@ -81,7 +74,6 @@ export default function profile() {
                         id="email-adress"
                         autoComplete="email-adress"
                         className="mt-1 focus:ring-indigo-500  dark:bg-black/20  bg-white focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        required
                       />
                     </div>
 
@@ -91,9 +83,6 @@ export default function profile() {
                         className="block text-sm font-medium text-gray-700"
                       >
                         Phone Number{' '}
-                        <span className="text-red-600 dark:text-red-300">
-                          *
-                        </span>
                       </label>
                       <input
                         type="text"
@@ -101,7 +90,6 @@ export default function profile() {
                         id="phone-number"
                         autoComplete="phone"
                         className="mt-1 focus:ring-indigo-500  dark:bg-black/20  bg-white focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        required
                       />
                     </div>
 
@@ -132,9 +120,6 @@ export default function profile() {
                         className="block text-sm font-medium text-gray-700 dark:text-gray-300"
                       >
                         Date of Birth
-                        <span className="text-red-600 dark:text-red-300">
-                          *
-                        </span>
                       </label>
                       <input
                         type="date"
@@ -142,7 +127,6 @@ export default function profile() {
                         id="dob"
                         autoComplete="dob"
                         className="mt-1 focus:ring-indigo-500  dark:bg-black/20  bg-white focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        required
                       />
                     </div>
 
@@ -152,9 +136,6 @@ export default function profile() {
                         className="block text-sm font-medium text-gray-900 dark:text-gray-300"
                       >
                         Salary
-                        <span className="text-red-600 dark:text-red-300">
-                          *
-                        </span>
                       </label>
                       <div className="mt-1 flex rounded-md shadow-sm">
                         <select
@@ -191,9 +172,6 @@ export default function profile() {
                         className="block text-sm font-medium text-gray-700 dark:text-gray-300"
                       >
                         Allow in Search and Listing
-                        <span className="text-red-600 dark:text-red-300">
-                          *
-                        </span>
                       </label>
                       <select
                         id="allow-search"
@@ -215,9 +193,6 @@ export default function profile() {
                         className="block text-sm font-medium text-gray-700"
                       >
                         Category
-                        <span className="text-red-600 dark:text-red-300">
-                          *
-                        </span>
                       </label>
                       <select
                         id="category"
@@ -359,9 +334,6 @@ export default function profile() {
                         className="block text-sm font-medium text-gray-700 dark:text-gray-300"
                       >
                         Candidate Description{' '}
-                        <span className="text-red-600 dark:text-red-300">
-                          *
-                        </span>
                       </label>
                       <div className="mt-1">
                         <textarea
@@ -370,7 +342,6 @@ export default function profile() {
                           rows={10}
                           className="shadow-sm dark:bg-black/20 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                           defaultValue={''}
-                          required
                         />
                       </div>
                     </div>
@@ -384,7 +355,7 @@ export default function profile() {
                   Social Network
                 </span>
                 <span className="text-xs font-medium text-red-800 dark:text-red-400 pl-3 ">
-                  Not required
+                  Not
                 </span>
               </span>
 
@@ -475,15 +446,11 @@ export default function profile() {
                         className="block text-sm font-medium text-gray-700"
                       >
                         Country{' '}
-                        <span className="text-red-600 dark:text-red-300">
-                          *
-                        </span>
                       </label>
                       <select
                         id="size-of-company"
                         name="size-of-company"
                         autoComplete="size-of-company"
-                        required
                         className=" appearance-none mt-1 block w-full py-2 px-3 border border-gray-300 bg-white dark:bg-black/20 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       >
                         <option className="dark:bg-darkcard/90 bg-white ">
@@ -498,9 +465,6 @@ export default function profile() {
                         className="block text-sm font-medium text-gray-700"
                       >
                         City{' '}
-                        <span className="text-red-600 dark:text-red-300">
-                          *
-                        </span>
                       </label>
                       <input
                         type="text"
@@ -517,9 +481,6 @@ export default function profile() {
                         className="block text-sm font-medium text-gray-700"
                       >
                         Address{' '}
-                        <span className="text-red-600 dark:text-red-300">
-                          *
-                        </span>
                       </label>
                       <input
                         type="text"
@@ -536,9 +497,6 @@ export default function profile() {
                         className="block text-sm font-medium text-gray-700"
                       >
                         Zip Code{' '}
-                        <span className="text-red-600 dark:text-red-300">
-                          *
-                        </span>
                       </label>
                       <input
                         type="number"

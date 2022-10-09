@@ -32,20 +32,14 @@ exports.getuserstate = async (req, res) => {
     return res.send({ success: true });
   }
 };
-
-exports.getuserprofilebyid = async (req, res) => {
-  db1.execute(
-    `SELECT * FROM auth_login WHERE id=? `,
-    [req.params],
-    (err, result) => {
-      if (result.length) {
-        return res.send(result);
-      } else {
-        return res.send({ msg: 'id not found', success: false });
-      }
-    }
-  );
+exports.getusertype = async (req, res) => {
+  if (req.user.id === undefined) {
+    return res.send({ msg: 'You are not logged in', success: false });
+  } else {
+    return res.send({ data: req.user.usertype, success: true });
+  }
 };
+
 exports.getuserbyusername = async (req, res) => {
   const username = req.body.username;
   db1.execute(
@@ -104,9 +98,9 @@ exports.getjobbyid = async (req, res) => {
 
 exports.getemployerdetail = async (req, res) => {
   const id = req.params.id;
-  console.log(id, 'idddddddddddddd');
+
   db1.execute(
-    `SELECT name, address,description,zipcode,latitude, longitude, size_of_company, est_date, sector,number, email, website, facebook, whatsapp, linkedin, twitter  FROM employer WHERE id=?`,
+    `SELECT name, address,description,zipcode,latitude, longitude, size_of_company, est_date, sector,number, email, website, facebook, whatsapp, linkedin, twitter  FROM employer WHERE employer_id=?`,
     [id],
     (err, result) => {
       console.log(result);
@@ -121,12 +115,11 @@ exports.getemployerdetail = async (req, res) => {
 
 exports.getemployeedetail = async (req, res) => {
   const id = req.params.id;
-  console.log(id, 'idddddddddddddd');
+
   db1.execute(
-    `SELECT name, gender, email, profile_img,username, account_status, website, salary_time, salary_amount, category, description, facebook, whatsapp, youtube, linkedin, city, address, latitude, Last_login  FROM employee WHERE id=?`,
+    `SELECT name, gender, email, profile_img,username, account_status, website, salary_time, salary_amount, category, description, facebook, whatsapp, youtube, linkedin, city, address, latitude, Last_login  FROM employee WHERE employee_id=?`,
     [id],
     (err, result) => {
-      console.log(result);
       if (result?.length) {
         return res.send(result);
       } else {

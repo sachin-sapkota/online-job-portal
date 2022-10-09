@@ -31,7 +31,7 @@ exports.Register = async (req, res) => {
             const randomid = randomUUID();
 
             db1.execute(
-              `INSERT INTO ${usertype} (id, name, username, email, number, password,usertype) VALUES (?,?,?,? ,?,?, ?)`,
+              `INSERT INTO ${usertype} (${usertype}_id, name, username, email, number, password,usertype) VALUES (?,?,?,? ,?,?, ?)`,
               [randomid, name, username, email, number, hash, usertype],
               (error, result) => {
                 if (error) return res.send({ msg: 'error while registering' });
@@ -50,6 +50,71 @@ exports.Register = async (req, res) => {
       }
     }
   );
+};
+
+exports.changepassword = async (req, res) => {
+  const usertype = req.user.usertype;
+  const id = req.user.id;
+  email = req.user.email;
+  const currpass = req.body.currpass;
+  const newpass = req.body.newpass;
+  if (currpass == newpass) {
+    return res.send({
+      msg: 'New password is same as prev password',
+      success: false,
+    });
+  } else {
+    db1.execute(
+      `SELECT * FROM ${usertype} WHERE email= ?`,
+      [email],
+      (err, result) => {
+        if (err) {
+          return res.sendStatus(400).send({ msg: 'error', success: false });
+        }
+        if (!result.length) {
+          return res.send({
+            msg: 'Password is incorrect!',
+            success: false,
+          });
+        } else {
+          bcrypt.compare(currpass, result[0]['password'], (err, results) => {
+            console.log(err, results);
+            if (err) {
+              return res.send({ msg: 'Password Error!', success: false });
+            } else {
+              if (results) {
+                bcrypt.hash(newpass, 10, (err, hash) => {
+                  if (err) {
+                    return res.send({ msg: 'error hashing', success: false });
+                  } else {
+                    db1.execute(
+                      `UPDATE ${usertype} SET password= ? WHERE {usertype}_id= ?`,
+                      [hash, id],
+                      (error, result) => {
+                        if (error) {
+                          return res.send({
+                            msg: 'Error changing password',
+                            success: false,
+                          });
+                        } else {
+                          res.send({
+                            msg: 'Password Changed Successfully!',
+                            success: true,
+                          });
+                        }
+                      }
+                    );
+                  }
+                });
+              } else {
+                return res.send({ msg: 'Password Incorrect!' });
+              }
+            }
+          });
+        }
+      }
+    );
+  }
 };
 
 exports.Login = async (req, res) => {
@@ -81,7 +146,10 @@ exports.Login = async (req, res) => {
           }
 
           const data = {
-            id: result[0]?.id,
+            id:
+              { usertype } === 'employee'
+                ? result[0]?.employee_id
+                : result[0]?.employee_id,
             name: result[0]?.name,
             username: result[0]?.username,
             email: result[0]?.email,
@@ -97,8 +165,8 @@ exports.Login = async (req, res) => {
             );
 
             db1.execute(
-              `UPDATE ${usertype} SET Last_login = now() WHERE id= ?`,
-              [result[0]['id']]
+              `UPDATE ${usertype} SET Last_login = now() WHERE ${usertype}+_id= ?`,
+              [result[0][`${usertype}_id`]]
             );
             res.cookie('accessToken', accessToken, {
               httpOnly: true,

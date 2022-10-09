@@ -40,7 +40,7 @@ const LandingPage = () => {
               <div className="font-nunito text-red-700 dark:text-red-400">
                 Find Your Next Dream Job
               </div>
-              <div className="select-none font-nunito font-extrabold text-4xl sm:text-4xl md:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">
+              <div className="select-none  font-black text-4xl sm:text-4xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">
                 <div> Dream Jobs </div>
                 <div> find Talent, All</div>
                 <div> in One Place. </div>

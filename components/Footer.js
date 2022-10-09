@@ -2,65 +2,8 @@ import { CgInstagram, CgFacebook, CgTwitter, CgYoutube } from 'react-icons/cg';
 import { AiFillApple, AiFillAndroid } from 'react-icons/ai';
 import Image from 'next/image';
 import Link from 'next/link';
-// const Footer = () => {
-//   return (
-//     <div className="relative  pt-9 px-8  h-auto  min-w-[200px]   shadow-xl bg-footer text-gray-200 dark:bg-gray-800 dark:text-white    ">
-//       <div className="gap-3 items-center justify-center p-5 flex-col  flex -top-16 md:-top-20 absolute h-[150px] md:h-[200px] w-[80vw] inset-x-0   rounded-3xl max-w-2xl mx-auto bg-gradient-to-br from-primary to-color1/95 backdrop-blur-sm ">
-//         <div className="font-bold font-sans text-2xl  ">
-//           Trust Us! We will build your success.
-//         </div>
-//         <div className="text-2xl text-center font-sans font-medium ">
-//           <div className="inline-block pr-1">Know your capability</div>
-//           <div className="inline-block bg-primary px-3 py-1 rounded-xl transition-all duration-150 hover:bg-primary/80 ">
-//             < a href="/signup">Now</ a>
-//           </div>
-//         </div>
-//       </div>
-
-//       <div className="grid   gap-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4">
-//         <div className="flex flex-col">
-//
-
-//       <div className="grid   sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 mt-6">
-//         <div className="flex gap-2">
-//           <div>Follow us</div>
-//           <div className="flex border-[1px] rounded-full justify-center items-center w-[30px] h-[30px] p-[1px]">
-//             <CgFacebook />
-//           </div>
-//           <div className="flex border-[1px] rounded-full justify-center items-center w-[30px] h-[30px] p-[1px]">
-//             <CgInstagram />
-//           </div>
-//           <div className="flex border-[1px] rounded-full justify-center items-center w-[30px] h-[30px] p-[1px]">
-//             <CgYoutube />
-//           </div>
-//           <div className="flex border-[1px] rounded-full justify-center items-center w-[30px] h-[30px] p-[1px]">
-//             <CgTwitter />
-//           </div>
-//         </div>
-//         <div className="flex gap-2 mt-2 md:mt-0">
-//           <div>Mobile App</div>
-//           <div className="flex border-[1px] rounded-full justify-center items-center w-[30px] h-[30px] p-[1px]">
-//             < a href='/'iFillApple />
-//           </div>
-//           <div className="flex border-[1px] rounded-full justify-center items-center w-[30px] h-[30px] p-[1px]">
-//             < a href='/'iFillAndroid />
-//           </div>
-//         </div>
-//       </div>
-//       <div className="pt-5 px-2">
-//         <hr className="border-1 w-full border-white" />
-//       </div>
-//       <div className="flex text-sm gap-3 items-center justify-center mt-3">
-//         <div>&copy;2022</div>
-//         <div>Terms of Service</div>
-//         <div>Privacy Policy</div>
-//       </div>
-//     </div>
-//   );
-// };
 
 const Footer = () => {
-  console.log('hello footer');
   return (
     <div className="relative font-nunito text-sm bg-deep-purple-accent-400 dark:bg-darkback">
       <svg
