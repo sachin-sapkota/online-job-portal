@@ -1,13 +1,12 @@
 {
   "name": "job-app",
-  "homepage":"http://sachinsapkota999.com.np",
+  "homepage": "http://sachinsapkota999.com.np",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "nodemon server/index.js",
- 
-      "build": "next build && next export",
-        "start": "next start",
+    "build": "next build ",
+    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
