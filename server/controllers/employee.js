@@ -85,7 +85,7 @@ exports.postfavjob = async (req, res) => {
 };
 
 exports.getfavjob = async (req, res) => {
-  id = req.user.id;
+  id = req?.user?.id;
   db1.execute(
     `SELECT job_id FROM liked_jobs WHERE employee_id=? `,
     [id],
@@ -99,7 +99,7 @@ exports.getfavjob = async (req, res) => {
   );
 };
 exports.getfavjobdetails = async (req, res) => {
-  id = req.user.id;
+  id = req?.user?.id;
   db1.execute(
     `SELECT job_id FROM liked_jobs WHERE employee_id=? `,
     [id],
@@ -339,6 +339,7 @@ exports.Login = async (req, res) => {
       `SELECT * FROM employee WHERE email= ?`,
       [email],
       (err, result) => {
+        console.log(result);
         if (err) {
           return res
             .sendStatus(400)

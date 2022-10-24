@@ -18,15 +18,18 @@ const contact = () => {
           <Image
             className="object-contain w-full h-full"
             src={require('../images/contact.png')}
+            alt="contact"
           />
         </div>
         <form
           onSubmit={handlesubmit}
-          novalidate=""
           className="space-y-6 ng-untouched ng-pristine ng-valid"
         >
           <div>
-            <label for="name" className="text-sm text-black dark:text-white">
+            <label
+              htmlFor="name"
+              className="text-sm text-black dark:text-white"
+            >
               Full name
             </label>
             <input
@@ -37,7 +40,10 @@ const contact = () => {
             />
           </div>
           <div>
-            <label for="email" className="text-sm  text-black dark:text-white">
+            <label
+              htmlFor="email"
+              className="text-sm  text-black dark:text-white"
+            >
               Email
             </label>
             <input
@@ -48,7 +54,7 @@ const contact = () => {
           </div>
           <div>
             <label
-              for="message"
+              htmlFor="message"
               className="text-sm  text-black dark:text-white"
             >
               Message

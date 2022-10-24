@@ -219,8 +219,8 @@ exports.changepassword = async (req, res) => {
 };
 
 exports.Login = async (req, res) => {
-  const email = req.body.email;
-  const usertype = req.body.usertype;
+  const email = req.body?.email;
+  const usertype = req.body?.usertype;
   if (usertype === 'employer') {
     db1.execute(
       `SELECT * FROM employer WHERE email= ?`,
@@ -263,10 +263,6 @@ exports.Login = async (req, res) => {
                 }
               );
 
-              db1.execute(
-                `UPDATE employer SET Last_login = now() WHERE employer_id= ?`,
-                [result[0][`employer_id`]]
-              );
               res.cookie('accessToken', accessToken, {
                 httpOnly: true,
                 secure: false,

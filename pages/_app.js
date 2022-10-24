@@ -3,7 +3,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { ThemeProvider } from 'next-themes';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import Layout from '../components/Layout';
+import Layout from '../components/layout';
 import useSWR from 'swr';
 import api from '../api/api';
 import Image from 'next/image';
@@ -74,6 +74,7 @@ export default function MyApp({ Component, pageProps }) {
               <Image
                 className="object-contain  w-[100px] h-[100px] lg:w-[400px] md:h-[400px]"
                 src={require('../images/Image.png')}
+                alt=""
               />
             </div>
 

@@ -21,7 +21,6 @@ export default function profile() {
     fb: '',
     wa: '',
     li: '',
-    country: 'Nepal',
     city: '',
     address: '',
     zipcode: '',
@@ -29,7 +28,7 @@ export default function profile() {
   const handlesubmit = (e) => {
     e.preventDefault();
     api
-      .post('/editprofile', data)
+      .post('/api/employee/editprofile', data)
       .then((res) => res.data)
       .catch((err) => console.log(err));
   };

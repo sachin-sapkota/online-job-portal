@@ -296,7 +296,24 @@ const Navbar = () => {
                               : 'dark:text-gray-400 text-gray-800'
                           }  flex w-full items-center group-hover:bg-indigo-800 hover:cursor-pointer hover:bg-indigo-300   rounded-md px-2 py-2 text-sm`}
                         >
-                          <Link href="/employers/dashboard">Dashboard</Link>
+                          <div
+                            className={`${
+                              data?.data?.usertype === 'employer'
+                                ? 'hidden'
+                                : ''
+                            } `}
+                          >
+                            <Link href="/employee/dashboard">Dashboard</Link>
+                          </div>
+                          <div
+                            className={`${
+                              data?.data?.usertype === 'employee'
+                                ? 'hidden'
+                                : ''
+                            } `}
+                          >
+                            <Link href="/employers/dashboard">Dashboard</Link>
+                          </div>
                         </div>
                       )}
                     </Menu.Item>

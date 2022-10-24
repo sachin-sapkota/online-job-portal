@@ -203,11 +203,13 @@ const signup = () => {
           />
           <div className=" pt-8 w-full  h-screen  flex justify-center items-center bg-whiteback dark:bg-darkback">
             <div className="grid items-center md:grid-cols-2 sm:grid-cols-1 grid-cols-1 grid-rows-1 md:grid-rows-1 justify-center    gap-3 md:gap-8 lg:gap-[5rem] text-gray-800">
-              <div className=" hidden md:flex items-center justify-center mb-4 md:mb-0 min-w-[250px] min-h-[250px] max-h-[300px] max-w-[300px] sm:max-w-[300px] md:max-w-[400px] md:max-h-[400px] z-[-1]">
+              <div>
                 <Image
-                  src={require('../images/draw2.svg')}
-                  className="object-contain rounded-md"
-                  alt={''}
+                  className="object-contain "
+                  src={require('../images/popular2.svg')}
+                  width={400}
+                  height={400}
+                  alt={'logo'}
                 />
               </div>
               <div className="min-w-[350px] p-5 py-8 rounded-xl dark:bg-darkback max-w-[360px] flex flex-col items-center justify-center">
